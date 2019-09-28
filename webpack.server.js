@@ -1,10 +1,10 @@
 // -> Require statements for helper modules
 const path = require("path");
-const webpack = require('webpack');
 const nodeExternals = require("webpack-node-externals");
+const merge = require("webpack-merge");
+const common = require("./webpack.common");
 
-module.exports = {
-  mode: "development",
+const serverConfig = {
   // -> To inform webpack that we are building a bundle for nodeJs
   target: "node",
 
@@ -19,16 +19,8 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
     filename: "bundle.js"
-  },
-
-  // -> Tells webpack to run babel on every file it runs through and also define the folders to exclude
-  module: {
-    rules: [
-      {
-        test: /\js?$/,
-        loader: "babel-loader",
-        exclude: /node_modules/
-      }
-    ]
   }
 };
+
+//Merge the common modules
+module.exports = merge(common, serverConfig);
