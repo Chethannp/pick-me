@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
  * Provider - Ties our store and react together, it is a react component that is used to communicate data from store to any connected component
  */
 
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import reducers from "../redux-thunk";
@@ -25,7 +25,12 @@ import reducers from "../redux-thunk";
  * @param applyMiddleware(thunk) - {Function} - The store enhancer
  */
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducers,
+  window.__PRELOADED_STATE__,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 ReactDom.hydrate(
   <Provider store={store}>

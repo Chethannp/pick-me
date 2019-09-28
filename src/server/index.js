@@ -9,6 +9,11 @@ const app = express();
 //Refer to public folder for all the assets
 app.use(express.static("public"));
 
+//Proxy setup
+process.env.API_ENDPOINT = "http://localhost:9002";
+const proxy = require("http-proxy-middleware");
+app.use("/repositories", proxy({ target: process.env.API_ENDPOINT }));
+
 app.get("*", (req, res, next) => {
   //Creating server store and then passing it to the renderer function
   const store = createStore();

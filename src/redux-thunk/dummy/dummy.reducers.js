@@ -1,4 +1,4 @@
-import { FIRST_CASE } from "./dummy.actions";
+import { FETCH_ALL_CASES } from "./dummy.actions";
 
 /**
  * @function - default
@@ -14,7 +14,7 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case FIRST_CASE:
+    case FETCH_ALL_CASES:
       return {
         ...state,
         data: action.payload

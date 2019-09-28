@@ -1,10 +1,13 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
-import Routes from "../routes";
 import { Provider } from "react-redux";
+import Routes from "../routes";
 
 export default (req, store) => {
+  const preloadedState = store.getState();
+  let stateJson = JSON.stringify(preloadedState).replace(/</g, "\\u003c");
+
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
@@ -26,6 +29,7 @@ export default (req, store) => {
     <body>
         <div id="root">${content}</div>
         <script src="bundle.js"></script>
+        <script>window.__PRELOADED_STATE__ = ${stateJson}</script>
     </body>
     </html>
   `;

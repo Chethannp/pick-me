@@ -1,11 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Home from "../client/pages/Home/home";
+// import Details from "../client/pages/Details/details";
 
 export default () => {
-  return (
-    <div>
-      <Route exact path="/" component={Home} />
-    </div>
-  );
+  return <Route exact path="/" component={Home} />;
 };

@@ -1,7 +1,6 @@
-import axios from "axios";
-
+import axios from "../../utils/api";
 //Types declarations
-export const FIRST_CASE = "First_Case";
+export const FETCH_ALL_CASES = "Fetch_All_Cases";
 
 /**
  * @function - {Function} - used to fetch data from the server
@@ -10,12 +9,12 @@ export const FIRST_CASE = "First_Case";
  * @dispatch - Used to dispatch an action to the reducer.
  */
 
-export const fetchCase = () => async dispatch => {
+export const fetchAllCases = (id = "all") => async dispatch => {
   try {
-    const res = await axios.get("/dummy?ID=12345");
+    const data = axios(`/repositories?dummy=${id}`);
     dispatch({
-      type: FIRST_CASE,
-      payload: res
+      type: FETCH_ALL_CASES,
+      payload: data
     });
     console.log(response);
   } catch (error) {

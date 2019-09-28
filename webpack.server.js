@@ -1,5 +1,6 @@
 // -> Require statements for helper modules
 const path = require("path");
+const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
 const merge = require("webpack-merge");
 const common = require("./webpack.common");
@@ -19,7 +20,12 @@ const serverConfig = {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
     filename: "bundle.js"
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      __isBrowser__: "false"
+    })
+  ]
 };
 
 //Merge the common modules

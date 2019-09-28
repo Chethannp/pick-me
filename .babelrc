@@ -2,11 +2,15 @@
 *Defining presets
 *@babel/preset-env - allows us to transform ES6+ into more traditional javascript code.
 *@babel/preset-react - does the same as above but with JSX instead.
+*@babel/transform-runtime - (when we use async and await - babel will always assume there is a generator runtime defined and when it does not find it, will output an error - so To fix that we are using this plugin. earlier version we were importing 'babel-polyfill'
 */
 
 {
     "presets": [
         "@babel/preset-env",  
         "@babel/preset-react"
+    ],
+    "plugins": [
+        ["@babel/transform-runtime"]
     ]
 }
