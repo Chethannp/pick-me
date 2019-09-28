@@ -1,0 +1,12 @@
+/*
+*Defining presets
+*@babel/preset-env - allows us to transform ES6+ into more traditional javascript code.
+*@babel/preset-react - does the same as above but with JSX instead.
+*/
+
+{
+    "presets": [
+        "@babel/preset-env",  
+        "@babel/preset-react"
+    ]
+}
