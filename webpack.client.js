@@ -5,7 +5,7 @@ const common = require("./webpack.common");
 
 const clientConfig = {
   // -> Tells webpack where the root file of our client application is
-  entry: "./src/client.js",
+  entry: "./src/client/index.js",
 
   // -> Tells webpack where to put the output file that is generated
   output: {

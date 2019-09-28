@@ -9,7 +9,7 @@ const serverConfig = {
   target: "node",
 
   // -> Tells webpack where the root file of our server application is
-  entry: "./server/index.js",
+  entry: "./src/server/index.js",
 
   // Need this to avoid error when working with Express
   externals: [nodeExternals()],
