@@ -1,9 +1,14 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
-import Home from "../src/pages/Home/home";
+import { StaticRouter } from "react-router-dom";
+import Routes from "../routes";
 
-export default () => {
-  const content = renderToString(<Home />);
+export default req => {
+  const content = renderToString(
+    <StaticRouter location={req.path} context={{}}>
+      <Routes />
+    </StaticRouter>
+  );
 
   return `
     <!DOCTYPE html>

@@ -8,8 +8,8 @@ const app = express();
 //Refer to public folder for all the assets
 app.use(express.static("public"));
 
-app.get("/", (req, res, next) => {
-  res.send(renderer());
+app.get("*", (req, res, next) => {
+  res.send(renderer(req));
 });
 
 app.listen(9000, () => {
