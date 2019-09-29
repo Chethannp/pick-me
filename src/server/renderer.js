@@ -4,9 +4,10 @@ import { matchPath } from "react-router-dom";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { HelmetProvider } from "react-helmet-async";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import App from "../client/App";
 import serialize from "serialize-javascript";
-import { HelmetProvider } from "react-helmet-async";
 
 export default (req, res, next, store) => {
   const activeRoute = Routes.find(route => matchPath(req.url, route)) || {};
@@ -17,23 +18,39 @@ export default (req, res, next, store) => {
 
   promise
     .then(() => {
-      const preloadedState = store.getState();
+      //initializing variables
+      let content;
+      let styleTags;
+      let helmetContext = {};
+
+      //Initial State
+      let preloadedState = store.getState();
       let stateJson = serialize(preloadedState);
 
-      const helmetContext = {};
+      //Wrapping Styled Sheet to React SSR
+      let sheet = new ServerStyleSheet();
 
-      const content = renderToString(
-        <HelmetProvider context={helmetContext}>
-          <Provider store={store}>
-            <StaticRouter location={req.url}>
-              <App />
-            </StaticRouter>
-          </Provider>
-        </HelmetProvider>
-      );
+      try {
+        content = renderToString(
+          <HelmetProvider context={helmetContext}>
+            <StyleSheetManager sheet={sheet.instance}>
+              <Provider store={store}>
+                <StaticRouter location={req.url}>
+                  <App />
+                </StaticRouter>
+              </Provider>
+            </StyleSheetManager>
+          </HelmetProvider>
+        );
+         styleTags = sheet.getStyleTags();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        sheet.seal();
+      }
 
       // Creating an instance of Helmet to pull all the tags out of the library
-      const { helmet } = helmetContext;
+      let { helmet } = helmetContext;
 
       res.send(`
         <!DOCTYPE html>
@@ -44,8 +61,12 @@ export default (req, res, next, store) => {
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no, user-scalable=yes">
             ${helmet.title.toString()}
             ${helmet.meta.toString()}
+            ${styleTags}
             <link rel="shortcut icon" href="/images/favicon.ico">
             <script src="bundle.js" defer></script>
+            <style>
+              *{margin:0;padding:0}
+            </style>  
         </head>
         <body>
             <div id="root">${content}</div>

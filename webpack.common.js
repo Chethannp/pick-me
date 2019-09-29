@@ -14,6 +14,22 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              path: path.resolve(__dirname, "public"),
+              outputPath: "/static-assets",
+              publicPath: "/static-assets",
+              fallback: "responsive-loader",
+              quality: 85
+            }
+          }
+        ]
+      },
+      {
         test: /favicon\.ico$/,
         use: [
           {
@@ -23,7 +39,7 @@ module.exports = {
             }
           }
         ]
-      },
+      }
     ]
   }
 };
