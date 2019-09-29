@@ -1,7 +1,7 @@
 import React from "react";
 import routes from "../routes";
 import { Route, Switch } from "react-router-dom";
-import NotFound from "./pages/NotFound/notfound";
+import NotFoundPage from "./pages/NotFound/notfoundPage";
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
           render={props => <C {...props} {...rest} />}
         />
       ))}
-      <Route render={props => <NotFound {...props} />} />
+      <Route render={props => <NotFoundPage {...props} />} />
     </Switch>
   );
 };
