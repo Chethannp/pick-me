@@ -1,12 +1,11 @@
-import HomePage, { loadData } from "../client/pages/Home/homePage";
+import HomePage from "../client/pages/Home/homePage";
 import DetailsPage from "../client/pages/Details/detailsPage";
 
 const routes = [
   {
+    ...HomePage,
     path: "/",
-    exact: true,
-    component: HomePage,
-    loadData
+    exact: true
   },
   {
     path: "/details/:id",

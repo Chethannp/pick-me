@@ -16,12 +16,8 @@ const proxy = require("http-proxy-middleware");
 app.use("/repositories", proxy({ target: process.env.API_ENDPOINT }));
 
 app.get("*", (req, res, next) => {
-  if (req.originalUrl && req.originalUrl.split("/").pop() === "favicon.ico") {
-    return res.sendStatus(204);
-  } else {
-    const store = createStore();
-    renderer(req, res, next, store);
-  }
+  const store = createStore();
+  renderer(req, res, next, store);
 });
 
 app.listen(9000, () => {
