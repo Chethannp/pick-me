@@ -12,7 +12,7 @@ export const SAVE_FETCHED_CASES = "Saver_Fetched_Cases";
 
 export const fetchAllCases = (id = "all") => async dispatch => {
   try {
-    const data = await axios(`/repositories?dummy=${id}`);
+    const data = await axios("/repos");
     dispatch(saveFetchedCases(data));
   } catch (error) {
     console.error(error);

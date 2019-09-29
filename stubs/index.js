@@ -8,7 +8,7 @@ stubServer.use((req, res, next) => {
   next();
 });
 
-stubServer.get("/repositories", (req, res) => {
+stubServer.get("/repos", (req, res) => {
   api = mapper.apis[0];
   res.jsonp(require(api.path));
 });

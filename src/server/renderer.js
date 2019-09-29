@@ -6,7 +6,7 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "../client/App";
 import serialize from "serialize-javascript";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 
 export default (req, res, next, store) => {
   const activeRoute = Routes.find(route => matchPath(req.url, route)) || {};

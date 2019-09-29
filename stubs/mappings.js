@@ -1,7 +1,7 @@
 module.exports = {
   apis: [
     {
-      url: `/repositories`,
+      url: `/repos`,
       path: "./dummy-list",
       method: "get",
       proxy: false,
