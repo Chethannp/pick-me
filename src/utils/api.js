@@ -5,8 +5,6 @@ export default async url => {
   if (!__isBrowser__) {
     url = process.env.API_ENDPOINT + url;
   }
-
   const res = await axios.get(url);
-
-  return res;
+  return res.data;
 };

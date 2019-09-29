@@ -1,9 +1,9 @@
 //Starting point for client code
 
 import React from "react";
-import ReactDom from "react-dom";
-import Routes from "../routes";
+import { hydrate } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 
 /**
  * createStore - function is used to make a redux store
@@ -13,8 +13,8 @@ import { BrowserRouter } from "react-router-dom";
  */
 
 import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 import reducers from "../redux-thunk";
 
 /**Client store creation
@@ -32,10 +32,10 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-ReactDom.hydrate(
+hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      <Routes />
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

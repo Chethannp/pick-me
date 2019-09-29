@@ -1,4 +1,4 @@
-import { FETCH_ALL_CASES } from "./dummy.actions";
+import { SAVE_FETCHED_CASES } from "./dummy.actions";
 
 /**
  * @function - default
@@ -7,20 +7,15 @@ import { FETCH_ALL_CASES } from "./dummy.actions";
  * @return - {Object} - It returns the redux store
  */
 
-export default (
-  state = {
-    data: []
-  },
-  action
-) => {
+export default (state = {}, action) => {
   switch (action.type) {
-    case FETCH_ALL_CASES:
+    case SAVE_FETCHED_CASES: {
       return {
-        ...state,
-        data: action.payload
+        dummyList: action.payload
       };
-
-    default:
+    }
+    default: {
       return state;
+    }
   }
 };

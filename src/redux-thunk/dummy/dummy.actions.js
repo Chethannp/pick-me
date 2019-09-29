@@ -1,6 +1,7 @@
 import axios from "../../utils/api";
+
 //Types declarations
-export const FETCH_ALL_CASES = "Fetch_All_Cases";
+export const SAVE_FETCHED_CASES = "Saver_Fetched_Cases";
 
 /**
  * @function - {Function} - used to fetch data from the server
@@ -11,13 +12,18 @@ export const FETCH_ALL_CASES = "Fetch_All_Cases";
 
 export const fetchAllCases = (id = "all") => async dispatch => {
   try {
-    const data = axios(`/repositories?dummy=${id}`);
-    dispatch({
-      type: FETCH_ALL_CASES,
-      payload: data
-    });
-    console.log(response);
+    const data = await axios(`/repositories?dummy=${id}`);
+    dispatch(saveFetchedCases(data));
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const saveFetchedCases = data => async dispatch => {
+  if (data) {
+    dispatch({
+      type: SAVE_FETCHED_CASES,
+      payload: data
+    });
   }
 };

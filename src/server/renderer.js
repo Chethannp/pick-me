@@ -2,35 +2,46 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import App from "../client/App";
+
+import { matchPath } from "react-router-dom";
 import Routes from "../routes";
 
-export default (req, store) => {
-  const preloadedState = store.getState();
-  let stateJson = JSON.stringify(preloadedState).replace(/</g, "\\u003c");
+export default (req, res, next, store) => {
+  const activeRoute = Routes.find(route => matchPath(req.url, route)) || {};
 
-  const content = renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.path} context={{}}>
-        <Routes />
-      </StaticRouter>
-    </Provider>
-  );
+  const promise = activeRoute.loadData
+    ? activeRoute.loadData(store)
+    : Promise.resolve();
 
-  return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="shortcut icon" href="/images/favicon.ico">
-        <title>Pick Me!</title>
-    </head>
-    <body>
-        <div id="root">${content}</div>
-        <script src="bundle.js"></script>
-        <script>window.__PRELOADED_STATE__ = ${stateJson}</script>
-    </body>
-    </html>
-  `;
+  promise
+    .then(() => {
+      const preloadedState = store.getState();
+      let stateJson = JSON.stringify(preloadedState).replace(/</g, "\\u003c");
+
+      const content = renderToString(
+        <Provider store={store}>
+          <StaticRouter location={req.url}>
+            <App />
+          </StaticRouter>
+        </Provider>
+      );
+
+      res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Pick Me!</title>
+            <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no, user-scalable=yes">
+          <script src="bundle.js" defer></script>
+        </head>
+        <body>
+            <div id="root">${content}</div>
+            <script>window.__PRELOADED_STATE__ = ${stateJson}</script>
+        </body>
+        </html>
+    `);
+    })
+    .catch(next);
 };

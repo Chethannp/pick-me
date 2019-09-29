@@ -11,13 +11,17 @@ app.use(express.static("public"));
 
 //Proxy setup
 process.env.API_ENDPOINT = "http://localhost:9002";
+console.log("API_ENDPOINT", process.env.API_ENDPOINT);
 const proxy = require("http-proxy-middleware");
 app.use("/repositories", proxy({ target: process.env.API_ENDPOINT }));
 
 app.get("*", (req, res, next) => {
-  //Creating server store and then passing it to the renderer function
-  const store = createStore();
-  res.send(renderer(req, store));
+  if (req.originalUrl && req.originalUrl.split("/").pop() === "favicon.ico") {
+    return res.sendStatus(204);
+  } else {
+    const store = createStore();
+    renderer(req, res, next, store);
+  }
 });
 
 app.listen(9000, () => {
