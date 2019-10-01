@@ -1,23 +1,39 @@
 require("./assets/favicon.ico");
-import React from "react";
+require("./assets/apple-icon-57x57.png");
+import React, { useState } from "react";
 import routes from "../routes";
 import { Route, Switch } from "react-router-dom";
-import NotFoundPage from "./pages/NotFound/notfoundPage";
 import { HelmetProvider } from "react-helmet-async";
-import HeaderComp from "./components/HeaderComp.js";
-import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
+import theme from "./styledComponents/theme";
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  font-size: 40px;
-`;
+//
+import NavbarComp from "./components/NavBar/navBarComp";
+import SideBarComp from "./components/SideBar/sideBarComp";
+import NotFoundPage from "./pages/NotFound/notfoundPage";
+
+//Styled Imports
+import { Backdrop } from "./styledComponents/layout";
 
 const App = () => {
+  const [sideBarStatus, setSideBarStatus] = useState(false);
+
+  const drawerToggleClickHandler = () => {
+    setSideBarStatus(!sideBarStatus);
+  };
+
+  const backDropClickHandler = () => {
+    setSideBarStatus(false);
+  };
+
   return (
     <HelmetProvider>
-      <AppContainer>
-        <HeaderComp />
+      <ThemeProvider theme={theme}>
+        <NavbarComp drawerClickHandler={drawerToggleClickHandler} />
+        <SideBarComp expanded={sideBarStatus} />
+        {sideBarStatus && (
+          <Backdrop zIndex="100" onClick={backDropClickHandler} />
+        )}
         <Switch>
           {routes.map(({ path, exact, component: C, ...rest }) => (
             <Route
@@ -29,7 +45,7 @@ const App = () => {
           ))}
           <Route render={props => <NotFoundPage {...props} />} />
         </Switch>
-      </AppContainer>
+      </ThemeProvider>
     </HelmetProvider>
   );
 };

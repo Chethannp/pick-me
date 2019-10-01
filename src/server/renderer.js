@@ -42,7 +42,7 @@ export default (req, res, next, store) => {
             </StyleSheetManager>
           </HelmetProvider>
         );
-         styleTags = sheet.getStyleTags();
+        styleTags = sheet.getStyleTags();
       } catch (error) {
         console.error(error);
       } finally {
@@ -63,9 +63,12 @@ export default (req, res, next, store) => {
             ${helmet.meta.toString()}
             ${styleTags}
             <link rel="shortcut icon" href="/images/favicon.ico">
+            <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
             <script src="bundle.js" defer></script>
             <style>
               *{margin:0;padding:0}
+              html,body{height: 100%}
+              div, h1,h2,h3,h4,h5,h6,p,ul,li,button,input,textarea{line-height: 25px;}
             </style>  
         </head>
         <body>
