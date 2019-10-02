@@ -75,6 +75,6 @@ export const CustomButton = styled(Button)`
     color: ${props => props.theme.colors.white};
     background: ${props =>
       `linear-gradient(45deg, ${props.theme.colors.brandPrimary}, ${props.theme.colors.brandSecondary})`};
-    transition: all 0.8s ease;
+    transition: all 0.3s ease;
   }
 `;

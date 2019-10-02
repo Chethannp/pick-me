@@ -126,7 +126,7 @@ const CarouselComp = () => {
             style={{ opacity: slideIndex == 0 ? "0.2" : "1" }}
             onClick={slidePrev}
           >
-            <FontAwesomeIcon icon={faChevronLeft} size="sm" />
+            <FontAwesomeIcon icon={faChevronLeft}/>
           </Prev>
           <Next
             style={{
@@ -134,7 +134,7 @@ const CarouselComp = () => {
             }}
             onClick={slideNext}
           >
-            <FontAwesomeIcon icon={faChevronRight} size="sm" />
+            <FontAwesomeIcon icon={faChevronRight} />
           </Next>
         </Div>
       </FlexBox>

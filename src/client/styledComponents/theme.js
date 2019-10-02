@@ -5,7 +5,7 @@ const theme = {
     // Brand Colors
     brandPrimary: "rgba(227, 173, 48, 1.00)", // #e3ad30
     brandSecondary: "rgba(197, 71, 127, 1.00)", // #c5477f
-    lightShade: "rgba(243, 246, 248, 1.00)", //#f3f6f8
+    lightShade: "rgba(255, 250, 240, 1.00)", //#fffaf0
 
     // Shades of Grey
     lightGrey: "rgba(208, 208, 208, 1.00)", // #C8C8C8
@@ -15,7 +15,7 @@ const theme = {
     // Other Colors
     notificationYellow: "rgba(255, 241, 118, 1.00)", // #FFF176
     notificationRed: "rgba(246, 215, 216, 1.00)", // #F6D7D8
-    black: "rgba(0, 0, 0, 0.20)", // #000000
+    black: "rgba(0, 0, 0, 1)", // #000000
     white: "rgba(255, 255, 255, 1)", //#FFFFFF
     siteMessage: "rgba(239, 237, 190, 1.00)"
   },

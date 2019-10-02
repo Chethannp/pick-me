@@ -18,13 +18,13 @@ const ProfileComp = props => {
     <FlexBox
       bg="white"
       width="320px"
-      borderRadius
-      borderStyle="lightGrey"
       mar10
       flowCol
       alignCenter
+      borderRadius
+      style={{ border: "1px solid rgba(208,208,208,.3)" }}
     >
-      <Div height="80px" width="100%" bg="brandPrimary" />
+      <Div height="80px" width="100%" bg="lightShade" borderRadius />
       <Div width="80px">
         <ProfileImage
           src={props.loggedIn ? User : Guest}

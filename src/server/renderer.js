@@ -68,7 +68,7 @@ export default (req, res, next, store) => {
             <style>
               *{margin:0;padding:0}
               html,body{height: 100%}
-              div, h1,h2,h3,h4,h5,h6,p,ul,li,button,input,textarea{line-height: 25px;}
+              div, h1,h2,h3,h4,h5,h6,p,ul,li,button,input,textarea{line-height: 20px;}
             </style>  
         </head>
         <body>
