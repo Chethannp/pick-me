@@ -1,7 +1,8 @@
 import React from "react";
-import { FlexBox, Div } from "../../styledComponents/layout";
+import { FlexBox, Div, Backdrop } from "../../styledComponents/layout";
 import SearchFromComp from "../Search/searchFormComp";
 import DeckComp from "../Deck/deckComp";
+import ModalComp from "../Modal/modalComp";
 
 const MainComp = () => {
   return (
@@ -9,7 +10,6 @@ const MainComp = () => {
       <Div width="100%" marB30>
         <SearchFromComp />
       </Div>
-
       <DeckComp />
       <DeckComp />
       <DeckComp />

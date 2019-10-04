@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { fetchAllCases } from "../../../redux-thunk/dummy/dummy.actions";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
 //Styled Imports
 import ProfileComp from "../../components/Profile/profileComp";
-import SponsoredComp from "../../components/Sponsored/sponsoredComp";
-import MainComp from "../../components/Main/mainComp";
-import { Container, Div, FlexBox } from "../../styledComponents/layout";
-
+// import SponsoredComp from "../../components/Sponsored/sponsoredComp";
+// import MainComp from "../../components/Main/mainComp";
+import { Container, Div } from "../../styledComponents/layout";
 
 /**
  * @function - loadData - this function is used to load initial data when it is being rendered from server
@@ -21,11 +20,6 @@ const loadData = store => {
 };
 
 const HomePage = props => {
-  useEffect(() => {
-    return () => {
-      return false;
-    };
-  }, []);
 
   return (
     <Div>
@@ -34,11 +28,13 @@ const HomePage = props => {
       </Helmet>
 
       <Container>
-        <FlexBox alignStart jcSpaceBetween marT20>
-          <ProfileComp />
+        <ProfileComp />
+        {/* <Auth signupFlow="false"/> */}
+        {/* <FlexBox alignStart jcSpaceBetween marT20>
+          
           <MainComp />
           <SponsoredComp />
-        </FlexBox>
+        </FlexBox> */}
       </Container>
 
       {/* <Container>

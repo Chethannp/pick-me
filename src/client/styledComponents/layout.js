@@ -70,7 +70,7 @@ export const Div = styled.div`
     style += props["textCase"]
       ? `text-transform: ${props.theme.textTransform[props.textCase]};`
       : "";
-
+      
     /* Position Properties */
     style += props["posAbs"] ? "position:absolute;" : "";
     style += props["posRel"] ? "position:relative;" : "";
@@ -78,6 +78,15 @@ export const Div = styled.div`
     style += props["posSticky"]
       ? "position: sticky; top:0; left:0;right:0;"
       : "";
+
+    /* Overflow Properties */
+    style += props["overflowX"]
+      ? `overflow-x: ${props.overflowX};`
+      : "overflow-x: inherit;";
+
+    style += props["overflowY"]
+      ? `overflow-y: ${props.overflowY};`
+      : "overflow-y: inherit;";
 
     /* Background Properties */
     style += props["bg"]
@@ -129,6 +138,7 @@ export const FlexBox = styled(Div)`
     if (props.jcStart) return "flex-start";
     if (props.jcSpaceBetween) return "space-between";
     if (props.jcSpaceAround) return "space-around";
+    if (props.jcCenter) return "center";
     return "center";
   }};
   flex-flow: ${props => {
@@ -172,7 +182,7 @@ export const Backdrop = styled(FlexBox)`
   top: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.8);
   left: 0;
-  ${props => (props.zIndexValue ? `z-index:${props.zIndexValue};` : "")};
+  ${props => (props.zIndex ? `z-index:${props.zIndex};` : "z-index: 0")};
 `;

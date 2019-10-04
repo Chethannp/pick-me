@@ -15,8 +15,7 @@ const InlineLoader = styled.div`
   position: relative;
   width: 45px;
   height: 45px;
-  margin-left: -20%;
-  margin-top: -15%;
+  margin-top: -50%;
   z-index: 5;
   div {
     transform-origin: 32px 32px;

@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import {
-  Div,
-  FlexBox,
-  ImageBlock,
-  Anchor
-} from "../../styledComponents/layout";
+import { Div, FlexBox, Anchor } from "../../styledComponents/layout";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "../../styledComponents/button";
-
-import CompanyLogo from "../../assets/company-placeholder.png";
-import InlineLoaderComp from "../InlineLoader/inlineLoaderComp";
+import InlineLoaderComp from "../InlineLoader/";
 
 const JobDeck = styled(Div)`
   border: 1px solid rgba(208, 208, 208, 0.3);
@@ -60,43 +52,40 @@ const DeckComp = () => {
           </Div>
           <Div fontSize="xxs">Posted 3 weeks ago</Div>
         </Div>
-        <Button noborder xs>
-          <Div posRel>
-            {!showInlineLoader &&
-              (saveJobStatus ? (
-                <FlexBox
-                  width="60px"
-                  height="45px"
-                  jcSpaceBetween
-                  alignCenter
-                  xxs
-                  onClick={removedSavedJob}
-                >
-                  <FontAwesomeIcon
-                    icon={faCheckSquare}
-                    color="rgba(197,71,127,1.00)"
-                  />
-                  <span> saved</span>
-                </FlexBox>
-              ) : (
-                <FlexBox
-                  width="55px"
-                  height="45px"
-                  jcSpaceBetween
-                  alignCenter
-                  xxs
-                  onClick={saveJob}
-                >
-                  <FontAwesomeIcon icon={faClock} color="#dfdfdf" />
-                  <span> save</span>
-                </FlexBox>
-              ))}
 
-            {showInlineLoader && (
-              <InlineLoaderComp width="80px" height="80px" />
-            )}
-          </Div>
-        </Button>
+        <Div posRel>
+          {!showInlineLoader &&
+            (saveJobStatus ? (
+              <FlexBox
+                width="50px"
+                jcSpaceBetween
+                alignCenter
+                fontSize="xxs"
+                onClick={removedSavedJob}
+                cursor
+              >
+                <FontAwesomeIcon
+                  icon={faCheckSquare}
+                  color="rgba(197,71,127,1.00)"
+                />
+                <span> saved</span>
+              </FlexBox>
+            ) : (
+              <FlexBox
+                width="45px"
+                jcSpaceBetween
+                alignCenter
+                fontSize="xxs"
+                onClick={saveJob}
+                cursor
+              >
+                <FontAwesomeIcon icon={faClock} color="#dfdfdf" />
+                <span> save</span>
+              </FlexBox>
+            ))}
+
+          {showInlineLoader && <InlineLoaderComp width="80px" height="80px" />}
+        </Div>
       </FlexBox>
       <Anchor to="/" textDecoration="none" color="black">
         <Div fontSize="xs">E.Stradis GmbH Company Location Augsburg, DE</Div>

@@ -67,7 +67,7 @@ export default (req, res, next, store) => {
             <script src="bundle.js" defer></script>
             <style>
               *{margin:0;padding:0}
-              html,body{height: 100%}
+              html,body{height: 100%; font-family: "Open Sans", sans-serif}
               div, h1,h2,h3,h4,h5,h6,p,ul,li,button,input,textarea{line-height: 20px;}
             </style>  
         </head>

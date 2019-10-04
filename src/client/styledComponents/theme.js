@@ -17,7 +17,9 @@ const theme = {
     notificationRed: "rgba(246, 215, 216, 1.00)", // #F6D7D8
     black: "rgba(0, 0, 0, 1)", // #000000
     white: "rgba(255, 255, 255, 1)", //#FFFFFF
-    siteMessage: "rgba(239, 237, 190, 1.00)"
+    siteMessage: "rgba(239, 237, 190, 1.00)",
+
+    opacity: "rgba(0, 0, 0, 0.8)"
   },
 
   // Font Weight

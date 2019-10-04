@@ -12,7 +12,7 @@ import { DisplayDecisionMaker } from "../../styledComponents/breakpoints";
 
 const NavbarComp = props => {
   return (
-    <Div zIndex="999" posSticky bg="white" boxShadow="lightGrey">
+    <Div zIndex="1" posSticky bg="white" boxShadow="lightGrey">
       <Container>
         <FlexBox alignCenter jcSpaceBetween height="50px" padT5>
           <DisplayDecisionMaker minWidth="md">
