@@ -10,7 +10,7 @@ export const SAVE_FETCHED_CASES = "Saver_Fetched_Cases";
  * @dispatch - Used to dispatch an action to the reducer.
  */
 
-export const fetchAllCases = (id = "all") => async dispatch => {
+export const fetchAllCases = () => async dispatch => {
   try {
     const data = await axios("/repos");
     dispatch(saveFetchedCases(data));
@@ -19,11 +19,17 @@ export const fetchAllCases = (id = "all") => async dispatch => {
   }
 };
 
-export const saveFetchedCases = data => async dispatch => {
-  if (data) {
+export const saveFetchedCases = data => async (dispatch, getState) => {
+  let prevData = getState().dummy.dummyList;
+
+  if (prevData != data) {
+    let updatedList = [];
+    updatedList = [...prevData, ...data];
+
+    if (updatedList == []) return;
     dispatch({
       type: SAVE_FETCHED_CASES,
-      payload: data
+      payload: updatedList
     });
   }
 };

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Guest from "../../assets/user-placeholder.png";
 import User from "../../assets/user.jpeg";
 import { FlexBox, Div, ImageBlock } from "../../styledComponents/layout";
 import styled from "styled-components";
 import { CustomButton } from "../../styledComponents/button";
-import Modal from "../../reusableComponents/Modal/Modal";
-import useModal from "../../reusableComponents/Modal/useModal";
-import Auth from "../../reusableComponents/Auth";
+import Modal from "../modal/modal";
+import useModal from "../modal/useModal";
+import Auth from "../auth";
 
 const ProfileImage = styled(ImageBlock)`
   border-radius: 10%;

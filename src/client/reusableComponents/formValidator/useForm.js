@@ -37,7 +37,6 @@ const useForm = (callback, validate) => {
   //Called only when erros are changed
   useEffect(() => {
     if (Object.keys(errors).length == 0 && isSubmitting) {
-      debugger;
       callback();
     }
   }, [errors]);

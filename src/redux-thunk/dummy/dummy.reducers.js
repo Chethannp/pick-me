@@ -7,7 +7,12 @@ import { SAVE_FETCHED_CASES } from "./dummy.actions";
  * @return - {Object} - It returns the redux store
  */
 
-export default (state = {}, action) => {
+export default (
+  state = {
+    dummyList: []
+  },
+  action
+) => {
   switch (action.type) {
     case SAVE_FETCHED_CASES: {
       return {

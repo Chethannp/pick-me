@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { fetchAllCases } from "../../../redux-thunk/dummy/dummy.actions";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
+//Components
+import ProfileComp from "../../reusableComponents/profile";
+
 //Styled Imports
-import ProfileComp from "../../components/Profile/profileComp";
-// import SponsoredComp from "../../components/Sponsored/sponsoredComp";
-// import MainComp from "../../components/Main/mainComp";
-import { Container, Div } from "../../styledComponents/layout";
+import { Container, Div, FlexBox } from "../../styledComponents/layout";
+import List from "../../reusableComponents/list";
+import SponsoredComp from "../../components/Sponsored/sponsoredComp";
 
 /**
- * @function - loadData - this function is used to load initial data when it is being rendered from server
+ * @function - loadData -this function is used to load initial data when it is being rendered from server
  * @parm - store - contains the combination of multiple reducers
  * @return - Promise - So that now the server can proceed in sending the res to the browser after building the html
  */
@@ -20,7 +22,6 @@ const loadData = store => {
 };
 
 const HomePage = props => {
-
   return (
     <Div>
       <Helmet>
@@ -28,13 +29,14 @@ const HomePage = props => {
       </Helmet>
 
       <Container>
-        <ProfileComp />
         {/* <Auth signupFlow="false"/> */}
-        {/* <FlexBox alignStart jcSpaceBetween marT20>
-          
-          <MainComp />
+        <FlexBox alignStart jcSpaceBetween marT20>
+          <ProfileComp />
+          <List />
           <SponsoredComp />
-        </FlexBox> */}
+          {/* <MainComp />
+           */}
+        </FlexBox>
       </Container>
 
       {/* <Container>
@@ -94,11 +96,7 @@ const HomePage = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {};
-};
-
 export default {
   loadData,
-  component: connect(mapStateToProps)(HomePage)
+  component: HomePage
 };

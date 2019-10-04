@@ -70,7 +70,7 @@ export const Div = styled.div`
     style += props["textCase"]
       ? `text-transform: ${props.theme.textTransform[props.textCase]};`
       : "";
-      
+
     /* Position Properties */
     style += props["posAbs"] ? "position:absolute;" : "";
     style += props["posRel"] ? "position:relative;" : "";
@@ -113,7 +113,7 @@ export const Div = styled.div`
       : props["alignSelfEnd"]
       ? "align-self:flex-end;"
       : "";
-    style += props["grow"] ? "flex-grow:1;" : "";
+    style += props["grow"] ? "flex-grow:1;" : "flex-grow:inherit;";
     style += props["flexReset"] ? "flex:0 0 auto;" : "";
     style += props["flexBasis"] ? `flex-basis:${props["flexBasis"]};` : "";
     style += props["zIndex"] ? `z-index: ${props.zIndex};` : 0;
