@@ -1,4 +1,4 @@
-import { SAVE_FETCHED_CASES } from "./dummy.actions";
+import { SAVE_FETCHED_CASES, HANDLE_PAGE_LOADER } from "./dummy.actions";
 
 /**
  * @function - default
@@ -10,7 +10,8 @@ import { SAVE_FETCHED_CASES } from "./dummy.actions";
 export default (
   state = {
     postList: [],
-    postListCount: 20 //Hard coded value just to demonstrate lazyloading feature
+    postListCount: 20, //Hard coded value just to demonstrate lazyloading feature
+    pageLoader: false
   },
   action
 ) => {
@@ -19,6 +20,12 @@ export default (
       return {
         ...state,
         postList: action.payload
+      };
+    }
+    case HANDLE_PAGE_LOADER: {
+      return {
+        ...state,
+        pageLoader: action.payload
       };
     }
     default:

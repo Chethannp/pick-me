@@ -50,7 +50,7 @@ const ProfileComp = props => {
         </Div>
       </FlexBox>
       <Modal isShowing={isShowing} hide={toggle}>
-        <Auth />
+        <Auth hide={toggle} />
       </Modal>
     </React.Fragment>
   );

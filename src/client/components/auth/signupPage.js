@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { FlexBox, Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 import {
@@ -12,21 +13,32 @@ import {
 } from "../../styledComponents/forms";
 import useForm from "../formValidator/useForm";
 import validate from "../formValidator/validate";
+import { registerUserDetails } from "../../../redux-thunk/dummy/dummy.actions";
 
-const SignUp = () => {
+const SignUp = ({ registerUser, dismissSignup }) => {
+  const formInputs = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    userName: "",
+    userPassword: ""
+  };
+
   const { handleChange, handleSubmit, values, errors } = useForm(
     submit,
-    validate
+    validate,
+    formInputs
   );
 
   function submit() {
-    console.log("Submitted successfully");
+    registerUser(values);
+    dismissSignup();
   }
 
   return (
     <FlexBox flowCol jcCenter alignCenter posRel>
       <Div color="brandSecondary" fontWeight="bold" pad10>
-        Sign Up
+        Register
       </Div>
 
       <Form onSubmit={handleSubmit} noValidate>
@@ -132,4 +144,9 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default connect(
+  null,
+  dispatch => ({
+    registerUser: userInfo => dispatch(registerUserDetails(userInfo))
+  })
+)(SignUp);

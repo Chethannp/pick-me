@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate) => {
-  const [values, setValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    userName: "",
-    userPassword: ""
-  });
+const useForm = (callback, validate, formInputs) => {
+  const [values, setValues] = useState(formInputs);
 
   //We would need a new state for errors
   //function that validates these errors

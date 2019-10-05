@@ -2,6 +2,7 @@ import axios from "../../utils/api";
 
 //Types declarations
 export const SAVE_FETCHED_CASES = "Saver_Fetched_Cases";
+export const HANDLE_PAGE_LOADER = `Handle_Page_Loader`;
 
 /**
  * @function - {Function} - used to fetch data from the server
@@ -32,4 +33,25 @@ export const saveFetchedCases = data => async (dispatch, getState) => {
       payload: updatedList
     });
   }
+};
+
+export const validateUserLogin = credentials => dispatch => {
+  dispatch(showPageLoader(true));
+  setTimeout(() => {
+    dispatch(showPageLoader(false));
+  }, 5000);
+};
+
+export const registerUserDetails = userInfo => dispatch => {
+  dispatch(showPageLoader(true));
+  setTimeout(() => {
+    dispatch(showPageLoader(false));
+  }, 5000);
+};
+
+export const showPageLoader = status => dispatch => {
+  dispatch({
+    type: HANDLE_PAGE_LOADER,
+    payload: status
+  });
 };

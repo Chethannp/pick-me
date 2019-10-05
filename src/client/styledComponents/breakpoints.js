@@ -17,20 +17,3 @@ export const DisplayDecisionMaker = styled.div`
       display:none;
     }`}
 `;
-
-// Media Query
-media: {
-  query: (lower, upper) => {
-    var queryString;
-    if (lower != null && upper != null) {
-      queryString = `@media screen and (min-width: ${lower}px) and (max-width: ${upper}px)`;
-    } else if (lower != null) {
-      queryString = `@media screen and (min-width: ${lower}px)`;
-    } else if (upper != null) {
-      queryString = `@media screen and (max-width: ${upper}px)`;
-    } else {
-      queryString = `@media screen and (min-width: 0px)`;
-    }
-    return queryString;
-  };
-}

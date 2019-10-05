@@ -1,16 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
 //Components
 import ProfileComp from "../../components/profile";
 
 //Styled Imports
-import styled from "styled-components";
 import { Container, Div, FlexBox } from "../../styledComponents/layout";
 import Post from "../../components/post";
 import { fetchAllPosts } from "../../../redux-thunk/dummy/dummy.actions";
 import { DisplayDecisionMaker } from "../../styledComponents/breakpoints";
 import QuickView from "../../components/quickView";
+import Loader from "../../components/pageLoader";
 
 /**
  * @function - loadData -this function is used to load initial data when it is being rendered from server
@@ -18,17 +19,11 @@ import QuickView from "../../components/quickView";
  * @return - Promise - So that now the server can proceed in sending the res to the browser after building the html
  */
 
-const loadData = store => {
+export const loadData = store => {
   return store.dispatch(fetchAllPosts());
 };
 
-const HomePageWrapper = styled(FlexBox)`
-  @media screen and (max-width: 991px) {
-    flex-flow: wrap-reverse;
-  }
-`;
-
-const HomePage = props => {
+const HomePage = ({ loaderStatus }) => {
   return (
     <Div>
       <Helmet>
@@ -36,19 +31,28 @@ const HomePage = props => {
       </Helmet>
 
       <Container>
-        <HomePageWrapper alignStart jcSpaceBetween marT20>
+        <FlexBox alignStart jcSpaceBetween marT20>
           <DisplayDecisionMaker minWidth="min" maxWidth="md">
             <ProfileComp />
           </DisplayDecisionMaker>
           <Post />
-          <QuickView />
-        </HomePageWrapper>
+          <DisplayDecisionMaker minWidth="min" maxWidth="lg">
+            <QuickView />
+          </DisplayDecisionMaker>
+        </FlexBox>
       </Container>
+      {loaderStatus && <Loader />}
     </Div>
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    loaderStatus: state.dummy.pageLoader
+  };
+};
+
 export default {
   loadData,
-  component: HomePage
+  component: connect(mapStateToProps)(HomePage)
 };

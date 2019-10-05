@@ -88,9 +88,9 @@ const FloatingDiv = styled(FlexBox)`
         `}
 `;
 
-const Auth = () => {
-  const [isLogInActive, setIsLogInActive] = useState(false);
-  const current = isLogInActive ? "Login" : "Register";
+const Auth = props => {
+  const [isLogInActive, setIsLogInActive] = useState(true);
+  const current = isLogInActive ? "Register" : "Login";
 
   const changeState = () => {
     setIsLogInActive(!isLogInActive);
@@ -116,7 +116,11 @@ const Auth = () => {
         zIndex="99"
         pad5
       >
-        {current == "Login" ? <Login /> : <SignUp />}
+        {current == "Login" ? (
+          <SignUp dismissSignup={props.hide} />
+        ) : (
+          <Login dismissLogin={props.hide} />
+        )}
       </AuthContainer>
       <SideDiv signup={isLogInActive} current={current} onClick={changeState} />
     </AuthWrapper>
