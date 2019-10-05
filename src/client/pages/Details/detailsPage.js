@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Div,
+  Anchor,
+  Breadcrumb,
+  Container
+} from "../../styledComponents/layout";
+import { connect } from "react-redux";
+import PostDetails from "../../components/postDetails";
 
-function DetailsPage() {
+const DetailsPage = props => {
   return (
-    <div>
-      <h2>Details</h2>
-    </div>
-  );
-}
+    <Div mar20>
+      <Container>
+        <Breadcrumb>
+          <Anchor to="/" color="brandSecondary">
+            Home
+          </Anchor>{" "}
+          ~> Job Details Page
+        </Breadcrumb>
+      </Container>
 
-export default DetailsPage;
+      <PostDetails {...props} />
+    </Div>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    jobList: state.dummy.JobList
+  };
+};
+
+export default connect(mapStateToProps)(DetailsPage);

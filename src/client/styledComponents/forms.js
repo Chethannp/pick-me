@@ -7,6 +7,18 @@ const Form = styled.form`
   flex-flow: column;
 `;
 
+const MultiFormWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  width: 500px;
+  margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
+`;
+
 const FormGroupSpacer = styled.div`
   margin-bottom: 10px;
 `;
@@ -74,6 +86,7 @@ const FormInputError = styled.span`
 
 export {
   Form,
+  MultiFormWrapper,
   FormGroup,
   FormGroupSpacer,
   FormInput,

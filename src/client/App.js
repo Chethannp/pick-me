@@ -8,8 +8,8 @@ import { ThemeProvider } from "styled-components";
 import theme from "./styledComponents/theme";
 
 //
-import NavbarComp from "./components/NavBar/navBarComp";
-import SideBarComp from "./components/SideBar/sideBarComp";
+import NavbarComp from "./components/navBar/navBarComp";
+import SideBarComp from "./components/sideBar/sideBarComp";
 import NotFoundPage from "./pages/NotFound/notfoundPage";
 
 //Styled Imports

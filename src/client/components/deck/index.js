@@ -5,17 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 import InlineLoaderComp from "../InlineLoader";
 
-const Deck = ({
-  title,
-  company,
-  company_info,
-  description,
-  employment_type,
-  skills,
-  location
-}) => {
+const Deck = props => {
+  const {
+    id,
+    title,
+    company,
+    company_info,
+    description,
+    employment_type,
+    skills,
+    location
+  } = props;
+
   const [saveJobStatus, setSaveJobStatus] = useState(false);
   const [showInlineLoader, setShowInlineLoader] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const saveJob = () => {
     setShowInlineLoader(true);
     setTimeout(() => {
@@ -77,12 +82,17 @@ const Deck = ({
           {showInlineLoader && <InlineLoaderComp width="80px" height="80px" />}
         </Div>
       </FlexBox>
-      <Anchor to="/details" textDecoration="none" color="black">
+      <Anchor
+        to={{ pathname: `/details/${id}`, state: { props } }}
+        textDecoration="none"
+        color="black"
+      >
         <Paragraph>{description}</Paragraph>
+
+        <Div marT10 fontSize="xxs">
+          Posted 3 weeks ago
+        </Div>
       </Anchor>
-      <Div marT10 fontSize="xxs">
-        Posted 3 weeks ago
-      </Div>
     </CardHeader>
   );
 };

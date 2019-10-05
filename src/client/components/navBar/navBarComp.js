@@ -5,6 +5,7 @@ import {
   Container,
   FlexBox,
   Anchor,
+  AnchorWithHref,
   ImageBlock
 } from "../../styledComponents/layout";
 import DrawerToggleButton from "../../styledComponents/drawerbtn";
@@ -19,7 +20,7 @@ const NavbarComp = props => {
             <DrawerToggleButton click={props.drawerClickHandler} />
           </DisplayDecisionMaker>
 
-          <Anchor to="/" color="brandSecondary" textDecoration="none">
+          <AnchorWithHref href="/" color="brandSecondary" textDecoration="none">
             <FlexBox alignCenter>
               <Div width="40px">
                 <ImageBlock
@@ -33,7 +34,7 @@ const NavbarComp = props => {
                 Hey Jobs
               </Div>
             </FlexBox>
-          </Anchor>
+          </AnchorWithHref>
 
           <Anchor to="/" color="brandPrimary" textDecoration="none">
             Login

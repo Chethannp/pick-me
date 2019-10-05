@@ -61,7 +61,8 @@ export const Button = styled.button`
 
 export const CustomButton = styled(Button)`
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: bold;
   border: 2px solid transparent;
   border-image: ${props =>
     `linear-gradient(45deg, ${props.theme.colors.brandPrimary}, ${props.theme.colors.brandSecondary})`};
@@ -71,6 +72,8 @@ export const CustomButton = styled(Button)`
   -webkit-background-clip: text;
   transition: all 0.1s ease;
   color: ${props => props.theme.colors.black};
+  width: ${props => props.width};
+  margin: ${props => (props.marAuto ? "0 auto" : "")};
   &:hover {
     color: ${props => props.theme.colors.white};
     background: ${props =>

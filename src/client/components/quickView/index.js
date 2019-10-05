@@ -16,11 +16,6 @@ const QuickView = () => {
           <Carousel />
         </QuickViewContent>
       </QuickViewDiv>
-
-      <QuickViewDiv>
-        <QuickViewHeading>Heading</QuickViewHeading>
-        <QuickViewContent>Content</QuickViewContent>
-      </QuickViewDiv>
     </QuickViewWrapper>
   );
 };

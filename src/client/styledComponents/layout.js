@@ -9,6 +9,12 @@ export const Container = styled.div`
   }
 `;
 
+export const Breadcrumb = styled.div`
+  font-size: 12px;
+  margin: 20px 0;
+  text-transform: uppercase;
+`;
+
 export const addPaddingStyles = (a, props) => {
   let style =
     a.indexOf("pad") === 0 && props[a] && !isNaN(a.slice(3))
@@ -32,6 +38,7 @@ export const addMarginStyles = (a, props) => {
     a.indexOf("mar") === 0 && props[a] && !isNaN(a.slice(3))
       ? `margin:${a.slice(3)}px;`
       : "";
+  style += a.indexOf("marAuto") === 0 ? `margin:0 auto;` : "";
   style +=
     a.indexOf("marT") === 0 && props[a] ? `margin-top:${a.slice(4)}px;` : "";
   style +=
@@ -155,6 +162,11 @@ export const ImageBlock = styled.img`
     style += props["height"] ? `height: ${props.height};` : "";
     return style;
   }}
+`;
+
+export const AnchorWithHref = styled.a`
+  text-decoration: none;
+  color: ${props => props.theme.colors.brandSecondary};
 `;
 
 export const Anchor = styled(Link)`
