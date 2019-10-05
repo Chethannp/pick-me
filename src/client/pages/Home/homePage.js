@@ -8,8 +8,8 @@ import ProfileComp from "../../reusableComponents/profile";
 
 //Styled Imports
 import { Container, Div, FlexBox } from "../../styledComponents/layout";
-import List from "../../reusableComponents/list";
 import SponsoredComp from "../../components/Sponsored/sponsoredComp";
+import Post from "../../reusableComponents/post";
 
 /**
  * @function - loadData -this function is used to load initial data when it is being rendered from server
@@ -32,7 +32,7 @@ const HomePage = props => {
         {/* <Auth signupFlow="false"/> */}
         <FlexBox alignStart jcSpaceBetween marT20>
           <ProfileComp />
-          <List />
+          <Post />
           <SponsoredComp />
           {/* <MainComp />
            */}
