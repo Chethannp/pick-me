@@ -23,7 +23,7 @@ const ProfileComp = props => {
     <React.Fragment>
       <FlexBox
         bg="white"
-        width="320px"
+        width="250px"
         mar10
         flowCol
         alignCenter

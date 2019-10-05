@@ -19,7 +19,8 @@ const theme = {
     white: "rgba(255, 255, 255, 1)", //#FFFFFF
     siteMessage: "rgba(239, 237, 190, 1.00)",
 
-    opacity: "rgba(0, 0, 0, 0.8)"
+    opacity: "rgba(0, 0, 0, 0.8)",
+    whiteBg: "rgba(208,208,208,.3)"
   },
 
   // Font Weight

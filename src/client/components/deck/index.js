@@ -32,7 +32,7 @@ const Deck = ({
     }, 2000);
   };
   return (
-    <CardHeader width="500px" mar20 pad10 borderRadius>
+    <CardHeader pad10>
       <FlexBox jcSpaceBetween>
         <Div width="100%">
           <Div fontWeight="bold" fontsize="lg">

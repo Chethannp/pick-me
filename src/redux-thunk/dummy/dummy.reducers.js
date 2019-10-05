@@ -9,7 +9,7 @@ import { SAVE_FETCHED_CASES } from "./dummy.actions";
 
 export default (
   state = {
-    dummyList: [],
+    postList: [],
     postListCount: 20 //Hard coded value just to demonstrate lazyloading feature
   },
   action
@@ -18,7 +18,7 @@ export default (
     case SAVE_FETCHED_CASES: {
       return {
         ...state,
-        dummyList: action.payload
+        postList: action.payload
       };
     }
     default:
