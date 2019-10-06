@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import LogoImg from "../../assets/logo.png";
 import {
     Div,
@@ -41,3 +42,7 @@ const NavbarComp = props => {
 };
 
 export default NavbarComp;
+
+NavbarComp.propTypes = {
+    drawerClickHandler: PropTypes.func
+};

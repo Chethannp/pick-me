@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
     FlexBox,
     Div,
@@ -117,3 +118,5 @@ const PostDetails = props => {
 };
 
 export default PostDetails;
+
+PostDetails.propTypes = {};

@@ -26,7 +26,6 @@ export const fetchAllPosts = () => async dispatch => {
 
 export const saveFetchedList = data => async (dispatch, getState) => {
     const prevData = getState().list.postList;
-    dispatch(showPageLoader(false));
     if (prevData != data) {
         let updatedList = [];
         updatedList = [...prevData, ...data];
@@ -37,9 +36,11 @@ export const saveFetchedList = data => async (dispatch, getState) => {
             payload: updatedList
         });
     }
+    dispatch(showPageLoader(false));
 };
 
 export const validateUserLogin = credentials => async dispatch => {
+    console.log(credentials);
     dispatch(showPageLoader(true));
     try {
         const data = await axios("/account", "post");

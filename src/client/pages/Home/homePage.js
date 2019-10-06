@@ -75,5 +75,7 @@ export default {
 
 HomePage.propTypes = {
     loaderStatus: PropTypes.bool,
-    toastMessage: PropTypes.string
+    toastMessage: PropTypes.string,
+    jobList: PropTypes.array,
+    fetchJobList: PropTypes.func
 };

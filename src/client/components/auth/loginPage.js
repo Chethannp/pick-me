@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { FlexBox, Div } from "../../styledComponents/layout";
 import {
@@ -117,3 +118,10 @@ export default connect(
         validateLogin: credentials => dispatch(validateUserLogin(credentials))
     })
 )(Login);
+
+Login.propTypes = {
+    validateLogin: PropTypes.func,
+    dismissLogin: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
+    loginErrorMessage: PropTypes.string
+};

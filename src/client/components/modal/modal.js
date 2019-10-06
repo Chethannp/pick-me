@@ -39,7 +39,6 @@ const Modal = ({ isShowing, hide, children }) =>
                     width="100vw"
                     height="100vh"
                     bg="opacity"
-                    zIndex="1050"
                     onClick={hide}
                 />
                 <CloseButton

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { Div } from "../../styledComponents/layout";
 
@@ -28,3 +29,7 @@ const SideBarComp = props => {
 };
 
 export default SideBarComp;
+
+SideBarComp.propTypes = {
+    expanded: PropTypes.bool
+};

@@ -1,14 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
     MultiFormWrapper,
     FormGroupSpacer,
     FormGroup,
     FormInput,
     FormLabel,
-    FormLabelName,
-    FormInputError
+    FormLabelName
 } from "../../styledComponents/forms";
-import { FlexBox, Div } from "../../styledComponents/layout";
+import { Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 
 const FormUserDetails = ({
@@ -91,3 +91,11 @@ const FormUserDetails = ({
 };
 
 export default FormUserDetails;
+
+FormUserDetails.propTypes = {
+    nextStep: PropTypes.func,
+    handleChange: PropTypes.func,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string
+};

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Div, FlexBox, Anchor } from "../../styledComponents/layout";
 import { CardHeader, Paragraph } from "../../styledComponents/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -112,3 +113,15 @@ const Deck = props => {
 };
 
 export default Deck;
+
+Deck.propTypes = {
+    id: PropTypes.number,
+    title: PropTypes.string,
+    company: PropTypes.string,
+    company_info: PropTypes.object,
+    description: PropTypes.string,
+    employment_type: PropTypes.string,
+    skills: PropTypes.array,
+    location: PropTypes.string,
+    loginStatus: PropTypes.bool
+};

@@ -9,12 +9,12 @@ stubServer.use((req, res, next) => {
 });
 
 stubServer.get("/repo", (req, res) => {
-    api = mapper.apis.find(path => path.url === "/repo");
+    const api = mapper.apis.find(path => path.url === "/repo");
     res.jsonp(require(api.path));
 });
 
 stubServer.post("/account", (req, res) => {
-    api = mapper.apis.find(path => path.url === "/account");
+    const api = mapper.apis.find(path => path.url === "/account");
     res.jsonp(require(api.path));
 });
 

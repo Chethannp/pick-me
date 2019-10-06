@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import InlineLoaderComp from "../InlineLoader";
@@ -147,3 +148,10 @@ export default connect(
         fetchMorePosts: () => dispatch(fetchAllPosts())
     })
 )(Post);
+
+Post.propTypes = {
+    postList: PropTypes.array,
+    postListCount: PropTypes.number,
+    fetchMorePosts: PropTypes.func,
+    isLoggedIn: PropTypes.bool
+};

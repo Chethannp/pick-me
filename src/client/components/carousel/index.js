@@ -18,7 +18,7 @@ const Carousel = () => {
     const [clientX, setClientX] = useState();
     const [clientY, setClientY] = useState();
     const [leftVal, setLeftVal] = useState(0);
-    const [imageWidth, setImageWidth] = useState(200);
+    const [imageWidth] = useState(200);
     const [swipeDirection, setSwipeDirection] = useState();
 
     const slideNext = () => {
@@ -39,40 +39,40 @@ const Carousel = () => {
 
     //For Touch scroll to enable we need to watch on 3 functions onTouchStart, onTouchMove, onTouchEnd
     const onTouchStart = e => {
-        // setClientX(e.touches[0].clientX);
-        // setClientY(e.touches[0].clientY);
+        setClientX(e.touches[0].clientX);
+        setClientY(e.touches[0].clientY);
     };
 
     const onTouchEnd = () => {
-        // let left = leftVal;
-        // let index = slideIndex;
-        // let swipeDirection = swipeDirection;
-        // if (swipeDirection == "left") {
-        //   left = Math.round((leftVal - 250) / imageWidth) * (imageWidth + 30);
-        //   index = left < leftVal ? ++index : index;
-        // }
-        // if (swipeDirection == "right") {
-        //   left = Math.round((leftVal + 250) / imageWidth) * (imageWidth + 30);
-        //   index = left > leftVal ? --index : index;
-        // }
-        // if (index >= 3 || index < 0) return;
-        // setLeftVal(left);
-        // setSlideIndex(index);
+        let left = leftVal;
+        let index = slideIndex;
+        let swipeDirection = swipeDirection;
+        if (swipeDirection == "left") {
+            left = Math.round((leftVal - 250) / imageWidth) * (imageWidth + 30);
+            index = left < leftVal ? ++index : index;
+        }
+        if (swipeDirection == "right") {
+            left = Math.round((leftVal + 250) / imageWidth) * (imageWidth + 30);
+            index = left > leftVal ? --index : index;
+        }
+        if (index >= 3 || index < 0) return;
+        setLeftVal(left);
+        setSlideIndex(index);
     };
 
     const onTouchMove = e => {
-        // let maxWidth = -(imageWidth + 30) * (3 - 1);
-        // let deltaX = e.touches[0].clientX - clientX;
-        // let deltaY = e.touches[0].clientY - clientY;
-        // if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        //   let left = leftVal + deltaX;
-        //   left = maxWidth < left ? left : maxWidth;
-        //   left = 0 > left ? left : 0;
-        //   setClientX(e.touches[0].clientX);
-        //   setClientY(e.touches[0].clientY);
-        //   setLeftVal(left);
-        //   setSwipeDirection(deltaX < 0 ? "left" : "right");
-        // }
+        let maxWidth = -(imageWidth + 30) * (3 - 1);
+        let deltaX = e.touches[0].clientX - clientX;
+        let deltaY = e.touches[0].clientY - clientY;
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            let left = leftVal + deltaX;
+            left = maxWidth < left ? left : maxWidth;
+            left = 0 > left ? left : 0;
+            setClientX(e.touches[0].clientX);
+            setClientY(e.touches[0].clientY);
+            setLeftVal(left);
+            setSwipeDirection(deltaX < 0 ? "left" : "right");
+        }
     };
 
     return (

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { FlexBox, Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
@@ -164,3 +165,9 @@ export default connect(
             dispatch(saveProfileInfo(userInfo, message))
     })
 )(SignUp);
+
+SignUp.propTypes = {
+    registerUser: PropTypes.func,
+    dismissSignup: PropTypes.func,
+    isLoggedIn: PropTypes.bool
+};

@@ -6,12 +6,10 @@ import {
     Div,
     Container,
     DetailsWrapper,
-    DetailsProfileImage,
     DetailsContent,
     Anchor,
     Breadcrumb
 } from "../../styledComponents/layout";
-import Guest from "../../assets/company-placeholder.png";
 import {
     Form,
     FormGroupSpacer,
@@ -274,5 +272,7 @@ export default connect(
 )(UpdateProfile);
 
 UpdateProfile.propTypes = {
-    saveProfile: PropTypes.func
+    saveProfile: PropTypes.func,
+    profile: PropTypes.object,
+    history: PropTypes.object
 };

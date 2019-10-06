@@ -9,7 +9,7 @@ import { Div } from "../../styledComponents/layout";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Dropdown = props => {
+const Dropdown = () => {
     const [status, setStatus] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState("Content 1");
     const showDropdownMenu = () => {

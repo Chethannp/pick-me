@@ -6,7 +6,7 @@ const JobFormPage = () => {
     return (
         <Container>
             <Div mar20>
-                <UserForm></UserForm>
+                <UserForm />
             </Div>
         </Container>
     );

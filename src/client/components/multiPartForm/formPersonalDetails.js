@@ -1,12 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FlexBox, Div } from "../../styledComponents/layout";
 import {
     FormGroupSpacer,
     FormGroup,
     FormInput,
     FormLabel,
-    FormLabelName,
-    FormInputError
+    FormLabelName
 } from "../../styledComponents/forms";
 import { CustomButton } from "../../styledComponents/button";
 
@@ -101,3 +101,12 @@ const FormPersonalDetails = ({
 };
 
 export default FormPersonalDetails;
+
+FormPersonalDetails.propTypes = {
+    nextStep: PropTypes.func,
+    prevStep: PropTypes.func,
+    handleChange: PropTypes.func,
+    company: PropTypes.string,
+    designation: PropTypes.string,
+    experience: PropTypes.string
+};

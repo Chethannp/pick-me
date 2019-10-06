@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
     Div,
     Anchor,
@@ -16,7 +16,7 @@ const DetailsPage = props => {
                     <Anchor to="/" color="brandSecondary">
                         Home
                     </Anchor>{" "}
-                    ~> Job Details Page
+                    ~`&gt;` Job Details Page
                 </Breadcrumb>
             </Container>
 

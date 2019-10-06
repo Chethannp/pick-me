@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styled, { css, keyframes } from "styled-components";
 import { FlexBox } from "../../styledComponents/layout";
 import Login from "./loginPage";
@@ -156,3 +157,10 @@ const SideDiv = props => {
 };
 
 export default Auth;
+
+Auth.propTypes = {
+    hide: PropTypes.func,
+    signup: PropTypes.bool,
+    onClick: PropTypes.func,
+    current: PropTypes.string
+};

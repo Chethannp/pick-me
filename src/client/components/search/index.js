@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { SearchForm, SearchInput } from "../../styledComponents/search";
 import Dropdown from "../dropdown";
 import { CustomButton } from "../../styledComponents/button";
@@ -29,3 +30,7 @@ const Search = ({ search }) => {
 };
 
 export default Search;
+
+Search.propTypes = {
+    search: PropTypes.func
+};
