@@ -16,6 +16,7 @@ import {
 export default (
   state = {
     isLoggedIn: false,
+    profile: {},
     postList: [],
     postListCount: 20, //Hard coded value just to demonstrate lazyloading feature
     pageLoader: false,

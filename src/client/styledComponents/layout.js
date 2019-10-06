@@ -156,6 +156,7 @@ export const FlexBox = styled(Div)`
 `;
 
 export const ImageBlock = styled.img`
+  border-radius: 3px;
   ${props => {
     let style = "";
     style += props["width"] ? `width: ${props.width};` : "";
@@ -197,4 +198,10 @@ export const Backdrop = styled(FlexBox)`
   background: rgba(0, 0, 0, 0.8);
   left: 0;
   ${props => (props.zIndex ? `z-index:${props.zIndex};` : "z-index: 0")};
+`;
+
+export const CenterBlock = styled.div`
+  position: absolute;
+  left: 10%;
+  top: 35%;
 `;
