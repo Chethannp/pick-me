@@ -16,16 +16,17 @@ export const SAVE_PROFILE_INFO = `Save_Profile_Info`;
 
 export const fetchAllPosts = () => async dispatch => {
   try {
+    dispatch(showPageLoader(true));
     const data = await axios("/repo", "get");
-    dispatch(saveFetchedCases(data));
+    dispatch(saveFetchedList(data));
   } catch (error) {
     console.error(error);
   }
 };
 
-export const saveFetchedCases = data => async (dispatch, getState) => {
+export const saveFetchedList = data => async (dispatch, getState) => {
   let prevData = getState().list.postList;
-
+  dispatch(showPageLoader(false));
   if (prevData != data) {
     let updatedList = [];
     updatedList = [...prevData, ...data];
@@ -72,13 +73,6 @@ const handleAuthResponse = data => dispatch => {
   dispatch(showPageLoader(false));
 };
 
-export const registerUserDetails = userInfo => dispatch => {
-  dispatch(showPageLoader(true));
-  setTimeout(() => {
-    dispatch(showPageLoader(false));
-  }, 5000);
-};
-
 export const showPageLoader = status => dispatch => {
   dispatch({
     type: HANDLE_PAGE_LOADER,
@@ -93,15 +87,19 @@ export const showCustomToast = message => dispatch => {
   });
 };
 
-export const saveProfileInfo = data => dispatch => {
+export const saveProfileInfo = (data, message) => (dispatch, getState) => {
+  let prevData = getState().list.profile;
+  let newData = prevData ? [...prevData, ...data] : data;
+
   dispatch(showPageLoader(true));
   setTimeout(() => {
     dispatch(showPageLoader(false));
+
     dispatch({
       type: SAVE_PROFILE_INFO,
       payload: {
-        data,
-        message: "Profile updated!"
+        data: newData,
+        message: message
       }
     });
   }, 2000);

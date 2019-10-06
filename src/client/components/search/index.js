@@ -5,17 +5,23 @@ import { CustomButton } from "../../styledComponents/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Search = () => {
+const Search = ({ search }) => {
+  const handleSearchSubmit = e => {
+    e.preventDefault();
+  };
+
   return (
-    <SearchForm>
+    <SearchForm onSubmit={handleSearchSubmit}>
       <Dropdown />
       <SearchInput
-        type="search"
+        autoComplete="off"
+        type="text"
         name="search"
         placeholder="Search..."
         defaultValue=""
+        onChange={e => search(e)}
       />
-      <CustomButton type="submit">
+      <CustomButton>
         <FontAwesomeIcon icon={faSearch} />
       </CustomButton>
     </SearchForm>

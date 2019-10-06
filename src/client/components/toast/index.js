@@ -49,7 +49,7 @@ const CustomToast = ({ hideCustomToast, toastMessage }) => {
   useEffect(() => {
     setTimeout(() => {
       hideCustomToast("");
-    }, 3000);
+    }, 6000);
   }, [toastMessage]);
 
   return <ToastWrapper showToast={toastMessage}>{toastMessage}</ToastWrapper>;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet-async";
@@ -26,7 +26,13 @@ export const loadData = store => {
   return store.dispatch(fetchAllPosts());
 };
 
-const HomePage = ({ loaderStatus, toastMessage }) => {
+const HomePage = ({ loaderStatus, toastMessage, jobList, fetchJobList }) => {
+  useEffect(() => {
+    if (jobList.length == 0) {
+      fetchJobList();
+    }
+  }, []);
+
   return (
     <Div>
       <Helmet>
@@ -52,13 +58,19 @@ const HomePage = ({ loaderStatus, toastMessage }) => {
 const mapStateToProps = state => {
   return {
     loaderStatus: state.list.pageLoader,
-    toastMessage: state.list.toastMessage
+    toastMessage: state.list.toastMessage,
+    jobList: state.list.postList
   };
 };
 
 export default {
   loadData,
-  component: connect(mapStateToProps)(HomePage)
+  component: connect(
+    mapStateToProps,
+    dispatch => ({
+      fetchJobList: () => dispatch(fetchAllPosts())
+    })
+  )(HomePage)
 };
 
 HomePage.propTypes = {

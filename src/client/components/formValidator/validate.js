@@ -1,14 +1,3 @@
-//Password
-// the password needs to be more than 0 chars
-// the password needs to be more than 10 chars
-
-// const formInputs = {
-
-//   : "",
-//   : "",
-//   : ""
-// };
-
 export default function validate(values) {
   let errors = {};
 
@@ -36,6 +25,27 @@ export default function validate(values) {
     case values.email != undefined &&
       !RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i).test(values.email):
       errors.email = "Email id is invalid";
+      break;
+
+    case values.userName != undefined &&
+      (values.userName || values.userName.length == 0):
+      errors.userName = "User name is required!";
+      break;
+
+    case values.userName != undefined && values.userName.length <= 4:
+      errors.userName = "User name should be minimum of 4 characters!";
+      break;
+
+    case values.userPassword != undefined &&
+      (values.userPassword || values.userPassword.length == 0):
+      errors.userPassword = "Password cannot be empty!";
+      break;
+
+    case values.userPassword != undefined && !RegExp(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/
+    ).test(values.userPassword):
+      errors.userPassword =
+        "Password must contain, at least 8 characters, 1 special character and 1 numeric, 1 lowercase, 1 uppercase letters";
       break;
 
     case values.company != undefined &&

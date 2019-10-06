@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { FlexBox, Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
@@ -13,9 +13,9 @@ import {
 } from "../../styledComponents/forms";
 import useForm from "../formValidator/useForm";
 import validate from "../formValidator/validate";
-import { registerUserDetails } from "../../../redux-thunk/list/list.actions";
+import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
 
-const SignUp = ({ registerUser, dismissSignup }) => {
+const SignUp = ({ registerUser, dismissSignup, isLoggedIn }) => {
   const formInputs = {
     firstName: "",
     lastName: "",
@@ -31,9 +31,14 @@ const SignUp = ({ registerUser, dismissSignup }) => {
   );
 
   function submit() {
-    registerUser(values);
-    dismissSignup();
+    registerUser(values, "Thank you for registering!");
   }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dismissSignup();
+    }
+  }, [isLoggedIn]);
 
   return (
     <FlexBox flowCol jcCenter alignCenter posRel>
@@ -144,9 +149,15 @@ const SignUp = ({ registerUser, dismissSignup }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.list.isLoggedIn
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   dispatch => ({
-    registerUser: userInfo => dispatch(registerUserDetails(userInfo))
+    registerUser: (userInfo, message) => dispatch(saveProfileInfo(userInfo, message))
   })
 )(SignUp);

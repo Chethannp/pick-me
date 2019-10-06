@@ -13,6 +13,15 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
   const [loaderStatus, setLoaderStatus] = useState(false);
   const [endStatus, setEndStatus] = useState(false);
 
+  const [search, setSearch] = useState("");
+  const filterSearch = e => {
+    setSearch(e.target.value);
+  };
+
+  let filteredJobs = postList.filter(
+    job => job.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  );
+
   //Trigger the callback function when the intersection is reached
   function scrollCallBack(entries) {
     if (entries[0].isIntersecting) {
@@ -38,6 +47,7 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
   //It is important to remove the observer and remove it from dom so that our useeffect hook doesn't trigger unecessarily. also it is good to inform the user that the end of the list is reached.
   //Further more you can still split the lazyloading feature to a different component or you can also create a dynamic hook.
   useEffect(() => {
+    if (!isLoggedIn) return;
     if (postList.length === 0) return;
     const scroll = new IntersectionObserver(scrollCallBack, {
       root: null,
@@ -51,10 +61,10 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
     }
     scroll.observe(bottomRef.current);
     return () => scroll.disconnect();
-  }, [endStatus, postList]); //passing posts prop to the useffect function the reason being if we do not do it then our props do not update in the call back function
+  }, [endStatus, postList, isLoggedIn]); //passing posts prop to the useffect function the reason being if we do not do it then our props do not update in the call back function
 
   return (
-    <Div marT10>
+    <Div>
       {postList.length === 0 ? (
         <CardHeader textAlign="center" noCursor>
           <Div padT10 padL30 padR30 fontSize="xs">
@@ -73,29 +83,38 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
         </CardHeader>
       ) : (
         <React.Fragment>
-          <Search />
-          {postList.map((list, i) => (
-            <Deck key={i} {...list} loginStatus={isLoggedIn} />
-          ))}
+          {isLoggedIn && <Search search={filterSearch} />}
 
-          {!endStatus && <div ref={bottomRef} />}
+          {filteredJobs && filteredJobs.length == 0 ? (
+            <CardHeader textAlign="center" noCursor pad20>
+              No results found
+            </CardHeader>
+          ) : (
+            <React.Fragment>
+              {filteredJobs.map((list, i) => (
+                <Deck key={i} {...list} loginStatus={isLoggedIn} />
+              ))}
 
-          {loaderStatus && (
-            <Div style={{ width: "100px", margin: "40px auto" }}>
-              <InlineLoaderComp />
-            </Div>
-          )}
+              {!endStatus && <div ref={bottomRef} />}
 
-          {endStatus && (
-            <Div
-              mar20
-              pad10
-              textAlign="center"
-              boxShadow="lightShade"
-              bg="lightShade"
-            >
-              ~that's all folks!~
-            </Div>
+              {loaderStatus && (
+                <Div style={{ width: "100px", margin: "40px auto" }}>
+                  <InlineLoaderComp />
+                </Div>
+              )}
+
+              {endStatus && (
+                <Div
+                  mar20
+                  pad10
+                  textAlign="center"
+                  boxShadow="lightShade"
+                  bg="lightShade"
+                >
+                  ~that's all folks!~
+                </Div>
+              )}
+            </React.Fragment>
           )}
         </React.Fragment>
       )}

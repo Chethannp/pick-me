@@ -26,15 +26,15 @@ import useForm from "../../components/formValidator/useForm";
 import validate from "../../components/formValidator/validate";
 import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
 
-const UpdateProfile = props => {
+const UpdateProfile = ({ profile, saveProfile, history }) => {
   const formInputs = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    company: "",
-    designation: "",
-    experience: "",
-    noticePeriod: ""
+    firstName: (profile && profile.firstName) || "",
+    lastName: (profile && profile.lastName) || "",
+    email: (profile && profile.email) || "",
+    company: (profile && profile.company) || "",
+    designation: (profile && profile.designation) || "",
+    experience: (profile && profile.experience) || "",
+    noticePeriod: (profile && profile.noticePeriod) || ""
   };
 
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -44,8 +44,8 @@ const UpdateProfile = props => {
   );
 
   function submit() {
-    props.saveProfile(values);
-    props.history.push("/");
+    saveProfile(values, "Profile updated!");
+    history.push("/");
   }
 
   return (
@@ -92,7 +92,9 @@ const UpdateProfile = props => {
                         type="text"
                       />
                       <FormLabel htmlFor="firstName">
-                        <FormLabelName>First Name*</FormLabelName>
+                        <FormLabelName>
+                          First Name* {values.firstName}
+                        </FormLabelName>
                       </FormLabel>
                     </FormGroup>
 
@@ -230,10 +232,16 @@ const UpdateProfile = props => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    profile: state.list.profile
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   dispatch => ({
-    saveProfile: data => dispatch(saveProfileInfo(data))
+    saveProfile: (data, message) => dispatch(saveProfileInfo(data, message))
   })
 )(UpdateProfile);
 

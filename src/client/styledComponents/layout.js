@@ -186,7 +186,7 @@ export const Anchor = styled(Link)`
   &:focus,
   &:active {
     outline: none;
-    color: inherit;
+    color: ${props => props.theme.colors[props.color]};
   }
 `;
 

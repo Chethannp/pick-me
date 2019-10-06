@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   QuickViewWrapper,
   QuickViewHeading,
@@ -6,9 +7,10 @@ import {
   QuickViewDiv
 } from "../../styledComponents/quickview";
 import Carousel from "../carousel";
+import { Div } from "../../styledComponents/layout";
 
-const QuickView = () => {
-  return (
+const QuickView = ({ isLoggedIn }) => {
+  return isLoggedIn ? (
     <QuickViewWrapper>
       <QuickViewDiv>
         <QuickViewHeading>Heading</QuickViewHeading>
@@ -17,7 +19,15 @@ const QuickView = () => {
         </QuickViewContent>
       </QuickViewDiv>
     </QuickViewWrapper>
+  ) : (
+    <Div width="320px" />
   );
 };
 
-export default QuickView;
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.list.isLoggedIn
+  };
+};
+
+export default connect(mapStateToProps)(QuickView);

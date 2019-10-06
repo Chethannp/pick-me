@@ -52,42 +52,46 @@ const Deck = props => {
           </Div>
           <Div fontSize="xxs">Augsburg, DE</Div>
         </Div>
-        <Div>
-          {!showInlineLoader &&
-            (saveJobStatus ? (
-              <FlexBox
-                width="50px"
-                jcSpaceBetween
-                alignCenter
-                fontSize="xxs"
-                onClick={removedSavedJob}
-              >
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  style={{ marginRight: 5 }}
-                  color="rgba(197,71,127,1.00)"
-                />
-                <span> saved</span>
-              </FlexBox>
-            ) : (
-              <FlexBox
-                width="45px"
-                jcEnd
-                alignCenter
-                fontSize="xxs"
-                onClick={saveJob}
-              >
-                <FontAwesomeIcon
-                  style={{ marginRight: 5 }}
-                  icon={faClock}
-                  color="#dfdfdf"
-                />
-                <span> save</span>
-              </FlexBox>
-            ))}
+        {loginStatus && (
+          <Div>
+            {!showInlineLoader &&
+              (saveJobStatus ? (
+                <FlexBox
+                  width="50px"
+                  jcSpaceBetween
+                  alignCenter
+                  fontSize="xxs"
+                  onClick={removedSavedJob}
+                >
+                  <FontAwesomeIcon
+                    icon={faCheckSquare}
+                    style={{ marginRight: 5 }}
+                    color="rgba(197,71,127,1.00)"
+                  />
+                  <span> saved</span>
+                </FlexBox>
+              ) : (
+                <FlexBox
+                  width="45px"
+                  jcEnd
+                  alignCenter
+                  fontSize="xxs"
+                  onClick={saveJob}
+                >
+                  <FontAwesomeIcon
+                    style={{ marginRight: 5 }}
+                    icon={faClock}
+                    color="#dfdfdf"
+                  />
+                  <span> save</span>
+                </FlexBox>
+              ))}
 
-          {showInlineLoader && <InlineLoaderComp width="80px" height="80px" />}
-        </Div>
+            {showInlineLoader && (
+              <InlineLoaderComp width="80px" height="80px" />
+            )}
+          </Div>
+        )}
       </FlexBox>
       <Anchor
         to={{
