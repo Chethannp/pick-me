@@ -2,6 +2,7 @@
 import express from "express";
 import renderer from "./renderer";
 import createStore from "./createStore";
+import { apiUrls } from "../utils/proxyUrls";
 
 //Creating an express instance
 const app = express();
@@ -13,7 +14,7 @@ app.use(express.static("public"));
 process.env.API_ENDPOINT = "http://localhost:9002";
 console.log("API_ENDPOINT", process.env.API_ENDPOINT);
 const proxy = require("http-proxy-middleware");
-app.use("/repos", proxy({ target: process.env.API_ENDPOINT }));
+app.use(apiUrls, proxy({ target: process.env.API_ENDPOINT }));
 
 app.get("*", (req, res, next) => {
   const store = createStore();

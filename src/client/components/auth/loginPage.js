@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { FlexBox, Div } from "../../styledComponents/layout";
 import {
@@ -13,9 +13,16 @@ import {
 import { CustomButton } from "../../styledComponents/button";
 import useForm from "../formValidator/useForm";
 import validate from "../formValidator/validate";
-import { validateUserLogin } from "../../../redux-thunk/dummy/dummy.actions";
+import { validateUserLogin } from "../../../redux-thunk/list/list.actions";
 
-const Login = ({ validateLogin, dismissLogin }) => {
+const Login = ({
+  validateLogin,
+  dismissLogin,
+  isLoggedIn,
+  loginErrorMessage
+}) => {
+  const [loginErrorState, setLoginErrorState] = useState("");
+
   const formInputs = {
     loginUserName: "",
     loginPassword: ""
@@ -28,9 +35,18 @@ const Login = ({ validateLogin, dismissLogin }) => {
   );
 
   function submit() {
+    setLoginErrorState("");
     validateLogin(values);
-    dismissLogin();
   }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dismissLogin();
+    }
+    if (loginErrorMessage.length > 0) {
+      setLoginErrorState(loginErrorMessage);
+    }
+  }, [isLoggedIn, loginErrorMessage]);
 
   return (
     <FlexBox flowCol jcCenter alignCenter posRel>
@@ -77,7 +93,7 @@ const Login = ({ validateLogin, dismissLogin }) => {
             <FormInputError>{errors.loginPassword}</FormInputError>
           )}
         </FormGroupSpacer>
-
+        {loginErrorState && <FormInputError>{loginErrorState}</FormInputError>}
         <br />
         <CustomButton>Submit</CustomButton>
         <br />
@@ -86,8 +102,15 @@ const Login = ({ validateLogin, dismissLogin }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.list.isLoggedIn,
+    loginErrorMessage: state.list.loginErrorMessage
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   dispatch => ({
     validateLogin: credentials => dispatch(validateUserLogin(credentials))
   })

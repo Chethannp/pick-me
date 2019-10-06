@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { fetchAllPosts } from "../../../redux-thunk/dummy/dummy.actions";
+
 import InlineLoaderComp from "../InlineLoader";
 import Deck from "../deck";
 import { Div } from "../../styledComponents/layout";
 import { CardHeader } from "../../styledComponents/card";
 import Search from "../search";
+import { fetchAllPosts } from "../../../redux-thunk/list/list.actions";
 
-const Post = ({ postList, postListCount, fetchMorePosts }) => {
+const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
   const bottomRef = useRef();
   const [loaderStatus, setLoaderStatus] = useState(false);
   const [endStatus, setEndStatus] = useState(false);
@@ -54,46 +55,49 @@ const Post = ({ postList, postListCount, fetchMorePosts }) => {
 
   return (
     <Div marT10>
-      <Search />
-
-      {postList.length === 0 && (
-        <CardHeader textAlign="center">
-          <Div padT30 padL30 padR30 fontSize="xs">
-            Oops...!, No Posts found :(
+      {postList.length === 0 ? (
+        <CardHeader textAlign="center" noCursor>
+          <Div padT10 padL30 padR30 fontSize="xs">
+            Oops...!, No Jobs found :(
           </Div>
-          <Div padT10 padL30 padR30 fontSize="xxs">
+          <Div padT10 padB10 padL30 padR30 fontSize="xxs">
             Our engineers are putting their best efforts to bring you the best
             jobs that you need... please bare with us!!!
           </Div>
-          <Div padT10 padL30 padR30 padB20 fontSize="xxs">
-            However you can still spend some time updating your profile, we will
-            send you a quick e-mail once our service is back up!
-          </Div>
+          {!isLoggedIn && (
+            <Div padL30 padR30 padB10 fontSize="xxs">
+              However you can still spend some time updating your profile, we
+              will send you a quick e-mail once our service is back up!
+            </Div>
+          )}
         </CardHeader>
-      )}
+      ) : (
+        <React.Fragment>
+          <Search />
+          {postList.map((list, i) => (
+            <Deck key={i} {...list} />
+          ))}
 
-      {postList.map((list, i) => (
-        <Deck key={i} {...list} />
-      ))}
+          {!endStatus && <div ref={bottomRef} />}
 
-      {!endStatus && <div ref={bottomRef} />}
+          {loaderStatus && (
+            <Div style={{ width: "100px", margin: "40px auto" }}>
+              <InlineLoaderComp />
+            </Div>
+          )}
 
-      {loaderStatus && (
-        <Div style={{ width: "100px", margin: "40px auto" }}>
-          <InlineLoaderComp />
-        </Div>
-      )}
-
-      {endStatus && (
-        <Div
-          mar20
-          pad10
-          textAlign="center"
-          boxShadow="lightShade"
-          bg="lightShade"
-        >
-          ~that's all folks!~
-        </Div>
+          {endStatus && (
+            <Div
+              mar20
+              pad10
+              textAlign="center"
+              boxShadow="lightShade"
+              bg="lightShade"
+            >
+              ~that's all folks!~
+            </Div>
+          )}
+        </React.Fragment>
       )}
     </Div>
   );
@@ -101,8 +105,9 @@ const Post = ({ postList, postListCount, fetchMorePosts }) => {
 
 const mapStateToProps = state => {
   return {
-    postList: state.dummy.postList,
-    postListCount: state.dummy.postListCount
+    postList: state.list.postList,
+    postListCount: state.list.postListCount,
+    isLoggedIn: state.list.isLoggedIn
   };
 };
 

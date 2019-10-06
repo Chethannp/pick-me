@@ -8,8 +8,13 @@ stubServer.use((req, res, next) => {
   next();
 });
 
-stubServer.get("/repos", (req, res) => {
-  api = mapper.apis[0];
+stubServer.get("/repo", (req, res) => {
+  api = mapper.apis.find(path => path.url === "/repo");
+  res.jsonp(require(api.path));
+});
+
+stubServer.post("/account", (req, res) => {
+  api = mapper.apis.find(path => path.url === "/account");
   res.jsonp(require(api.path));
 });
 

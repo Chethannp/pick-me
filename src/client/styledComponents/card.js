@@ -6,7 +6,6 @@ const CardHeader = styled(Div)`
   border-radius: 3px;
   border: 1px solid ${props => props.theme.colors.lightGrey};
   border-top: 4px solid ${props => props.theme.colors.brandPrimary};
-  cursor: pointer;
   &:hover {
     box-shadow: 0 1px 4px 0 ${props => props.theme.colors.lightGrey};
   }

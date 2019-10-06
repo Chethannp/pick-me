@@ -27,7 +27,7 @@ const DetailsPage = props => {
 
 const mapStateToProps = state => {
   return {
-    jobList: state.dummy.JobList
+    jobList: state.list.JobList
   };
 };
 

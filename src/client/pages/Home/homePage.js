@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
@@ -8,10 +9,12 @@ import ProfileComp from "../../components/profile";
 //Styled Imports
 import { Container, Div, FlexBox } from "../../styledComponents/layout";
 import Post from "../../components/post";
-import { fetchAllPosts } from "../../../redux-thunk/dummy/dummy.actions";
+import CustomToast from "../../components/toast";
+
 import { DisplayDecisionMaker } from "../../styledComponents/breakpoints";
 import QuickView from "../../components/quickView";
 import Loader from "../../components/pageLoader";
+import { fetchAllPosts } from "../../../redux-thunk/list/list.actions";
 
 /**
  * @function - loadData -this function is used to load initial data when it is being rendered from server
@@ -23,13 +26,13 @@ export const loadData = store => {
   return store.dispatch(fetchAllPosts());
 };
 
-const HomePage = ({ loaderStatus }) => {
+const HomePage = ({ loaderStatus, toastMessage }) => {
   return (
     <Div>
       <Helmet>
         <meta property="og:title" content="Dummy List" />
       </Helmet>
-
+      <CustomToast toastMessage={toastMessage} />
       <Container>
         <FlexBox alignStart jcSpaceBetween marT20>
           <DisplayDecisionMaker minWidth="min" maxWidth="md">
@@ -48,11 +51,17 @@ const HomePage = ({ loaderStatus }) => {
 
 const mapStateToProps = state => {
   return {
-    loaderStatus: state.dummy.pageLoader
+    loaderStatus: state.list.pageLoader,
+    toastMessage: state.list.toastMessage
   };
 };
 
 export default {
   loadData,
   component: connect(mapStateToProps)(HomePage)
+};
+
+HomePage.propTypes = {
+  loaderStatus: PropTypes.bool,
+  toastMessage: PropTypes.string
 };

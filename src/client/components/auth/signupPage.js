@@ -13,7 +13,7 @@ import {
 } from "../../styledComponents/forms";
 import useForm from "../formValidator/useForm";
 import validate from "../formValidator/validate";
-import { registerUserDetails } from "../../../redux-thunk/dummy/dummy.actions";
+import { registerUserDetails } from "../../../redux-thunk/list/list.actions";
 
 const SignUp = ({ registerUser, dismissSignup }) => {
   const formInputs = {
