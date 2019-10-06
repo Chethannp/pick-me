@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Div, FlexBox, Anchor } from "../../styledComponents/layout";
 import { CardHeader, Paragraph } from "../../styledComponents/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,12 +14,19 @@ const Deck = props => {
     description,
     employment_type,
     skills,
-    location
+    location,
+    loginStatus
   } = props;
 
   const [saveJobStatus, setSaveJobStatus] = useState(false);
   const [showInlineLoader, setShowInlineLoader] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (loginStatus) {
+      setIsLoggedIn(loginStatus);
+    }
+  }, [loginStatus]);
 
   const saveJob = () => {
     setShowInlineLoader(true);
@@ -83,7 +90,10 @@ const Deck = props => {
         </Div>
       </FlexBox>
       <Anchor
-        to={{ pathname: `/details/${id}`, state: { props } }}
+        to={{
+          pathname: `${isLoggedIn ? "/details/${id}" : "/jaffa"}`,
+          state: { props }
+        }}
         textDecoration="none"
         color="black"
       >

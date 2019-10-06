@@ -23,6 +23,7 @@ const useForm = (callback, validate, formInputs) => {
 
   const handleSubmit = event => {
     event.preventDefault();
+
     //handle errors
     setErrors(validate(values));
     setIsSubmitting(true);
@@ -30,6 +31,7 @@ const useForm = (callback, validate, formInputs) => {
 
   //Called only when erros are changed
   useEffect(() => {
+ 
     if (Object.keys(errors).length == 0 && isSubmitting) {
       callback();
     }

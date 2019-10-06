@@ -1,49 +1,24 @@
 import React from "react";
-import styled from "styled-components";
 import {
   FlexBox,
   Div,
-  ImageBlock,
   Container,
-  Anchor
+  Anchor,
+  DetailsWrapper,
+  DetailsContent,
+  DetailsProfileImage
 } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 import Guest from "../../assets/company-placeholder.png";
 
-const ProfileImage = styled(ImageBlock)`
-  border-radius: 10%;
-  border: 2px solid #fff;
-  box-shadow: inset 0 1.5px 3px 0 rgba(0, 0, 0, 0.15),
-    0 1.5px 3px 0 rgba(0, 0, 0, 0.15);
-  margin: -60px auto 20px;
-  display: block;
-`;
-
-const DetailsWrapper = styled(FlexBox)`
-  align-items: flex-start;
-  @media screen and (max-width: 767px) {
-    flex-flow: wrap;
-  }
-`;
-
-const DetailsContent = styled(Div)`
-  margin-top: -20px;
-  width: 80%;
-  margin-right: 40px;
-  @media screen and (max-width: 767px) {
-    width: 100%;
-    margin: 0;
-  }
-`;
-
 const PostDetails = props => {
   return (
     <FlexBox flowCol>
-      <Div height="125px" width="100%" bg="lightShade" borderRadius />
+      <Div height="75px" width="100%" bg="lightShade" borderRadius />
       <Container>
         <DetailsWrapper alignCenter jcStart>
           <Div width="20%" marAuto>
-            <ProfileImage src={Guest} alt="" width="100" />
+            <DetailsProfileImage src={Guest} alt="" width="100" />
           </Div>
 
           <DetailsContent>

@@ -205,3 +205,29 @@ export const CenterBlock = styled.div`
   left: 10%;
   top: 35%;
 `;
+
+export const DetailsWrapper = styled(FlexBox)`
+  align-items: flex-start;
+  @media screen and (max-width: 767px) {
+    flex-flow: wrap;
+  }
+`;
+
+export const DetailsContent = styled(Div)`
+  margin-top: -40px;
+  width: 80%;
+  margin-right: 40px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    margin: 0;
+  }
+`;
+
+export const DetailsProfileImage = styled(ImageBlock)`
+  border-radius: 10%;
+  border: 2px solid #fff;
+  box-shadow: inset 0 1.5px 3px 0 rgba(0, 0, 0, 0.15),
+    0 1.5px 3px 0 rgba(0, 0, 0, 0.15);
+  margin: -60px auto 20px;
+  display: block;
+`;

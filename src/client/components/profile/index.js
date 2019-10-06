@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Guest from "../../assets/user-placeholder.png";
 import User from "../../assets/user.jpeg";
-import { FlexBox, Div, ImageBlock } from "../../styledComponents/layout";
+import { FlexBox, Div, ImageBlock, Anchor } from "../../styledComponents/layout";
 import styled from "styled-components";
 import { CustomButton } from "../../styledComponents/button";
 import Modal from "../modal/modal";
@@ -14,8 +14,7 @@ import LazyImageLoader from "../lazyImageLoader";
 const ProfileImage = styled.div`
   border-radius: 10%;
   border: 2px solid #fff;
-  box-shadow: inset 0 21.5px 36px 0 rgb(227, 173, 48),
-    0 -4.5px 0px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 5px 0 rgb(218, 218, 218), 0 0px 2px 0 rgb(199, 199, 199);
   margin: -50px auto 0;
 `;
 
@@ -51,14 +50,27 @@ const ProfileComp = ({ isLoggedIn, profile }) => {
               <ImageBlock src={Guest} width="80px" height="80px" />
             )}
           </ProfileImage>
-
-          {/* <ProfileImage
-            src={isLoggedIn ? User : profile.image}
-            alt=""
-            width="100%"
-          /> */}
         </Div>
-        {!isLoggedIn && (
+        {isLoggedIn ? (
+          <Div textAlign="center" pad20>
+            <Div fontSize="xs">Thanks for the log In !!!</Div>
+            <Div fontSize="xxs" marT10>
+              Oops...! We do not have your profile information with us :(
+            </Div>
+            <Div fontSize="xxs" marT10>
+              Our team needs it to bring in the best suiting jobs for you,
+            </Div>
+            <Div fontSize="xxs" marT10>
+              Please spare some time to
+            </Div>
+            <br />
+            <Anchor to="/update-profile">
+              <CustomButton secondary xs>
+                Update your Profile :)
+              </CustomButton>
+            </Anchor>
+          </Div>
+        ) : (
           <Div textAlign="center" pad20>
             <Div fontSize="xs">Hey there, Welcome !!!</Div>
             <Div fontSize="xxs" marT10>

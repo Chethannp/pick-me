@@ -3,7 +3,8 @@ import {
   HANDLE_PAGE_LOADER,
   HANDLE_LOGIN_SUCCESS,
   HANDLE_LOGIN_ERROR,
-  SHOW_CUSTOM_TOAST
+  SHOW_CUSTOM_TOAST,
+  SAVE_PROFILE_INFO
 } from "./list.actions";
 
 /**
@@ -51,6 +52,14 @@ export default (
         ...state,
         isLoggedIn: action.payload.status,
         loginErrorMessage: action.payload.message
+      };
+    }
+    case SAVE_PROFILE_INFO: {
+      return {
+        ...state,
+        profile: action.payload.data,
+        toastMessage: action.payload.message,
+        isLoggedIn: true
       };
     }
     case SAVE_FETCHED_CASES: {

@@ -6,7 +6,7 @@ export const HANDLE_PAGE_LOADER = `Handle_Page_Loader`;
 export const HANDLE_LOGIN_ERROR = `Handle_Login_Error`;
 export const HANDLE_LOGIN_SUCCESS = `Handle_Login_Success`;
 export const SHOW_CUSTOM_TOAST = `Show_Custom_Toast`;
-
+export const SAVE_PROFILE_INFO = `Save_Profile_Info`;
 /**
  * @function - {Function} - used to fetch data from the server
  * @param - () - has the ability to accept params, but currently none in our case so its marked empty
@@ -91,4 +91,18 @@ export const showCustomToast = message => dispatch => {
     type: SHOW_CUSTOM_TOAST,
     payload: message
   });
+};
+
+export const saveProfileInfo = data => dispatch => {
+  dispatch(showPageLoader(true));
+  setTimeout(() => {
+    dispatch(showPageLoader(true));
+    dispatch({
+      type: SAVE_PROFILE_INFO,
+      payload: {
+        data,
+        message: "Profile updated!"
+      }
+    });
+  }, 3000);
 };

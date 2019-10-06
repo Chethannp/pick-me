@@ -75,7 +75,7 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
         <React.Fragment>
           <Search />
           {postList.map((list, i) => (
-            <Deck key={i} {...list} />
+            <Deck key={i} {...list} loginStatus={isLoggedIn} />
           ))}
 
           {!endStatus && <div ref={bottomRef} />}
