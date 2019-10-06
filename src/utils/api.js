@@ -1,21 +1,22 @@
 import axios from "axios";
 
 export default async (url, type) => {
-  if (!__isBrowser__) {
-    url = process.env.API_ENDPOINT + url;
-  }
+    if (!__isBrowser__) {
+        url = process.env.API_ENDPOINT + url;
+    }
 
-  let res;
+    let res;
 
-  switch (true) {
+    switch (true) {
     case type === "get":
-      res = await axios.get(url);
-      break;
+        res = await axios.get(url);
+        break;
     case type === "post":
-      res = await axios.post(url);
+        res = await axios.post(url);
+        break;
     default:
-      break;
-  }
+        break;
+    }
 
-  return res.data;
+    return res.data;
 };

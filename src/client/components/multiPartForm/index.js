@@ -5,63 +5,63 @@ import Confirm from "./confirm";
 import Success from "./success";
 
 const UserForm = () => {
-  const [formValues, setFormValues] = useState({
-    step: 4,
-    firstName: "",
-    lastName: "",
-    email: "",
-    company: "",
-    designation: "",
-    experience: ""
-  });
+    const [formValues, setFormValues] = useState({
+        step: 4,
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        designation: "",
+        experience: ""
+    });
 
-  //Proceed to next step
-  const nextStep = () => {
-    setFormValues({ ...formValues, step: formValues.step + 1 });
-  };
+    //Proceed to next step
+    const nextStep = () => {
+        setFormValues({ ...formValues, step: formValues.step + 1 });
+    };
 
-  //Go back to prev step
-  const prevStep = () => {
-    setFormValues({ ...formValues, step: formValues.step - 1 });
-  };
+    //Go back to prev step
+    const prevStep = () => {
+        setFormValues({ ...formValues, step: formValues.step - 1 });
+    };
 
-  //Handle fields change
-  const handleChange = input => e => {
-    setFormValues({ ...formValues, [input]: e.target.value });
-  };
+    //Handle fields change
+    const handleChange = input => e => {
+        setFormValues({ ...formValues, [input]: e.target.value });
+    };
 
-  switch (formValues.step) {
+    switch (formValues.step) {
     case 1:
-      return (
-        <FormUserDetails
-          nextStep={nextStep}
-          handleChange={handleChange}
-          {...formValues}
-        />
-      );
+        return (
+            <FormUserDetails
+                nextStep={nextStep}
+                handleChange={handleChange}
+                {...formValues}
+            />
+        );
     case 2:
-      return (
-        <FormPersonalDetails
-          prevStep={prevStep}
-          nextStep={nextStep}
-          handleChange={handleChange}
-          {...formValues}
-        />
-      );
+        return (
+            <FormPersonalDetails
+                prevStep={prevStep}
+                nextStep={nextStep}
+                handleChange={handleChange}
+                {...formValues}
+            />
+        );
     case 3:
-      return (
-        <Confirm
-          prevStep={prevStep}
-          nextStep={nextStep}
-          handleChange={handleChange}
-          {...formValues}
-        />
-      );
+        return (
+            <Confirm
+                prevStep={prevStep}
+                nextStep={nextStep}
+                handleChange={handleChange}
+                {...formValues}
+            />
+        );
     case 4:
-      return <Success />;
+        return <Success />;
     default:
-      return "Jaffa";
-  }
+        return "Jaffa";
+    }
 };
 
 export default UserForm;

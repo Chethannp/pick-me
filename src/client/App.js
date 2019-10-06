@@ -16,38 +16,38 @@ import NotFoundPage from "./pages/NotFound/notfoundPage";
 import { Backdrop } from "./styledComponents/layout";
 
 const App = () => {
-  const [sideBarStatus, setSideBarStatus] = useState(false);
+    const [sideBarStatus, setSideBarStatus] = useState(false);
 
-  const drawerToggleClickHandler = () => {
-    setSideBarStatus(!sideBarStatus);
-  };
+    const drawerToggleClickHandler = () => {
+        setSideBarStatus(!sideBarStatus);
+    };
 
-  const backDropClickHandler = () => {
-    setSideBarStatus(false);
-  };
+    const backDropClickHandler = () => {
+        setSideBarStatus(false);
+    };
 
-  return (
-    <HelmetProvider>
-      <ThemeProvider theme={theme}>
-        <NavbarComp drawerClickHandler={drawerToggleClickHandler} />
-        <SideBarComp expanded={sideBarStatus} />
-        {sideBarStatus && (
-          <Backdrop zIndex="100" onClick={backDropClickHandler} />
-        )}
-        <Switch>
-          {routes.map(({ path, exact, component: C, ...rest }) => (
-            <Route
-              key={path}
-              path={path}
-              exact={exact}
-              render={props => <C {...props} {...rest} />}
-            />
-          ))}
-          <Route render={props => <NotFoundPage {...props} />} />
-        </Switch>
-      </ThemeProvider>
-    </HelmetProvider>
-  );
+    return (
+        <HelmetProvider>
+            <ThemeProvider theme={theme}>
+                <NavbarComp drawerClickHandler={drawerToggleClickHandler} />
+                <SideBarComp expanded={sideBarStatus} />
+                {sideBarStatus && (
+                    <Backdrop zIndex="100" onClick={backDropClickHandler} />
+                )}
+                <Switch>
+                    {routes.map(({ path, exact, component: C, ...rest }) => (
+                        <Route
+                            key={path}
+                            path={path}
+                            exact={exact}
+                            render={props => <C {...props} {...rest} />}
+                        />
+                    ))}
+                    <Route render={props => <NotFoundPage {...props} />} />
+                </Switch>
+            </ThemeProvider>
+        </HelmetProvider>
+    );
 };
 
 export default App;

@@ -23,57 +23,57 @@ import { fetchAllPosts } from "../../../redux-thunk/list/list.actions";
  */
 
 export const loadData = store => {
-  return store.dispatch(fetchAllPosts());
+    return store.dispatch(fetchAllPosts());
 };
 
 const HomePage = ({ loaderStatus, toastMessage, jobList, fetchJobList }) => {
-  useEffect(() => {
-    if (jobList.length == 0) {
-      fetchJobList();
-    }
-  }, []);
+    useEffect(() => {
+        if (jobList.length == 0) {
+            fetchJobList();
+        }
+    }, []);
 
-  return (
-    <Div>
-      <Helmet>
-        <meta property="og:title" content="Dummy List" />
-      </Helmet>
-      <CustomToast toastMessage={toastMessage} />
-      <Container>
-        <FlexBox alignStart jcSpaceBetween marT20>
-          <DisplayDecisionMaker minWidth="min" maxWidth="md">
-            <ProfileComp />
-          </DisplayDecisionMaker>
-          <Post />
-          <DisplayDecisionMaker minWidth="min" maxWidth="lg">
-            <QuickView />
-          </DisplayDecisionMaker>
-        </FlexBox>
-      </Container>
-      {loaderStatus && <Loader />}
-    </Div>
-  );
+    return (
+        <Div>
+            <Helmet>
+                <meta property="og:title" content="Dummy List" />
+            </Helmet>
+            <CustomToast toastMessage={toastMessage} />
+            <Container>
+                <FlexBox alignStart jcSpaceBetween marT20>
+                    <DisplayDecisionMaker minWidth="min" maxWidth="md">
+                        <ProfileComp />
+                    </DisplayDecisionMaker>
+                    <Post />
+                    <DisplayDecisionMaker minWidth="min" maxWidth="lg">
+                        <QuickView />
+                    </DisplayDecisionMaker>
+                </FlexBox>
+            </Container>
+            {loaderStatus && <Loader />}
+        </Div>
+    );
 };
 
 const mapStateToProps = state => {
-  return {
-    loaderStatus: state.list.pageLoader,
-    toastMessage: state.list.toastMessage,
-    jobList: state.list.postList
-  };
+    return {
+        loaderStatus: state.list.pageLoader,
+        toastMessage: state.list.toastMessage,
+        jobList: state.list.postList
+    };
 };
 
 export default {
-  loadData,
-  component: connect(
-    mapStateToProps,
-    dispatch => ({
-      fetchJobList: () => dispatch(fetchAllPosts())
-    })
-  )(HomePage)
+    loadData,
+    component: connect(
+        mapStateToProps,
+        dispatch => ({
+            fetchJobList: () => dispatch(fetchAllPosts())
+        })
+    )(HomePage)
 };
 
 HomePage.propTypes = {
-  loaderStatus: PropTypes.bool,
-  toastMessage: PropTypes.string
+    loaderStatus: PropTypes.bool,
+    toastMessage: PropTypes.string
 };

@@ -1,10 +1,10 @@
 // Just to maintain a cleaner code and structuring
-//I have created a new file for creating a store on server side.
+// I have created a new file for creating a store on server side.
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducers from "../redux-thunk";
 
-/**Server store creation
+/** Server store creation
  * @function default -
  * @const store = {object} - An object that holds the complete state of your app.
  * @function createStore - Creates a Redux store that holds the complete state tree of your app.
@@ -15,6 +15,6 @@ import reducers from "../redux-thunk";
  */
 
 export default () => {
-  const store = createStore(reducers, {}, applyMiddleware(thunk));
-  return store;
+    const store = createStore(reducers, {}, applyMiddleware(thunk));
+    return store;
 };

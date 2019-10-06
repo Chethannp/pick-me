@@ -10,49 +10,49 @@ import App from "../client/App";
 import serialize from "serialize-javascript";
 
 export default (req, res, next, store) => {
-  const activeRoute = Routes.find(route => matchPath(req.url, route)) || {};
+    const activeRoute = Routes.find(route => matchPath(req.url, route)) || {};
 
-  const promise = activeRoute.loadData
-    ? activeRoute.loadData(store)
-    : Promise.resolve();
+    const promise = activeRoute.loadData
+        ? activeRoute.loadData(store)
+        : Promise.resolve();
 
-  promise
-    .then(() => {
-      //initializing variables
-      let content;
-      let styleTags;
-      let helmetContext = {};
+    promise
+        .then(() => {
+            //initializing variables
+            let content;
+            let styleTags;
+            let helmetContext = {};
 
-      //Initial State
-      let preloadedState = store.getState();
-      let stateJson = serialize(preloadedState);
+            //Initial State
+            let preloadedState = store.getState();
+            let stateJson = serialize(preloadedState);
 
-      //Wrapping Styled Sheet to React SSR
-      let sheet = new ServerStyleSheet();
+            //Wrapping Styled Sheet to React SSR
+            let sheet = new ServerStyleSheet();
 
-      try {
-        content = renderToString(
-          <HelmetProvider context={helmetContext}>
-            <StyleSheetManager sheet={sheet.instance}>
-              <Provider store={store}>
-                <StaticRouter location={req.url}>
-                  <App />
-                </StaticRouter>
-              </Provider>
-            </StyleSheetManager>
-          </HelmetProvider>
-        );
-        styleTags = sheet.getStyleTags();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        sheet.seal();
-      }
+            try {
+                content = renderToString(
+                    <HelmetProvider context={helmetContext}>
+                        <StyleSheetManager sheet={sheet.instance}>
+                            <Provider store={store}>
+                                <StaticRouter location={req.url}>
+                                    <App />
+                                </StaticRouter>
+                            </Provider>
+                        </StyleSheetManager>
+                    </HelmetProvider>
+                );
+                styleTags = sheet.getStyleTags();
+            } catch (error) {
+                console.error(error);
+            } finally {
+                sheet.seal();
+            }
 
-      // Creating an instance of Helmet to pull all the tags out of the library
-      let { helmet } = helmetContext;
+            // Creating an instance of Helmet to pull all the tags out of the library
+            let { helmet } = helmetContext;
 
-      res.send(`
+            res.send(`
         <!DOCTYPE html>
         <html>
         <head>
@@ -77,6 +77,6 @@ export default (req, res, next, store) => {
         </body>
         </html>
     `);
-    })
-    .catch(next);
+        })
+        .catch(next);
 };

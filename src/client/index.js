@@ -27,16 +27,16 @@ import reducers from "../redux-thunk";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  reducers,
-  window.__PRELOADED_STATE__,
-  composeEnhancers(applyMiddleware(thunk))
+    reducers,
+    window.__PRELOADED_STATE__,
+    composeEnhancers(applyMiddleware(thunk))
 );
 
 hydrate(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById("root")
 );

@@ -6,26 +6,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Search = ({ search }) => {
-  const handleSearchSubmit = e => {
-    e.preventDefault();
-  };
+    const handleSearchSubmit = e => {
+        e.preventDefault();
+    };
 
-  return (
-    <SearchForm onSubmit={handleSearchSubmit}>
-      <Dropdown />
-      <SearchInput
-        autoComplete="off"
-        type="text"
-        name="search"
-        placeholder="Search..."
-        defaultValue=""
-        onChange={e => search(e)}
-      />
-      <CustomButton>
-        <FontAwesomeIcon icon={faSearch} />
-      </CustomButton>
-    </SearchForm>
-  );
+    return (
+        <SearchForm onSubmit={handleSearchSubmit}>
+            <Dropdown />
+            <SearchInput
+                autoComplete="off"
+                type="text"
+                name="search"
+                placeholder="Search..."
+                defaultValue=""
+                onChange={e => search(e)}
+            />
+            <CustomButton>
+                <FontAwesomeIcon icon={faSearch} />
+            </CustomButton>
+        </SearchForm>
+    );
 };
 
 export default Search;
