@@ -45,7 +45,7 @@ const UpdateProfile = props => {
 
   function submit() {
     props.saveProfile(values);
-    props.history.goBack();
+    props.history.push("/");
   }
 
   return (
@@ -218,7 +218,7 @@ const UpdateProfile = props => {
                   </FormGroupSpacer>
                   <br /> <br />
                   <CustomButton marAuto width="100px">
-                    <Anchor to="/">Save</Anchor>
+                    Save
                   </CustomButton>
                 </Form>
               </Div>

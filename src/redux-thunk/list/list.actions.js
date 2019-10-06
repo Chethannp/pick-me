@@ -96,7 +96,7 @@ export const showCustomToast = message => dispatch => {
 export const saveProfileInfo = data => dispatch => {
   dispatch(showPageLoader(true));
   setTimeout(() => {
-    dispatch(showPageLoader(true));
+    dispatch(showPageLoader(false));
     dispatch({
       type: SAVE_PROFILE_INFO,
       payload: {
@@ -104,5 +104,5 @@ export const saveProfileInfo = data => dispatch => {
         message: "Profile updated!"
       }
     });
-  }, 3000);
+  }, 2000);
 };

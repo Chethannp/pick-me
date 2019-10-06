@@ -91,7 +91,7 @@ const Deck = props => {
       </FlexBox>
       <Anchor
         to={{
-          pathname: `${isLoggedIn ? "/details/${id}" : "/jaffa"}`,
+          pathname: `${isLoggedIn ? "/details/${id}" : "/"}`,
           state: { props }
         }}
         textDecoration="none"
