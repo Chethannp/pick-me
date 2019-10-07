@@ -31,21 +31,22 @@ const Post = ({
     //Trigger the callback function when the intersection is reached
     function scrollCallBack(entries) {
         if (entries[0].isIntersecting) {
-            if (postList.length < postListCount) {
-                setLoaderStatus(true);
-                setTimeout(() => {
-                    setLoaderStatus(false);
-                    fetchMorePosts();
-                }, 3000);
-            } else {
-                setLoaderStatus(true);
-                setTimeout(() => {
-                    setLoaderStatus(false);
-                    setEndStatus(true);
-                }, 3000);
-            }
+            setLoaderStatus(true);
         }
     }
+
+    //Placing this settimeout inside the scrollCallBack function is causing a memory leak so placing it inside the use effect function and clearing it once the component unmounts
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoaderStatus(false);
+            if (postList.length < postListCount) {
+                fetchMorePosts();
+            } else {
+                setEndStatus(true);
+            }
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, [loaderStatus]);
 
     //Defines the view port boundary
     //Defines the reference element which needs to be observed and Instantiates the observer
