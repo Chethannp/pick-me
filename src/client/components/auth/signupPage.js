@@ -16,7 +16,7 @@ import useForm from "../formValidator/useForm";
 import validate from "../formValidator/validate";
 import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
 
-const SignUp = ({ registerUser, dismissSignup, isLoggedIn }) => {
+const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
     const formInputs = {
         firstName: "",
         lastName: "",

@@ -24,7 +24,7 @@ const ProfileImage = styled.div`
     margin: -50px auto 0;
 `;
 
-const ProfileComp = ({ isLoggedIn, profileInfo }) => {
+const ProfileComp = ({ isLoggedIn = false, profile = undefined }) => {
     const { isShowing, toggle } = useModal();
 
     return (
@@ -44,8 +44,8 @@ const ProfileComp = ({ isLoggedIn, profileInfo }) => {
                         {isLoggedIn ? (
                             <LazyImageLoader
                                 url={
-                                    profileInfo
-                                        ? `${profileInfo.image}`
+                                    profile
+                                        ? `${profile.image}`
                                         : "http://placeimg.com/295/295/any/tech"
                                 }
                                 fallbackUrl={User}
@@ -62,9 +62,9 @@ const ProfileComp = ({ isLoggedIn, profileInfo }) => {
                     </ProfileImage>
                 </Div>
                 {isLoggedIn ? (
-                    profileInfo ? (
+                    profile ? (
                         <Div textAlign="center" pad20>
-                            {profileInfo.firstName} {profileInfo.lastName}
+                            {profile.firstName} {profile.lastName}
                         </Div>
                     ) : (
                         <Div textAlign="center" pad20>
@@ -111,7 +111,7 @@ const ProfileComp = ({ isLoggedIn, profileInfo }) => {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.list.isLoggedIn,
-        profileInfo: state.list.profile
+        profile: state.list.profile
     };
 };
 
@@ -119,5 +119,5 @@ export default connect(mapStateToProps)(ProfileComp);
 
 ProfileComp.propTypes = {
     isLoggedIn: PropTypes.bool,
-    profileInfo: PropTypes.object
+    profile: PropTypes.object
 };

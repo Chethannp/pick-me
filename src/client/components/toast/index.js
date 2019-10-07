@@ -45,7 +45,7 @@ const ToastWrapper = styled.div`
         `}
 `;
 
-const CustomToast = ({ hideCustomToast, toastMessage }) => {
+const CustomToast = ({ hideCustomToast, toastMessage = "" }) => {
     useEffect(() => {
         setTimeout(() => {
             hideCustomToast("");

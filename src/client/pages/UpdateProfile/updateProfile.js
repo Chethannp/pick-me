@@ -24,7 +24,7 @@ import useForm from "../../components/formValidator/useForm";
 import validate from "../../components/formValidator/validate";
 import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
 
-const UpdateProfile = ({ profile, saveProfile, history }) => {
+const UpdateProfile = ({ profile = undefined, saveProfile, history }) => {
     const formInputs = {
         firstName: (profile && profile.firstName) || "",
         lastName: (profile && profile.lastName) || "",

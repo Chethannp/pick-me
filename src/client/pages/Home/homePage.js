@@ -26,9 +26,15 @@ export const loadData = store => {
     return store.dispatch(fetchAllPosts());
 };
 
-const HomePage = ({ loaderStatus, toastMessage, jobList, fetchJobList }) => {
+const HomePage = ({
+    loaderStatus = false,
+    toastMessage = "",
+    postList = [],
+    isLoggedIn = false,
+    fetchJobList
+}) => {
     useEffect(() => {
-        if (jobList.length == 0) {
+        if (postList.length == 0) {
             fetchJobList();
         }
     }, []);
@@ -44,7 +50,7 @@ const HomePage = ({ loaderStatus, toastMessage, jobList, fetchJobList }) => {
                     <DisplayDecisionMaker minWidth="min" maxWidth="md">
                         <ProfileComp />
                     </DisplayDecisionMaker>
-                    <Post />
+                    <Post postList={postList} isLoggedIn={isLoggedIn} />
                     <DisplayDecisionMaker minWidth="min" maxWidth="lg">
                         <QuickView />
                     </DisplayDecisionMaker>
@@ -59,7 +65,8 @@ const mapStateToProps = state => {
     return {
         loaderStatus: state.list.pageLoader,
         toastMessage: state.list.toastMessage,
-        jobList: state.list.postList
+        postList: state.list.postList,
+        isLoggedIn: state.list.isLoggedIn
     };
 };
 
@@ -76,6 +83,7 @@ export default {
 HomePage.propTypes = {
     loaderStatus: PropTypes.bool,
     toastMessage: PropTypes.string,
-    jobList: PropTypes.array,
+    postList: PropTypes.array,
+    isLoggedIn: PropTypes.bool,
     fetchJobList: PropTypes.func
 };

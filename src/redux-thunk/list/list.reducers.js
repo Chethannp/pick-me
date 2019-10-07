@@ -1,5 +1,5 @@
 import {
-    SAVE_FETCHED_CASES,
+    SAVE_FETCHED_LISTS,
     HANDLE_PAGE_LOADER,
     HANDLE_LOGIN_SUCCESS,
     HANDLE_LOGIN_ERROR,
@@ -14,18 +14,7 @@ import {
  * @return - {Object} - It returns the redux store
  */
 
-export default (
-    state = {
-        isLoggedIn: false,
-        profile: undefined,
-        postList: [],
-        postListCount: 20, // Hard coded value just to demonstrate lazyloading feature
-        pageLoader: false,
-        loginErrorMessage: "",
-        toastMessage: ""
-    },
-    action
-) => {
+export default (state = {}, action) => {
     switch (action.type) {
     case HANDLE_PAGE_LOADER: {
         return {
@@ -62,10 +51,12 @@ export default (
             isLoggedIn: true
         };
     }
-    case SAVE_FETCHED_CASES: {
+    case SAVE_FETCHED_LISTS: {
         return {
             ...state,
-            postList: action.payload
+            postList: action.payload.updatedList,
+            sponsoredList: action.payload.sponsoredList,
+            userSavedList: action.payload.userSavedList
         };
     }
 

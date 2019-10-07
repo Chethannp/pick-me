@@ -19,8 +19,8 @@ import { validateUserLogin } from "../../../redux-thunk/list/list.actions";
 const Login = ({
     validateLogin,
     dismissLogin,
-    isLoggedIn,
-    loginErrorMessage
+    isLoggedIn = false,
+    loginErrorMessage = ""
 }) => {
     const [loginErrorState, setLoginErrorState] = useState("");
 

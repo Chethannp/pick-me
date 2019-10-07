@@ -19,7 +19,7 @@ const Carousel = () => {
     const [clientY, setClientY] = useState();
     const [leftVal, setLeftVal] = useState(0);
     const [imageWidth] = useState(200);
-    const [swipeDirection, setSwipeDirection] = useState();
+    const [userSwipeDirection, setUserSwipeDirection] = useState("");
 
     const slideNext = () => {
         if (slideIndex != 2 && slideIndex < 2) {
@@ -46,7 +46,8 @@ const Carousel = () => {
     const onTouchEnd = () => {
         let left = leftVal;
         let index = slideIndex;
-        let swipeDirection = swipeDirection;
+        let swipeDirection = userSwipeDirection;
+
         if (swipeDirection == "left") {
             left = Math.round((leftVal - 250) / imageWidth) * (imageWidth + 30);
             index = left < leftVal ? ++index : index;
@@ -71,7 +72,7 @@ const Carousel = () => {
             setClientX(e.touches[0].clientX);
             setClientY(e.touches[0].clientY);
             setLeftVal(left);
-            setSwipeDirection(deltaX < 0 ? "left" : "right");
+            setUserSwipeDirection(deltaX < 0 ? "left" : "right");
         }
     };
 

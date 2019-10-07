@@ -23,6 +23,7 @@ module.exports = [
         description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         is_saved: false,
+        is_sponsored: true,
         employment_type: "Full-time",
         experience_level: "Mid-Senior level",
         salary_range: "Not Specified",
@@ -37,7 +38,7 @@ module.exports = [
             "AWS"
         ],
         title: "Senior React JS Developer",
-        time_of_post: "2019-09-11 12:55:00"
+        time_of_post: "2019-09-11T12:55"
     },
     {
         id: 2,
@@ -53,7 +54,7 @@ module.exports = [
         location: "Netherlands",
         skills: ["HTML", "CSS", "Javascript", "Angular.js", "Gulp"],
         title: "Junior Javascript Developer (f/m/d)",
-        time_of_post: "2019-07-11 1:55:00"
+        time_of_post: "2019-09-11T12:55"
     },
     {
         id: 3,
@@ -69,7 +70,7 @@ module.exports = [
         location: "Frankfurt, Germany",
         skills: ["Test Cases", "Java", "Netbeans", "Automation Testing", "ETL"],
         title: "Contract QA Engineer (f/m/d)",
-        time_of_post: "2019-02-11 9:25:00"
+        time_of_post: "2019-09-11T12:55"
     },
     {
         id: 4,
@@ -101,7 +102,7 @@ module.exports = [
         location: "Berlin, Germany",
         skills: ["HTML", "CSS", "Javascript"],
         title: "Frontend Developer",
-        time_of_post: "2018-06-19 22:08:16"
+        time_of_post: "2019-09-11T12:55"
     },
     {
         id: 5,
@@ -116,7 +117,7 @@ module.exports = [
         location: "Berlin, Germany",
         skills: ["HTML", "CSS", "Javascript"],
         title: "Frontend Developer",
-        time_of_post: "2018-06-19 22:08:16"
+        time_of_post: "2019-09-11T12:55"
     },
     {
         id: 6,
@@ -148,7 +149,7 @@ module.exports = [
         location: "Berlin, Germany",
         skills: ["HTML", "CSS", "Javascript"],
         title: "Frontend Developer",
-        time_of_post: "2018-06-19 22:08:16"
+        time_of_post: "2019-09-11T12:55"
     },
     {
         id: 7,
@@ -180,6 +181,6 @@ module.exports = [
         location: "Berlin, Germany",
         skills: ["HTML", "CSS", "Javascript"],
         title: "Frontend Developer",
-        time_of_post: "2018-06-19 22:08:16"
+        time_of_post: "2019-09-11T12:55"
     }
 ];

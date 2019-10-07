@@ -9,7 +9,12 @@ import { CardHeader } from "../../styledComponents/card";
 import Search from "../search";
 import { fetchAllPosts } from "../../../redux-thunk/list/list.actions";
 
-const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
+const Post = ({
+    postList,
+    postListCount = 20, // Hard coded value just to demonstrate lazyloading feature
+    fetchMorePosts,
+    isLoggedIn
+}) => {
     const bottomRef = useRef();
     const [loaderStatus, setLoaderStatus] = useState(false);
     const [endStatus, setEndStatus] = useState(false);
@@ -86,7 +91,11 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
                 </CardHeader>
             ) : (
                 <React.Fragment>
-                    {isLoggedIn && <Search search={filterSearch} />}
+                    {isLoggedIn && (
+                        <Div marT10>
+                            <Search search={filterSearch} />
+                        </Div>
+                    )}
 
                     {filteredJobs && filteredJobs.length == 0 ? (
                         <CardHeader textAlign="center" noCursor pad20>
@@ -123,7 +132,7 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
                                     boxShadow="lightShade"
                                     bg="lightShade"
                                 >
-                                    ~that's all folks!~
+                                    -- that is all folks!--
                                 </Div>
                             )}
                         </React.Fragment>
@@ -134,16 +143,16 @@ const Post = ({ postList, postListCount, fetchMorePosts, isLoggedIn }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        postList: state.list.postList,
-        postListCount: state.list.postListCount,
-        isLoggedIn: state.list.isLoggedIn
-    };
-};
+// const mapStateToProps = state => {
+//     return {
+//         postList: state.list.postList,
+//         postListCount: state.list.postListCount,
+//         isLoggedIn: state.list.isLoggedIn
+//     };
+// };
 
 export default connect(
-    mapStateToProps,
+    null,
     dispatch => ({
         fetchMorePosts: () => dispatch(fetchAllPosts())
     })

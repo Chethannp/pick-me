@@ -6,7 +6,7 @@ import Success from "./success";
 
 const UserForm = () => {
     const [formValues, setFormValues] = useState({
-        step: 4,
+        step: 1,
         firstName: "",
         lastName: "",
         email: "",

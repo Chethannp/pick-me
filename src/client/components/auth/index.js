@@ -156,6 +156,12 @@ const SideDiv = props => {
     );
 };
 
+SideDiv.propTypes = {
+    signup: PropTypes.bool,
+    onClick: PropTypes.func,
+    current: PropTypes.string
+};
+
 export default Auth;
 
 Auth.propTypes = {

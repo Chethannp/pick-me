@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Div, FlexBox, Anchor } from "../../styledComponents/layout";
+import { Div, FlexBox } from "../../styledComponents/layout";
 import { CardHeader, Paragraph } from "../../styledComponents/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 import InlineLoaderComp from "../InlineLoader";
+import CustomToast from "../toast";
+import { useHistory } from "react-router";
 
 const Deck = props => {
+    let history = useHistory();
     const {
         id,
         title,
@@ -16,12 +19,14 @@ const Deck = props => {
         employment_type,
         skills,
         location,
-        loginStatus
+        loginStatus,
+        time_of_post
     } = props;
 
     const [saveJobStatus, setSaveJobStatus] = useState(false);
     const [showInlineLoader, setShowInlineLoader] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loginReminderToast, setLoginReminderToast] = useState(false);
 
     useEffect(() => {
         if (loginStatus) {
@@ -44,14 +49,26 @@ const Deck = props => {
             setShowInlineLoader(false);
         }, 2000);
     };
+
+    function handleRouteClick() {
+        if (isLoggedIn) {
+            history.push(`/details/${id}`, props);
+        } else {
+            setLoginReminderToast(true);
+            setTimeout(() => {
+                setLoginReminderToast(false);
+            }, 2000);
+        }
+    }
+
     return (
-        <CardHeader pad10>
+        <CardHeader pad10 onClick={handleRouteClick}>
             <FlexBox jcSpaceBetween>
                 <Div width="100%">
                     <Div fontWeight="bold" fontsize="lg">
-                        Senior Software- Developer (m/w/d)
+                        {title}
                     </Div>
-                    <Div fontSize="xxs">Augsburg, DE</Div>
+                    <Div fontSize="xxs">{location}</Div>
                 </Div>
                 {loginStatus && (
                     <Div>
@@ -94,20 +111,24 @@ const Deck = props => {
                     </Div>
                 )}
             </FlexBox>
-            <Anchor
+            {/* <Anchor
                 to={{
                     pathname: `${isLoggedIn ? "/details/${id}" : "/"}`,
                     state: { props }
                 }}
                 textDecoration="none"
                 color="black"
-            >
-                <Paragraph>{description}</Paragraph>
+            > */}
+            <Paragraph>{description}</Paragraph>
 
-                <Div marT10 fontSize="xxs">
-                    Posted 3 weeks ago
-                </Div>
-            </Anchor>
+            <Div marT10 fontSize="xxs">
+                {time_of_post}
+            </Div>
+            {/* </Anchor> */}
+
+            {loginReminderToast && (
+                <CustomToast toastMessage="Please login to see the details!" />
+            )}
         </CardHeader>
     );
 };

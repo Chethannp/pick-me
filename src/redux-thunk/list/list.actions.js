@@ -1,7 +1,8 @@
+import moment from "moment";
 import axios from "../../utils/api";
 
 // Types declarations
-export const SAVE_FETCHED_CASES = "Saver_Fetched_Cases";
+export const SAVE_FETCHED_LISTS = "Saver_Fetched_Lists";
 export const HANDLE_PAGE_LOADER = "Handle_Page_Loader";
 export const HANDLE_LOGIN_ERROR = "Handle_Login_Error";
 export const HANDLE_LOGIN_SUCCESS = "Handle_Login_Success";
@@ -16,27 +17,47 @@ export const SAVE_PROFILE_INFO = "Save_Profile_Info";
 
 export const fetchAllPosts = () => async dispatch => {
     try {
-        dispatch(showPageLoader(true));
-        const data = await axios("/repo", "get");
-        dispatch(saveFetchedList(data));
+        const res = await axios("/repo", "get");
+        dispatch(saveFetchedList(res));
     } catch (error) {
         console.error(error);
     }
 };
 
-export const saveFetchedList = data => async (dispatch, getState) => {
-    const prevData = getState().list.postList;
+export const saveFetchedList = res => async (dispatch, getState) => {
+    //Using moment Js library to convert server time to standard hours and day notation so that we can display a readable text for the user.
+    const data = res.map(list => {
+        if (list.time_of_post) {
+            list.time_of_post = moment(new Date(list.time_of_post)).fromNow();
+        }
+        return list;
+    });
+
+    //Check for the prevdata to avoid unecessary dispatch of action
+    const prevData = getState().list.postList || [];
+
     if (prevData != data) {
         let updatedList = [];
         updatedList = [...prevData, ...data];
 
         if (updatedList == []) return;
+
+        const sponsoredList = updatedList
+            ? updatedList.filter(item => item.is_sponsored)
+            : undefined;
+        const userSavedList = updatedList
+            ? updatedList.filter(item => item.is_saved)
+            : undefined;
+
         dispatch({
-            type: SAVE_FETCHED_CASES,
-            payload: updatedList
+            type: SAVE_FETCHED_LISTS,
+            payload: {
+                updatedList,
+                userSavedList,
+                sponsoredList
+            }
         });
     }
-    dispatch(showPageLoader(false));
 };
 
 export const validateUserLogin = credentials => async dispatch => {
@@ -89,7 +110,7 @@ export const showCustomToast = message => dispatch => {
 };
 
 export const saveProfileInfo = (data, message) => (dispatch, getState) => {
-    const prevData = getState().list.profile;
+    const prevData = getState().list.profile || undefined;
     const newData = prevData ? [...prevData, ...data] : data;
 
     dispatch(showPageLoader(true));
