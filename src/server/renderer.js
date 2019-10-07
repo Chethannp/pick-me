@@ -66,9 +66,45 @@ export default (req, res, next, store) => {
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
             <script src="bundle.js" defer></script>
             <style>
-              *{margin:0;padding:0}
-              html,body{height: 100%; font-family: "Open Sans", sans-serif}
-              div, h1,h2,h3,h4,h5,h6,p,ul,li,button,input,textarea{line-height: 20px;}
+                * {
+                    margin: 0;
+                    padding: 0;
+                    font-weight: normal;
+                }
+                input,
+                textarea,
+                button {
+                    -webkit-appearance: none !important;
+                    -webkit-border-radius: 0 !important;
+                }
+                input[type='button'] {
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    -webkit-border-radius: 0px !important;
+                }
+                input[type='submit'] {
+                    -webkit-border-radius: 0px;
+                }
+                input,
+                textarea {
+                    &:focus,
+                    &:active {
+                        outline: none;
+                    }
+                }
+                html {
+                    scroll-behavior: smooth;
+                }
+                body {
+                    max-height: 100vh;
+                    font-family: "Open Sans", sans-serif
+                }
+                body.no-scroll{
+                    overflow: hidden;
+                }
+                div, h1,h2,h3,h4,h5,h6,p,ul,li,button,input,textarea{
+                    line-height: 20px;
+                }
             </style>  
         </head>
         <body>

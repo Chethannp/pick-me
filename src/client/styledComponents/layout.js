@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
     @media only screen and (max-width: 1199px) {
         width: 95%;
@@ -190,6 +190,9 @@ export const Anchor = styled(Link)`
         let style = "";
         style += props.color
             ? `color: ${props.theme.colors[props.color]};`
+            : "";
+        style += props.fontSize
+            ? `font-size: ${props.theme.fontSize[props.fontSize]};`
             : "";
         style += props.textCase
             ? `text-transform: ${props.theme.textTransform[props.textCase]};`

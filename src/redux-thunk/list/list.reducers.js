@@ -56,8 +56,7 @@ export default (state = {}, action) => {
         return {
             ...state,
             postList: action.payload.updatedList,
-            sponsoredList: action.payload.sponsoredList,
-            userSavedList: action.payload.userSavedList
+            sponsoredList: action.payload.sponsoredList
         };
     }
 

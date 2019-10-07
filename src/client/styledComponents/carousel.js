@@ -15,10 +15,10 @@ const CarouselContainer = styled.div`
 `;
 
 const CarouselItem = styled.div`
-    background: #fff;
+    background: rgba(255, 250, 240, 1);
     min-height: 60px;
     margin: 5px 10px;
-    padding: 20px;
+    padding: 10px;
     flex: 0 0 auto;
     border-radius: 3px;
     color: #000;

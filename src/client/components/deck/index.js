@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Div, FlexBox } from "../../styledComponents/layout";
+import { Div, FlexBox, Anchor } from "../../styledComponents/layout";
 import { CardHeader, Paragraph } from "../../styledComponents/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
@@ -113,12 +113,25 @@ const Deck = props => {
                 )}
             </FlexBox>
 
-            <Div onClick={handleRouteClick} style={{ cursor: "pointer" }}>
-                <Paragraph>{description}</Paragraph>
-                <Div marT10 fontSize="xxs">
-                    {time_of_post}
+            {loginStatus ? (
+                <Anchor
+                    color="brandSecondary"
+                    textDecoration="none"
+                    to={{ pathname: `/details/${id}`, query: { props } }}
+                >
+                    <Paragraph>{description}</Paragraph>
+                    <Div marT10 fontSize="xxs">
+                        {time_of_post}
+                    </Div>
+                </Anchor>
+            ) : (
+                <Div onClick={handleRouteClick} style={{ cursor: "pointer" }}>
+                    <Paragraph>{description}</Paragraph>
+                    <Div marT10 fontSize="xxs">
+                        {time_of_post}
+                    </Div>
                 </Div>
-            </Div>
+            )}
 
             {loginReminderToast && (
                 <CustomToast toastMessage="Please login to see the details!" />

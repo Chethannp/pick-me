@@ -47,15 +47,11 @@ export const saveFetchedList = res => async (dispatch, getState) => {
         const sponsoredList = updatedList
             ? updatedList.filter(item => item.is_sponsored)
             : undefined;
-        const userSavedList = updatedList
-            ? updatedList.filter(item => item.is_saved)
-            : undefined;
 
         dispatch({
             type: SAVE_FETCHED_LISTS,
             payload: {
                 updatedList,
-                userSavedList,
                 sponsoredList
             }
         });

@@ -8,7 +8,7 @@ import {
     QuickViewDiv
 } from "../../styledComponents/quickview";
 import Carousel from "../carousel";
-import { Div } from "../../styledComponents/layout";
+import { Div, Anchor } from "../../styledComponents/layout";
 
 const QuickView = ({
     isLoggedIn = false,
@@ -20,7 +20,23 @@ const QuickView = ({
             {sponsoredList.length > 0 && (
                 <QuickViewWrapper>
                     <QuickViewDiv>
-                        <QuickViewHeading>Sponsored List</QuickViewHeading>
+                        <QuickViewHeading>
+                            <Div
+                                posRel
+                                color="white"
+                                fontSize="xxs"
+                                fontWeight="bold"
+                            >
+                                Sponsored List
+                            </Div>
+                            <Anchor
+                                fontSize="xxs"
+                                color="brandSecondary"
+                                to="/sponsored-jobs/"
+                            >
+                                View All
+                            </Anchor>
+                        </QuickViewHeading>
                         <QuickViewContent>
                             <Carousel list={sponsoredList} />
                         </QuickViewContent>
@@ -31,7 +47,23 @@ const QuickView = ({
             {userSavedList.length > 0 && (
                 <QuickViewWrapper>
                     <QuickViewDiv>
-                        <QuickViewHeading>Saved List</QuickViewHeading>
+                        <QuickViewHeading>
+                            <Div
+                                posRel
+                                color="white"
+                                fontSize="xxs"
+                                fontWeight="bold"
+                            >
+                                Saved List
+                            </Div>
+                            <Anchor
+                                fontSize="xxs"
+                                color="brandSecondary"
+                                to="/saved-jobs/"
+                            >
+                                View All
+                            </Anchor>
+                        </QuickViewHeading>
                         <QuickViewContent>
                             <Carousel list={userSavedList} />
                         </QuickViewContent>

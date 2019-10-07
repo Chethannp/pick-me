@@ -26,7 +26,7 @@ const Carousel = ({ list }) => {
 
     const slideNext = () => {
         if (slideIndex != list.length - 1 && slideIndex < list.length - 1) {
-            let slideTo = (slideIndex + 1) * -250;
+            let slideTo = (slideIndex + 1) * -230;
             setLeftVal(slideTo);
             setSlideIndex(slideIndex + 1);
         }
@@ -34,7 +34,7 @@ const Carousel = ({ list }) => {
 
     const slidePrev = () => {
         if (slideIndex != 0 && slideIndex > 0) {
-            let slideTo = leftVal + 250;
+            let slideTo = leftVal + 230;
             setLeftVal(slideTo);
             setSlideIndex(slideIndex - 1);
         }
@@ -52,11 +52,11 @@ const Carousel = ({ list }) => {
         let swipeDirection = userSwipeDirection;
 
         if (swipeDirection == "left") {
-            left = Math.round((leftVal - 250) / imageWidth) * (imageWidth + 30);
+            left = Math.round((leftVal - 230) / imageWidth) * (imageWidth + 30);
             index = left < leftVal ? ++index : index;
         }
         if (swipeDirection == "right") {
-            left = Math.round((leftVal + 250) / imageWidth) * (imageWidth + 30);
+            left = Math.round((leftVal + 230) / imageWidth) * (imageWidth + 30);
             index = left > leftVal ? --index : index;
         }
         if (index >= list.length || index < 0) return;
@@ -84,7 +84,7 @@ const Carousel = ({ list }) => {
             {list.length > 1 && (
                 <CarouselFooter>
                     <Prev
-                        style={{ opacity: slideIndex == 0 ? "0.2" : "1" }}
+                        style={{ opacity: slideIndex == 0 ? "0.1" : "1" }}
                         onClick={slidePrev}
                     >
                         <FontAwesomeIcon icon={faChevronLeft} />
@@ -92,7 +92,8 @@ const Carousel = ({ list }) => {
 
                     <Next
                         style={{
-                            opacity: slideIndex === 3 - 1 ? "0.2" : "1"
+                            opacity:
+                                slideIndex === list.length - 1 ? "0.1" : "1"
                         }}
                         onClick={slideNext}
                     >
@@ -117,7 +118,10 @@ const Carousel = ({ list }) => {
                             width: `${imageWidth}px`
                         }}
                     >
-                        <Div fontsize="lg">{item.title}</Div>
+                        <Div fontSize="xs">{item.title}</Div>
+                        <Div fontSize="xxs" color="brandPrimary">
+                            {item.company}
+                        </Div>
                         <Div fontSize="xxs">{item.location}</Div>
 
                         <FlexBox jcEnd>
