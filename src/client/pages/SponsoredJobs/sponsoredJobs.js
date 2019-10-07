@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Container, Div, FlexBox, Anchor } from "../../styledComponents/layout";
@@ -8,17 +8,13 @@ import { Paragraph } from "../../styledComponents/card";
 import { GridRow, GridItem } from "../../styledComponents/grid";
 
 const SponsoredJobs = ({ sponsoredList = [] }) => {
-    useEffect(() => {
-        return () => {};
-    }, []);
-
     return (
         <Div marT20>
             <Container>
                 {sponsoredList.length > 0 ? (
                     <GridRow>
                         {sponsoredList.map((item, i) => (
-                            <GridItem key={i}>
+                            <GridItem key={i} grow="30%">
                                 <Div fontsize="lg">{item.title}</Div>
                                 <Div fontSize="xxs">{item.location}</Div>
                                 <Paragraph>{item.description}</Paragraph>

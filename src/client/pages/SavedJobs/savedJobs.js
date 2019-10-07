@@ -18,7 +18,7 @@ const SavedJobs = ({ userSavedList = [] }) => {
                 {userSavedList.length > 0 ? (
                     <GridRow>
                         {userSavedList.map((item, i) => (
-                            <GridItem key={i}>
+                            <GridItem key={i} grow="30%">
                                 <Div fontsize="lg">{item.title}</Div>
                                 <Div fontSize="xxs">{item.location}</Div>
                                 <Paragraph>{item.description}</Paragraph>

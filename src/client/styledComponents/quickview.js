@@ -18,7 +18,6 @@ const QuickViewHeading = styled.div`
     align-items: center;
     margin-bottom: 10px;
     padding-bottom: 5px;
-    background-color: ${props => props.theme.colors.lightShade};
 
     font-size: ${props => props.theme.fontSize.xs};
     border-bottom: 1px solid ${props => props.theme.colors.whiteBg};
@@ -28,8 +27,8 @@ const QuickViewHeading = styled.div`
         top: -10px;
         position: absolute;
         width: 200px;
-        height: 35px;
-        background: rgb(197, 71, 127);
+        height: 40px;
+        background: rgb(255, 250, 240);
         transform: skewX(-30deg);
         transition: 1s;
     }

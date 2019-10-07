@@ -13,7 +13,7 @@ import {
 } from "../../../redux-thunk/list/list.actions";
 
 const Post = ({
-    postList,
+    postList = [],
     postListCount = 20, // Hard coded value just to demonstrate lazyloading feature
     isLoggedIn = false,
     fetchMorePosts,

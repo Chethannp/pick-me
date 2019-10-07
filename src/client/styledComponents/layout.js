@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-    max-width: 1200px;
+    width: 1200px;
     margin: 0 auto;
     @media only screen and (max-width: 1199px) {
         width: 95%;

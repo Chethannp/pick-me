@@ -16,7 +16,7 @@ const DetailsPage = props => {
                     <Anchor to="/" color="brandSecondary">
                         Home
                     </Anchor>{" "}
-                    ~`&gt;` Job Details Page
+                    -/- Job Details Page
                 </Breadcrumb>
             </Container>
 

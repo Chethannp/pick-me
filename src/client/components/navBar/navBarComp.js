@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import LogoImg from "../../assets/logo.png";
+
 import {
     Div,
     Container,
@@ -11,13 +14,13 @@ import {
 import DrawerToggleButton from "../../styledComponents/drawerbtn";
 import { DisplayDecisionMaker } from "../../styledComponents/breakpoints";
 
-const NavbarComp = props => {
+const NavbarComp = ({ drawerClickHandler, isLoggedIn = false }) => {
     return (
         <Div zIndex="1" posSticky bg="white" boxShadow="lightGrey">
             <Container>
                 <FlexBox alignCenter jcSpaceBetween height="50px" padT5>
                     <DisplayDecisionMaker minWidth="md">
-                        <DrawerToggleButton click={props.drawerClickHandler} />
+                        <DrawerToggleButton click={drawerClickHandler} />
                     </DisplayDecisionMaker>
 
                     <Anchor to="/" color="brandSecondary" textDecoration="none">
@@ -35,14 +38,33 @@ const NavbarComp = props => {
                             </Div>
                         </FlexBox>
                     </Anchor>
+
+                    {isLoggedIn ? (
+                        <Anchor
+                            to="/update-profile"
+                            color="brandPrimary"
+                            textDecoration="none"
+                        >
+                            Profile
+                        </Anchor>
+                    ) : (
+                        <span></span>
+                    )}
                 </FlexBox>
             </Container>
         </Div>
     );
 };
 
-export default NavbarComp;
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.list.isLoggedIn
+    };
+};
+
+export default connect(mapStateToProps)(NavbarComp);
 
 NavbarComp.propTypes = {
-    drawerClickHandler: PropTypes.func
+    drawerClickHandler: PropTypes.func,
+    isLoggedIn: PropTypes.bool
 };

@@ -21,12 +21,7 @@ const QuickView = ({
                 <QuickViewWrapper>
                     <QuickViewDiv>
                         <QuickViewHeading>
-                            <Div
-                                posRel
-                                color="white"
-                                fontSize="xxs"
-                                fontWeight="bold"
-                            >
+                            <Div posRel fontSize="xxs" fontWeight="bold">
                                 Sponsored List
                             </Div>
                             <Anchor
@@ -48,12 +43,7 @@ const QuickView = ({
                 <QuickViewWrapper>
                     <QuickViewDiv>
                         <QuickViewHeading>
-                            <Div
-                                posRel
-                                color="white"
-                                fontSize="xxs"
-                                fontWeight="bold"
-                            >
+                            <Div posRel fontSize="xxs" fontWeight="bold">
                                 Saved List
                             </Div>
                             <Anchor
