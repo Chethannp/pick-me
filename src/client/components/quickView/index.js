@@ -13,19 +13,34 @@ import { Div } from "../../styledComponents/layout";
 const QuickView = ({
     isLoggedIn = false,
     sponsoredList = [],
-    userSavedPostList = []
+    userSavedList = []
 }) => {
     return isLoggedIn ? (
-        <QuickViewWrapper>
-            <QuickViewDiv>
-                <QuickViewHeading>Heading</QuickViewHeading>
-                <QuickViewContent>
-                    <Carousel />
-                </QuickViewContent>
-            </QuickViewDiv>
-        </QuickViewWrapper>
+        <React.Fragment>
+            {sponsoredList.length > 0 && (
+                <QuickViewWrapper>
+                    <QuickViewDiv>
+                        <QuickViewHeading>Sponsored List</QuickViewHeading>
+                        <QuickViewContent>
+                            <Carousel list={sponsoredList} />
+                        </QuickViewContent>
+                    </QuickViewDiv>
+                </QuickViewWrapper>
+            )}
+
+            {userSavedList.length > 0 && (
+                <QuickViewWrapper>
+                    <QuickViewDiv>
+                        <QuickViewHeading>Saved List</QuickViewHeading>
+                        <QuickViewContent>
+                            <Carousel list={userSavedList} />
+                        </QuickViewContent>
+                    </QuickViewDiv>
+                </QuickViewWrapper>
+            )}
+        </React.Fragment>
     ) : (
-        <Div width="320px" />
+        <Div width="320px" /> //I need this to retain the real estate space on homepage so that the job list div does not span over
     );
 };
 
@@ -33,7 +48,7 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.list.isLoggedIn,
         sponsoredList: state.list.sponsoredList,
-        userSavedPostList: state.list.userSavedPostList
+        userSavedList: state.list.userSavedList
     };
 };
 
@@ -42,5 +57,5 @@ export default connect(mapStateToProps)(QuickView);
 QuickView.propTypes = {
     isLoggedIn: PropTypes.bool,
     sponsoredList: PropTypes.array,
-    userSavedPostList: PropTypes.array
+    userSavedList: PropTypes.array
 };

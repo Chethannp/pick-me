@@ -40,16 +40,17 @@ const ToastWrapper = styled.div`
         css`
             visibility: visible; /* Show the snackbar */
             /* Add animation: Take 0.5 seconds to fade in and out the snackbar. However, delay the fade out process for 2.5 seconds */
-            animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 20s;
+            animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 10s;
             transition: animation 200ms ease-out;
         `}
 `;
 
 const CustomToast = ({ hideCustomToast, toastMessage = "" }) => {
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             hideCustomToast("");
-        }, 6000);
+        }, 5000);
+        return () => clearTimeout(timer);
     }, [toastMessage]);
 
     return <ToastWrapper showToast={toastMessage}>{toastMessage}</ToastWrapper>;

@@ -11,15 +11,13 @@ import { useHistory } from "react-router";
 const Deck = props => {
     let history = useHistory();
     const {
+        updateJob,
+        loginStatus,
         id,
         title,
         company,
-        company_info,
-        description,
-        employment_type,
-        skills,
         location,
-        loginStatus,
+        description,
         time_of_post
     } = props;
 
@@ -38,14 +36,16 @@ const Deck = props => {
         setShowInlineLoader(true);
         setTimeout(() => {
             setSaveJobStatus(true);
+            updateJob(props, "add");
             setShowInlineLoader(false);
-        }, 2000);
+        }, 1000);
     };
 
     const removedSavedJob = () => {
         setShowInlineLoader(true);
         setTimeout(() => {
             setSaveJobStatus(false);
+            updateJob(props, "remove");
             setShowInlineLoader(false);
         }, 2000);
     };
@@ -62,16 +62,17 @@ const Deck = props => {
     }
 
     return (
-        <CardHeader pad10 onClick={handleRouteClick}>
+        <CardHeader pad10>
             <FlexBox jcSpaceBetween>
                 <Div width="100%">
                     <Div fontWeight="bold" fontsize="lg">
                         {title}
                     </Div>
+                    <Div fontSize="xs">{company}</Div>
                     <Div fontSize="xxs">{location}</Div>
                 </Div>
                 {loginStatus && (
-                    <Div>
+                    <Div style={{ cursor: "pointer" }}>
                         {!showInlineLoader &&
                             (saveJobStatus ? (
                                 <FlexBox
@@ -111,20 +112,13 @@ const Deck = props => {
                     </Div>
                 )}
             </FlexBox>
-            {/* <Anchor
-                to={{
-                    pathname: `${isLoggedIn ? "/details/${id}" : "/"}`,
-                    state: { props }
-                }}
-                textDecoration="none"
-                color="black"
-            > */}
-            <Paragraph>{description}</Paragraph>
 
-            <Div marT10 fontSize="xxs">
-                {time_of_post}
+            <Div onClick={handleRouteClick} style={{ cursor: "pointer" }}>
+                <Paragraph>{description}</Paragraph>
+                <Div marT10 fontSize="xxs">
+                    {time_of_post}
+                </Div>
             </Div>
-            {/* </Anchor> */}
 
             {loginReminderToast && (
                 <CustomToast toastMessage="Please login to see the details!" />
@@ -144,5 +138,8 @@ Deck.propTypes = {
     employment_type: PropTypes.string,
     skills: PropTypes.array,
     location: PropTypes.string,
-    loginStatus: PropTypes.bool
+    loginStatus: PropTypes.bool,
+    save: PropTypes.func,
+    updateJob: PropTypes.func,
+    time_of_post: PropTypes.string
 };

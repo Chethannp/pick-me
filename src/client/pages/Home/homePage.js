@@ -30,11 +30,10 @@ const HomePage = ({
     loaderStatus = false,
     toastMessage = "",
     postList = [],
-    isLoggedIn = false,
     fetchJobList
 }) => {
     useEffect(() => {
-        if (postList.length == 0) {
+        if (postList.length === 0) {
             fetchJobList();
         }
     }, []);
@@ -50,8 +49,12 @@ const HomePage = ({
                     <DisplayDecisionMaker minWidth="min" maxWidth="md">
                         <ProfileComp />
                     </DisplayDecisionMaker>
-                    <Post postList={postList} isLoggedIn={isLoggedIn} />
-                    <DisplayDecisionMaker minWidth="min" maxWidth="lg">
+                    <Post />
+                    <DisplayDecisionMaker
+                        minWidth="min"
+                        maxWidth="lg"
+                        style={{ position: "sticky", top: "56px" }}
+                    >
                         <QuickView />
                     </DisplayDecisionMaker>
                 </FlexBox>

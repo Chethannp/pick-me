@@ -7,26 +7,22 @@ import Deck from "../deck";
 import { Div } from "../../styledComponents/layout";
 import { CardHeader } from "../../styledComponents/card";
 import Search from "../search";
-import { fetchAllPosts } from "../../../redux-thunk/list/list.actions";
+import {
+    fetchAllPosts,
+    updateUserSavedList
+} from "../../../redux-thunk/list/list.actions";
 
 const Post = ({
     postList,
     postListCount = 20, // Hard coded value just to demonstrate lazyloading feature
+    isLoggedIn = false,
     fetchMorePosts,
-    isLoggedIn
+    updateUserSavedList
 }) => {
     const bottomRef = useRef();
     const [loaderStatus, setLoaderStatus] = useState(false);
     const [endStatus, setEndStatus] = useState(false);
-
     const [search, setSearch] = useState("");
-    const filterSearch = e => {
-        setSearch(e.target.value);
-    };
-
-    let filteredJobs = postList.filter(
-        job => job.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
-    );
 
     //Trigger the callback function when the intersection is reached
     function scrollCallBack(entries) {
@@ -37,6 +33,7 @@ const Post = ({
 
     //Placing this settimeout inside the scrollCallBack function is causing a memory leak so placing it inside the use effect function and clearing it once the component unmounts
     useEffect(() => {
+        if (!isLoggedIn) return;
         const timer = setTimeout(() => {
             setLoaderStatus(false);
             if (postList.length < postListCount) {
@@ -69,6 +66,18 @@ const Post = ({
         scroll.observe(bottomRef.current);
         return () => scroll.disconnect();
     }, [endStatus, postList, isLoggedIn]); //passing posts prop to the useffect function the reason being if we do not do it then our props do not update in the call back function
+
+    const filterSearch = e => {
+        setSearch(e.target.value);
+    };
+
+    let filteredJobs = postList.filter(
+        job => job.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    );
+
+    const updateJob = (job, action) => {
+        updateUserSavedList(job, action);
+    };
 
     return (
         <Div>
@@ -109,6 +118,7 @@ const Post = ({
                                     key={i}
                                     {...list}
                                     loginStatus={isLoggedIn}
+                                    updateJob={updateJob}
                                 />
                             ))}
 
@@ -133,7 +143,7 @@ const Post = ({
                                     boxShadow="lightShade"
                                     bg="lightShade"
                                 >
-                                    -- that is all folks!--
+                                    -- that&apos;s all folks!--
                                 </Div>
                             )}
                         </React.Fragment>
@@ -144,18 +154,20 @@ const Post = ({
     );
 };
 
-// const mapStateToProps = state => {
-//     return {
-//         postList: state.list.postList,
-//         postListCount: state.list.postListCount,
-//         isLoggedIn: state.list.isLoggedIn
-//     };
-// };
+const mapStateToProps = state => {
+    return {
+        postList: state.list.postList,
+        postListCount: state.list.postListCount,
+        isLoggedIn: state.list.isLoggedIn
+    };
+};
 
 export default connect(
-    null,
+    mapStateToProps,
     dispatch => ({
-        fetchMorePosts: () => dispatch(fetchAllPosts())
+        fetchMorePosts: () => dispatch(fetchAllPosts()),
+        updateUserSavedList: (job, action) =>
+            dispatch(updateUserSavedList(job, action))
     })
 )(Post);
 
@@ -163,5 +175,6 @@ Post.propTypes = {
     postList: PropTypes.array,
     postListCount: PropTypes.number,
     fetchMorePosts: PropTypes.func,
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    updateUserSavedList: PropTypes.func
 };

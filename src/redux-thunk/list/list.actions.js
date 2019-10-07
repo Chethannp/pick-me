@@ -8,6 +8,8 @@ export const HANDLE_LOGIN_ERROR = "Handle_Login_Error";
 export const HANDLE_LOGIN_SUCCESS = "Handle_Login_Success";
 export const SHOW_CUSTOM_TOAST = "Show_Custom_Toast";
 export const SAVE_PROFILE_INFO = "Save_Profile_Info";
+export const UPDATE_USER_SAVED_LIST = "Update_User_Saved_List";
+
 /**
  * @function - {Function} - used to fetch data from the server
  * @param - () - has the ability to accept params, but currently none in our case so its marked empty
@@ -61,7 +63,7 @@ export const saveFetchedList = res => async (dispatch, getState) => {
 };
 
 export const validateUserLogin = credentials => async dispatch => {
-    console.log(credentials);
+    //console.log(credentials)
     dispatch(showPageLoader(true));
     try {
         const data = await axios("/account", "post");
@@ -125,4 +127,23 @@ export const saveProfileInfo = (data, message) => (dispatch, getState) => {
             }
         });
     }, 2000);
+};
+
+export const updateUserSavedList = (job, action) => (dispatch, getState) => {
+    let prevList = getState().list.userSavedList || [];
+    let newList = [];
+    if (action === "add") {
+        newList = [...prevList, job];
+        dispatch(showCustomToast("Job Saved! Click again to remove them!"));
+    } else {
+        dispatch(showCustomToast("Job Removed :( Click again to add them!"));
+        newList = prevList.filter(item => item.id != job.id);
+    }
+
+    dispatch({
+        type: UPDATE_USER_SAVED_LIST,
+        payload: newList
+    });
+
+    console.log(newList);
 };

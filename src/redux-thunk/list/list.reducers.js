@@ -4,7 +4,8 @@ import {
     HANDLE_LOGIN_SUCCESS,
     HANDLE_LOGIN_ERROR,
     SHOW_CUSTOM_TOAST,
-    SAVE_PROFILE_INFO
+    SAVE_PROFILE_INFO,
+    UPDATE_USER_SAVED_LIST
 } from "./list.actions";
 
 /**
@@ -57,6 +58,13 @@ export default (state = {}, action) => {
             postList: action.payload.updatedList,
             sponsoredList: action.payload.sponsoredList,
             userSavedList: action.payload.userSavedList
+        };
+    }
+
+    case UPDATE_USER_SAVED_LIST: {
+        return {
+            ...state,
+            userSavedList: action.payload
         };
     }
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
     CarouselWrapper,
     CarouselContainer,
@@ -12,8 +13,10 @@ import {
     faChevronLeft,
     faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
+import { Div, Anchor, FlexBox } from "../../styledComponents/layout";
+import { CustomButton } from "../../styledComponents/button";
 
-const Carousel = () => {
+const Carousel = ({ list }) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [clientX, setClientX] = useState();
     const [clientY, setClientY] = useState();
@@ -22,7 +25,7 @@ const Carousel = () => {
     const [userSwipeDirection, setUserSwipeDirection] = useState("");
 
     const slideNext = () => {
-        if (slideIndex != 2 && slideIndex < 2) {
+        if (slideIndex != list.length - 1 && slideIndex < list.length - 1) {
             let slideTo = (slideIndex + 1) * -250;
             setLeftVal(slideTo);
             setSlideIndex(slideIndex + 1);
@@ -56,13 +59,13 @@ const Carousel = () => {
             left = Math.round((leftVal + 250) / imageWidth) * (imageWidth + 30);
             index = left > leftVal ? --index : index;
         }
-        if (index >= 3 || index < 0) return;
+        if (index >= list.length || index < 0) return;
         setLeftVal(left);
         setSlideIndex(index);
     };
 
     const onTouchMove = e => {
-        let maxWidth = -(imageWidth + 30) * (3 - 1);
+        let maxWidth = -(imageWidth + 30) * (list.length - 1);
         let deltaX = e.touches[0].clientX - clientX;
         let deltaY = e.touches[0].clientY - clientY;
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -78,23 +81,26 @@ const Carousel = () => {
 
     return (
         <CarouselWrapper>
-            <CarouselFooter>
-                <Prev
-                    style={{ opacity: slideIndex == 0 ? "0.2" : "1" }}
-                    onClick={slidePrev}
-                >
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                </Prev>
+            {list.length > 1 && (
+                <CarouselFooter>
+                    <Prev
+                        style={{ opacity: slideIndex == 0 ? "0.2" : "1" }}
+                        onClick={slidePrev}
+                    >
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </Prev>
 
-                <Next
-                    style={{
-                        opacity: slideIndex === 3 - 1 ? "0.2" : "1"
-                    }}
-                    onClick={slideNext}
-                >
-                    <FontAwesomeIcon icon={faChevronRight} />
-                </Next>
-            </CarouselFooter>
+                    <Next
+                        style={{
+                            opacity: slideIndex === 3 - 1 ? "0.2" : "1"
+                        }}
+                        onClick={slideNext}
+                    >
+                        <FontAwesomeIcon icon={faChevronRight} />
+                    </Next>
+                </CarouselFooter>
+            )}
+
             <CarouselContainer
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
@@ -104,30 +110,34 @@ const Carousel = () => {
                     transition: "transform 0.2s linear"
                 }}
             >
-                <CarouselItem
-                    style={{
-                        width: `${imageWidth}px`
-                    }}
-                >
-                    hh
-                </CarouselItem>
-                <CarouselItem
-                    style={{
-                        width: `${imageWidth}px`
-                    }}
-                >
-                    hh
-                </CarouselItem>
-                <CarouselItem
-                    style={{
-                        width: `${imageWidth}px`
-                    }}
-                >
-                    hh
-                </CarouselItem>
+                {list.map((item, i) => (
+                    <CarouselItem
+                        key={i}
+                        style={{
+                            width: `${imageWidth}px`
+                        }}
+                    >
+                        <Div fontsize="lg">{item.title}</Div>
+                        <Div fontSize="xxs">{item.location}</Div>
+
+                        <FlexBox jcEnd>
+                            <Anchor
+                                to={`/details/${item.id}`}
+                                textDecoration="none"
+                                color="black"
+                            >
+                                <CustomButton>Apply</CustomButton>
+                            </Anchor>
+                        </FlexBox>
+                    </CarouselItem>
+                ))}
             </CarouselContainer>
         </CarouselWrapper>
     );
 };
 
 export default Carousel;
+
+Carousel.propTypes = {
+    list: PropTypes.array
+};
