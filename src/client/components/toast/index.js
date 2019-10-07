@@ -49,7 +49,7 @@ const CustomToast = ({ hideCustomToast, toastMessage = "" }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             hideCustomToast("");
-        }, 5000);
+        }, 3000);
         return () => clearTimeout(timer);
     }, [toastMessage]);
 

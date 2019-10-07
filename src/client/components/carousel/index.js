@@ -126,7 +126,10 @@ const Carousel = ({ list }) => {
 
                         <FlexBox jcEnd>
                             <Anchor
-                                to={`/details/${item.id}`}
+                                to={{
+                                    pathname: `/details/${item.id}`,
+                                    query: { props: item }
+                                }}
                                 textDecoration="none"
                                 color="black"
                             >

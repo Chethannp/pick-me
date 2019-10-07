@@ -115,7 +115,7 @@ const Deck = props => {
 
             {loginStatus ? (
                 <Anchor
-                    color="brandSecondary"
+                    color="black"
                     textDecoration="none"
                     to={{ pathname: `/details/${id}`, query: { props } }}
                 >

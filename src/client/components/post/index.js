@@ -101,11 +101,7 @@ const Post = ({
                 </CardHeader>
             ) : (
                 <React.Fragment>
-                    {isLoggedIn && (
-                        <Div marT10>
-                            <Search search={filterSearch} />
-                        </Div>
-                    )}
+                    {isLoggedIn && <Search search={filterSearch} />}
 
                     {filteredJobs && filteredJobs.length == 0 ? (
                         <CardHeader textAlign="center" noCursor pad20>

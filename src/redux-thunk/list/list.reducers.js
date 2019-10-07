@@ -5,7 +5,8 @@ import {
     HANDLE_LOGIN_ERROR,
     SHOW_CUSTOM_TOAST,
     SAVE_PROFILE_INFO,
-    UPDATE_USER_SAVED_LIST
+    UPDATE_USER_SAVED_LIST,
+    LOG_OUT
 } from "./list.actions";
 
 /**
@@ -64,6 +65,14 @@ export default (state = {}, action) => {
         return {
             ...state,
             userSavedList: action.payload
+        };
+    }
+
+    case LOG_OUT: {
+        return {
+            ...state,
+            isLoggedIn: false,
+            profile: {}
         };
     }
 

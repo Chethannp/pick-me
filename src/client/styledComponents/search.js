@@ -5,7 +5,7 @@ const SearchForm = styled.form`
     position: sticky;
     z-index: 99;
     width: 90%;
-    margin: 0 auto;
+    margin: 10px auto 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;

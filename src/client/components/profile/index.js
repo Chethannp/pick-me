@@ -7,24 +7,17 @@ import {
     FlexBox,
     Div,
     ImageBlock,
-    Anchor
+    Anchor,
+    ProfileImage
 } from "../../styledComponents/layout";
-import styled from "styled-components";
+
 import { CustomButton } from "../../styledComponents/button";
 import Modal from "../modal/modal";
 import useModal from "../modal/useModal";
 import Auth from "../auth";
 import LazyImageLoader from "../lazyImageLoader";
 
-const ProfileImage = styled.div`
-    border-radius: 10%;
-    border: 2px solid #fff;
-    box-shadow: inset 0 0 5px 0 rgb(218, 218, 218),
-        0 0px 2px 0 rgb(199, 199, 199);
-    margin: -50px auto 0;
-`;
-
-const ProfileComp = ({ isLoggedIn = false, profile = undefined }) => {
+const ProfileComp = ({ isLoggedIn = false, profile = {} }) => {
     const { isShowing, toggle } = useModal();
 
     return (
@@ -45,7 +38,7 @@ const ProfileComp = ({ isLoggedIn = false, profile = undefined }) => {
                             <LazyImageLoader
                                 url={
                                     profile
-                                        ? `${profile.image}`
+                                        ? `${profile.profileImage}`
                                         : "http://placeimg.com/295/295/any/tech"
                                 }
                                 fallbackUrl={User}
@@ -65,21 +58,24 @@ const ProfileComp = ({ isLoggedIn = false, profile = undefined }) => {
                     profile ? (
                         <Div textAlign="center" pad20>
                             {profile.firstName} {profile.lastName}
+                            <br />
+                            <Anchor to="/update-profile">
+                                <CustomButton secondary xs>
+                                    Edit Profile
+                                </CustomButton>
+                            </Anchor>
                         </Div>
                     ) : (
                         <Div textAlign="center" pad20>
-                            <Div fontSize="xs">Thanks for the log In !!!</Div>
                             <Div fontSize="xxs" marT10>
-                                Oops...! We do not have your profile information
-                                with us :(
+                                Could you please take a moment to update your
+                                profile.
                             </Div>
                             <Div fontSize="xxs" marT10>
                                 Our team needs it to bring in the best suiting
-                                jobs for you,
+                                jobs for you!
                             </Div>
-                            <Div fontSize="xxs" marT10>
-                                Please spare some time to
-                            </Div>
+
                             <br />
                             <Anchor to="/update-profile">
                                 <CustomButton secondary xs>

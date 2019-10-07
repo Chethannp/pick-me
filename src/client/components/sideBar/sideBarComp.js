@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { Div } from "../../styledComponents/layout";
+import ProfileComp from "../profile";
 
 const SideBarWrapper = styled(Div)`
     transform: translateX(-100%);
@@ -23,7 +24,7 @@ const SideBarComp = props => {
             posFixed
             expanded={props.expanded}
         >
-            Side Nav
+            <ProfileComp />
         </SideBarWrapper>
     );
 };

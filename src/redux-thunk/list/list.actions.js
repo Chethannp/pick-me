@@ -9,6 +9,7 @@ export const HANDLE_LOGIN_SUCCESS = "Handle_Login_Success";
 export const SHOW_CUSTOM_TOAST = "Show_Custom_Toast";
 export const SAVE_PROFILE_INFO = "Save_Profile_Info";
 export const UPDATE_USER_SAVED_LIST = "Update_User_Saved_List";
+export const LOG_OUT = "Log_Out";
 
 /**
  * @function - {Function} - used to fetch data from the server
@@ -108,8 +109,8 @@ export const showCustomToast = message => dispatch => {
 };
 
 export const saveProfileInfo = (data, message) => (dispatch, getState) => {
-    const prevData = getState().list.profile || undefined;
-    const newData = prevData ? [...prevData, ...data] : data;
+    const prevData = getState().list.profile || [];
+    const newData = prevData ? [...prevData, data] : data;
 
     dispatch(showPageLoader(true));
     setTimeout(() => {
@@ -142,4 +143,16 @@ export const updateUserSavedList = (job, action) => (dispatch, getState) => {
     });
 
     console.log(newList);
+};
+
+export const handleUserLogout = () => dispatch => {
+    dispatch(showPageLoader(true));
+
+    setTimeout(() => {
+        dispatch(showPageLoader(false));
+        dispatch(showCustomToast("Logged out successfully"));
+        dispatch({
+            type: LOG_OUT
+        });
+    }, 4000);
 };

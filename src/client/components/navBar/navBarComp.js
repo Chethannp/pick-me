@@ -13,8 +13,13 @@ import {
 } from "../../styledComponents/layout";
 import DrawerToggleButton from "../../styledComponents/drawerbtn";
 import { DisplayDecisionMaker } from "../../styledComponents/breakpoints";
+import { handleUserLogout } from "../../../redux-thunk/list/list.actions";
 
-const NavbarComp = ({ drawerClickHandler, isLoggedIn = false }) => {
+const NavbarComp = ({ drawerClickHandler, isLoggedIn = false, logOut }) => {
+    const handleLogout = () => {
+        logOut();
+    };
+
     return (
         <Div zIndex="1" posSticky bg="white" boxShadow="lightGrey">
             <Container>
@@ -39,17 +44,13 @@ const NavbarComp = ({ drawerClickHandler, isLoggedIn = false }) => {
                         </FlexBox>
                     </Anchor>
 
-                    {isLoggedIn ? (
-                        <Anchor
-                            to="/update-profile"
-                            color="brandPrimary"
-                            textDecoration="none"
-                        >
-                            Profile
-                        </Anchor>
-                    ) : (
-                        <span></span>
-                    )}
+                    <Anchor to="" textDecoration="none" color="brandPrimary">
+                        {isLoggedIn ? (
+                            <Div onClick={handleLogout}>Logout</Div>
+                        ) : (
+                            <span>&nbsp;</span>
+                        )}
+                    </Anchor>
                 </FlexBox>
             </Container>
         </Div>
@@ -62,9 +63,15 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(NavbarComp);
+export default connect(
+    mapStateToProps,
+    dispatch => ({
+        logOut: () => dispatch(handleUserLogout())
+    })
+)(NavbarComp);
 
 NavbarComp.propTypes = {
     drawerClickHandler: PropTypes.func,
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    logOut: PropTypes.func
 };

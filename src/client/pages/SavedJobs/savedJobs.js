@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Container, Div, FlexBox, Anchor } from "../../styledComponents/layout";
+import {
+    Container,
+    Div,
+    FlexBox,
+    Anchor,
+    Breadcrumb
+} from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 import StarRating from "../../components/star/rating";
 import { Paragraph } from "../../styledComponents/card";
@@ -14,6 +20,15 @@ const SavedJobs = ({ userSavedList = [] }) => {
 
     return (
         <Div marT20>
+            <Container>
+                <Breadcrumb>
+                    <Anchor to="/" color="brandSecondary">
+                        Home
+                    </Anchor>{" "}
+                    -/- Saved Jobs
+                </Breadcrumb>
+            </Container>
+
             <Container>
                 {userSavedList.length > 0 ? (
                     <GridRow>
@@ -28,7 +43,10 @@ const SavedJobs = ({ userSavedList = [] }) => {
                                         ratingCount={item.rating}
                                     />
                                     <Anchor
-                                        to={`/details/${item.id}`}
+                                        to={{
+                                            pathname: `/details/${item.id}`,
+                                            query: { props: item }
+                                        }}
                                         textDecoration="none"
                                         color="black"
                                     >
