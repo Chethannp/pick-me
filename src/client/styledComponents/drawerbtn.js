@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -23,9 +24,9 @@ const Line = styled.div`
     background-color: ${props => props.theme.colors[props.bg]};
 `;
 
-const DrawerToggleButton = props => {
+const DrawerToggleButton = ({ click }) => {
     return (
-        <Button onClick={props.click}>
+        <Button onClick={click}>
             <Line bg="brandPrimary" />
             <Line bg="brandPrimary" />
             <Line bg="brandPrimary" />
@@ -34,3 +35,7 @@ const DrawerToggleButton = props => {
 };
 
 export default DrawerToggleButton;
+
+DrawerToggleButton.propTypes = {
+    click: PropTypes.func
+};

@@ -19,7 +19,6 @@ const PostDetails = ({ details }) => {
         description,
         employment_type,
         experience_level,
-        id,
         location,
         skills,
         time_of_post

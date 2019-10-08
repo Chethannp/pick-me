@@ -70,8 +70,7 @@ export const saveFetchedList = res => async (dispatch, getState) => {
     }
 };
 
-export const validateUserLogin = credentials => async dispatch => {
-    //console.log(credentials)
+export const validateUserLogin = () => async dispatch => {
     dispatch(showPageLoader(true));
     try {
         const data = await axios("/account", "post");

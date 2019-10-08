@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 // -> Require statements for helper modules
 const path = require("path");
 

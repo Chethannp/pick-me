@@ -6,7 +6,11 @@ module.exports = {
         commonjs: true
     },
 
-    extends: ["eslint:recommended", "plugin:react/recommended"],
+    extends: [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:jest/recommended"
+    ],
     globals: {
         Atomics: "readonly",
         SharedArrayBuffer: "readonly",
