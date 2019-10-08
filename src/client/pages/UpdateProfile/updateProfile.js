@@ -307,7 +307,7 @@ const UpdateProfile = ({
                                                     <FormLabel htmlFor="noticePeriod">
                                                         <FormLabelName>
                                                             Notice period
-                                                            duration*
+                                                            duration (month/s)*
                                                         </FormLabelName>
                                                     </FormLabel>
                                                 </FormGroup>

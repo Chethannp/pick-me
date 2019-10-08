@@ -18,10 +18,11 @@ const Deck = props => {
         company,
         location,
         description,
-        time_of_post
+        time_of_post,
+        is_saved
     } = props;
 
-    const [saveJobStatus, setSaveJobStatus] = useState(false);
+    const [saveJobStatus, setSaveJobStatus] = useState(is_saved);
     const [showInlineLoader, setShowInlineLoader] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loginReminderToast, setLoginReminderToast] = useState(false);
@@ -154,5 +155,6 @@ Deck.propTypes = {
     loginStatus: PropTypes.bool,
     save: PropTypes.func,
     updateJob: PropTypes.func,
-    time_of_post: PropTypes.string
+    time_of_post: PropTypes.string,
+    is_saved: PropTypes.bool
 };

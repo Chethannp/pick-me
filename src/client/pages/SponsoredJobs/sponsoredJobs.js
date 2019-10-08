@@ -21,7 +21,7 @@ const SponsoredJobs = ({ sponsoredList = [] }) => {
                     <Anchor to="/" color="brandSecondary">
                         Home
                     </Anchor>{" "}
-                    -/- Saved Jobs
+                    -/- Sponsored Jobs
                 </Breadcrumb>
 
                 {sponsoredList.length > 0 ? (

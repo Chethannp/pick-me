@@ -24,7 +24,7 @@ const DetailsPage = ({ location, isLoggedIn }) => {
                                     <Anchor to="/" color="brandSecondary">
                                         Home
                                     </Anchor>{" "}
-                                    -/- Job Details Page
+                                    -/- Job Details
                                 </Breadcrumb>
                             </Container>
 

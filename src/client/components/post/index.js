@@ -17,12 +17,13 @@ const Post = ({
     postListCount = 20, // Hard coded value just to demonstrate lazyloading feature
     isLoggedIn = false,
     fetchMorePosts,
-    updateUserSavedList
+    updateUserSavedList,
+    filterOptions = []
 }) => {
     const bottomRef = useRef();
     const [loaderStatus, setLoaderStatus] = useState(false);
     const [endStatus, setEndStatus] = useState(false);
-    const [search, setSearch] = useState("");
+    // const [searchParams, setSearchParams] = useState("");
 
     //Trigger the callback function when the intersection is reached
     function scrollCallBack(entries) {
@@ -52,7 +53,9 @@ const Post = ({
     //Further more you can still split the lazyloading feature to a different component or you can also create a dynamic hook.
     useEffect(() => {
         if (!isLoggedIn) return;
-        if (postList.length === 0) return;
+        if (searchFilteredOutput.length === 0) {
+            return;
+        }
         const scroll = new IntersectionObserver(scrollCallBack, {
             root: null,
             rootMargin: "10px 0px 10px 0px",
@@ -65,19 +68,73 @@ const Post = ({
         }
         scroll.observe(bottomRef.current);
         return () => scroll.disconnect();
-    }, [endStatus, postList, isLoggedIn]); //passing posts prop to the useffect function the reason being if we do not do it then our props do not update in the call back function
-
-    const filterSearch = e => {
-        setSearch(e.target.value);
-    };
-
-    let filteredJobs = postList.filter(
-        job => job.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
-    );
+    }, [endStatus, searchFilteredOutput, isLoggedIn]); //passing posts prop to the useffect function the reason being if we do not do it then our props do not update in the call back function
 
     const updateJob = (job, action) => {
         updateUserSavedList(job, action);
     };
+
+    //Filtered code goes here
+    const [method, setMethod] = useState();
+
+    //This code is used to identify whether it is an input search or a dropdown select
+    const identifySearchMethod = e => {
+        if (e.target) {
+            setMethod({
+                option: "string",
+                key: e.target.value
+            });
+        } else {
+            let key;
+            switch (e) {
+            case "Sponsored":
+                key = "is_sponsored";
+                break;
+            case "Saved":
+                key = "is_saved";
+                break;
+            default:
+                key = e;
+                break;
+            }
+
+            setMethod({
+                option: "sort",
+                key
+            });
+        }
+    };
+
+    //Once the method is identified now lets write a function which outputs a filtered array.
+    const filterFunnel = () => {
+        if (!method) return;
+        const { option, key } = method;
+
+        if (key === "All") return postList;
+
+        let tmp;
+        switch (option) {
+        case "string":
+            tmp = postList.filter(item =>
+                item.title.toLowerCase().includes(key.toLowerCase())
+            );
+            break;
+
+        case "sort":
+            tmp = postList.filter(item => item[key] === true);
+            break;
+        default:
+            tmp = postList;
+            break;
+        }
+
+        return tmp;
+    };
+
+    //Now lets assing this function to a searchFilteredOutput so that we can use it to iterate through
+    let searchFilteredOutput = filterFunnel() || postList;
+
+    //Filtered code ends here
 
     return (
         <Div>
@@ -101,49 +158,55 @@ const Post = ({
                 </CardHeader>
             ) : (
                 <React.Fragment>
-                    {isLoggedIn && <Search search={filterSearch} />}
-
-                    {filteredJobs && filteredJobs.length == 0 ? (
-                        <CardHeader textAlign="center" noCursor pad20>
-                            No results found
-                        </CardHeader>
-                    ) : (
-                        <React.Fragment>
-                            {filteredJobs.map((list, i) => (
-                                <Deck
-                                    key={i}
-                                    {...list}
-                                    loginStatus={isLoggedIn}
-                                    updateJob={updateJob}
-                                />
-                            ))}
-
-                            {!endStatus && <div ref={bottomRef} />}
-
-                            {loaderStatus && (
-                                <Div
-                                    style={{
-                                        width: "100px",
-                                        margin: "40px auto"
-                                    }}
-                                >
-                                    <InlineLoaderComp />
-                                </Div>
-                            )}
-
-                            {endStatus && (
-                                <Div
-                                    mar20
-                                    pad10
-                                    textAlign="center"
-                                    boxShadow="lightShade"
-                                    bg="lightShade"
-                                >
-                                    -- that&apos;s all folks!--
-                                </Div>
-                            )}
-                        </React.Fragment>
+                    {isLoggedIn && (
+                        <Search
+                            filters={filterOptions}
+                            search={identifySearchMethod}
+                        />
                     )}
+
+                    {searchFilteredOutput &&
+                    searchFilteredOutput.length == 0 ? (
+                            <CardHeader textAlign="center" noCursor pad20>
+                            No results found
+                            </CardHeader>
+                        ) : (
+                            <React.Fragment>
+                                {searchFilteredOutput &&
+                                searchFilteredOutput.map((list, i) => (
+                                    <Deck
+                                        key={i}
+                                        {...list}
+                                        loginStatus={isLoggedIn}
+                                        updateJob={updateJob}
+                                    />
+                                ))}
+
+                                {loaderStatus && (
+                                    <Div
+                                        style={{
+                                            width: "100px",
+                                            margin: "40px auto"
+                                        }}
+                                    >
+                                        <InlineLoaderComp />
+                                    </Div>
+                                )}
+
+                                {endStatus && searchFilteredOutput.length != 0 && (
+                                    <Div
+                                        mar20
+                                        pad10
+                                        textAlign="center"
+                                        boxShadow="lightShade"
+                                        bg="lightShade"
+                                    >
+                                    -- that&apos;s all folks!--
+                                    </Div>
+                                )}
+                            </React.Fragment>
+                        )}
+                    {!endStatus && <Div marB20 ref={bottomRef} />}
                 </React.Fragment>
             )}
         </Div>
@@ -154,7 +217,8 @@ const mapStateToProps = state => {
     return {
         postList: state.list.postList,
         postListCount: state.list.postListCount,
-        isLoggedIn: state.list.isLoggedIn
+        isLoggedIn: state.list.isLoggedIn,
+        filterOptions: state.list.filterOptions
     };
 };
 
@@ -169,6 +233,7 @@ export default connect(
 
 Post.propTypes = {
     postList: PropTypes.array,
+    filterOptions: PropTypes.array,
     postListCount: PropTypes.number,
     fetchMorePosts: PropTypes.func,
     isLoggedIn: PropTypes.bool,

@@ -9,7 +9,6 @@ import {
     Breadcrumb
 } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
-import StarRating from "../../components/star/rating";
 import { Paragraph } from "../../styledComponents/card";
 import { GridRow, GridItem } from "../../styledComponents/grid";
 
@@ -38,10 +37,6 @@ const SavedJobs = ({ userSavedList = [] }) => {
                                 <Div fontSize="xxs">{item.location}</Div>
                                 <Paragraph>{item.description}</Paragraph>
                                 <FlexBox jcSpaceBetween alignCenter marT30>
-                                    <StarRating
-                                        id={`randomId${item.title}`}
-                                        ratingCount={item.rating}
-                                    />
                                     <Anchor
                                         to={{
                                             pathname: `/details/${item.id}`,

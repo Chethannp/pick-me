@@ -6,14 +6,14 @@ import { CustomButton } from "../../styledComponents/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Search = ({ search }) => {
+const Search = ({ search, filters }) => {
     const handleSearchSubmit = e => {
         e.preventDefault();
     };
 
     return (
         <SearchForm onSubmit={handleSearchSubmit}>
-            <Dropdown />
+            <Dropdown options={filters} query={search} />
             <SearchInput
                 autoComplete="off"
                 type="text"
@@ -32,5 +32,6 @@ const Search = ({ search }) => {
 export default Search;
 
 Search.propTypes = {
-    search: PropTypes.func
+    search: PropTypes.func,
+    filters: PropTypes.array
 };

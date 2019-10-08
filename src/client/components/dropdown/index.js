@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
     DropdownHeading,
     DropdownMenu,
@@ -9,15 +10,19 @@ import { Div } from "../../styledComponents/layout";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Dropdown = () => {
+const Dropdown = ({ options, query }) => {
     const [status, setStatus] = useState(false);
-    const [selectedFilter, setSelectedFilter] = useState("Content 1");
+    const [selectedFilter, setSelectedFilter] = useState("All");
     const showDropdownMenu = () => {
         setStatus(!status);
     };
     const handleFilterSelection = filter => {
         setSelectedFilter(filter);
     };
+
+    useEffect(() => {
+        query(selectedFilter);
+    }, [selectedFilter]);
 
     return (
         <DropdownContainer onClick={showDropdownMenu} role="navigation">
@@ -30,21 +35,14 @@ const Dropdown = () => {
             <DropdownMenu>
                 {status && (
                     <Div>
-                        <List
-                            onClick={() => handleFilterSelection("Content 1")}
-                        >
-                            Content1
-                        </List>
-                        <List
-                            onClick={() => handleFilterSelection("Content 2")}
-                        >
-                            Content2
-                        </List>
-                        <List
-                            onClick={() => handleFilterSelection("Content 3")}
-                        >
-                            Content3
-                        </List>
+                        {options.map(option => (
+                            <List
+                                key={option}
+                                onClick={() => handleFilterSelection(option)}
+                            >
+                                {option}
+                            </List>
+                        ))}
                     </Div>
                 )}
             </DropdownMenu>
@@ -53,3 +51,8 @@ const Dropdown = () => {
 };
 
 export default Dropdown;
+
+Dropdown.propTypes = {
+    query: PropTypes.func,
+    options: PropTypes.array
+};

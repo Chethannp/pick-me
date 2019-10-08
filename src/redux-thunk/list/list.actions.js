@@ -30,8 +30,11 @@ export const fetchAllPosts = () => async dispatch => {
 };
 
 export const saveFetchedList = res => async (dispatch, getState) => {
+    const postList = res[0].posts;
+    const filters = res[0].filters;
+
     //Using moment Js library to convert server time to standard hours and day notation so that we can display a readable text for the user.
-    const data = res.map(list => {
+    const data = postList.map(list => {
         if (list.time_of_post) {
             list.time_of_post = moment(new Date(list.time_of_post)).fromNow();
         }
@@ -51,11 +54,17 @@ export const saveFetchedList = res => async (dispatch, getState) => {
             ? updatedList.filter(item => item.is_sponsored)
             : undefined;
 
+        const savedList = updatedList
+            ? updatedList.filter(item => item.is_saved)
+            : undefined;
+
         dispatch({
             type: SAVE_FETCHED_LISTS,
             payload: {
                 updatedList,
-                sponsoredList
+                sponsoredList,
+                savedList,
+                filters
             }
         });
     }
@@ -129,22 +138,34 @@ export const saveProfileInfo = (data, message) => (dispatch, getState) => {
 };
 
 export const updateUserSavedList = (job, action) => (dispatch, getState) => {
+    //lets modify the user saved entry
     let prevList = getState().list.userSavedList || [];
-    let newList = [];
+
+    let newSavedList = [];
     if (action === "add") {
-        newList = [...prevList, job];
+        newSavedList = [...prevList, job];
         dispatch(showCustomToast("Job Saved! Click again to remove them!"));
     } else {
         dispatch(showCustomToast("Job Removed :( Click again to add them!"));
-        newList = prevList.filter(item => item.id != job.id);
+        newSavedList = prevList.filter(item => item.id != job.id);
     }
+
+    //lets also modify the is_saved entry in post list so that it reflects on filter search!
+    let postList = getState().list.postList || [];
+    let newPostList = postList.map(item => {
+        if (item.id == job.id) {
+            item.is_saved = action === "add" ? true : false;
+        }
+        return item;
+    });
 
     dispatch({
         type: UPDATE_USER_SAVED_LIST,
-        payload: newList
+        payload: {
+            newSavedList,
+            newPostList
+        }
     });
-
-    console.log(newList);
 };
 
 export const handleUserLogout = () => dispatch => {

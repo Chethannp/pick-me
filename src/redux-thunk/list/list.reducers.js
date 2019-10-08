@@ -59,14 +59,17 @@ export default (state = {}, action) => {
         return {
             ...state,
             postList: action.payload.updatedList,
-            sponsoredList: action.payload.sponsoredList
+            sponsoredList: action.payload.sponsoredList,
+            userSavedList: action.payload.savedList,
+            filterOptions: action.payload.filters
         };
     }
 
     case UPDATE_USER_SAVED_LIST: {
         return {
             ...state,
-            userSavedList: action.payload
+            userSavedList: action.payload.newSavedList,
+            postList: action.payload.newPostList
         };
     }
 
