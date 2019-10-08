@@ -7,9 +7,7 @@ import {
     Div,
     ProfileImage,
     ImageBlock,
-    Container,
-    Anchor,
-    FlexBox
+    Anchor
 } from "../../styledComponents/layout";
 import User from "../../assets/user-placeholder.png";
 import { UserContext } from "../../App";
@@ -36,7 +34,7 @@ const SideBarWrapper = styled(Div)`
 
 const SideBarComp = props => {
     const { isShowing, toggle } = useModal();
-    const { isLoggedIn, profile, logOut } = props;
+    const { isLoggedIn, profile = {}, logOut } = props;
     return (
         <UserContext.Consumer>
             {closeSideNav => {

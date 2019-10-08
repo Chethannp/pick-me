@@ -111,8 +111,8 @@ export const showCustomToast = message => dispatch => {
 };
 
 export const saveProfileInfo = (data, message) => (dispatch, getState) => {
-    const prevData = getState().list.profile || [];
-    const newData = prevData ? [...prevData, data] : data;
+    const prevData = getState().list.profile || {};
+    const newData = prevData ? { ...prevData, ...data } : data;
 
     dispatch(showPageLoader(true));
     setTimeout(() => {

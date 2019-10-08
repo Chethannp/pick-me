@@ -37,7 +37,9 @@ const FormPersonalDetails = ({ handleStepChange }) => {
 
     return (
         <MultiFormWrapper>
-            <Div fontSize="lg">Please fill in user details </Div>
+            <Div fontSize="lg" color="brandSecondary">
+                Please fill in user details
+            </Div>
             <Div width="70%" marT30>
                 <Form onSubmit={handleSubmit} noValidate>
                     <FormGroupSpacer>

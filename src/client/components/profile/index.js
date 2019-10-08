@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Guest from "../../assets/user-placeholder.png";
-import User from "../../assets/user.jpeg";
 import {
     FlexBox,
     Div,
@@ -41,7 +40,7 @@ const ProfileComp = ({ isLoggedIn = false, profile }) => {
                                         ? `${profile.profileImage}`
                                         : "http://placeimg.com/295/295/any/tech"
                                 }
-                                fallbackUrl={User}
+                                fallbackUrl={Guest}
                                 width="80px"
                                 height="80px"
                             />
@@ -57,7 +56,12 @@ const ProfileComp = ({ isLoggedIn = false, profile }) => {
                 {isLoggedIn ? (
                     profile ? (
                         <Div textAlign="center" pad20>
-                            {profile.firstName} {profile.lastName}
+                            <Div marT5 marB5 fontSize="xs">
+                                {profile.firstName} {profile.lastName}
+                            </Div>
+                            <Div marT5 marB5 fontSize="xxs">
+                                {profile.designation}
+                            </Div>
                             <br />
                             <Anchor to="/update-profile">
                                 <CustomButton secondary xs>
