@@ -16,7 +16,6 @@ const PostDetails = ({ details }) => {
     const {
         title,
         company,
-        company_info,
         description,
         employment_type,
         experience_level,
@@ -43,11 +42,9 @@ const PostDetails = ({ details }) => {
                             style={{ border: "1px solid rgba(208,208,208,.3)" }}
                         >
                             {title && (
-                                <Div
-                                    fontSize="md"
-                                    marB10
-                                    fontStyle="bold"
-                                ></Div>
+                                <Div fontSize="md" marB10 fontStyle="bold">
+                                    {title}
+                                </Div>
                             )}
                             {company && (
                                 <Div fontSize="xs" marB20 color="brandPrimary">
@@ -134,7 +131,7 @@ const PostDetails = ({ details }) => {
 
                             <FlexBox jcEnd>
                                 <Anchor
-                                    to="/apply"
+                                    to={`/apply/${company}`}
                                     textDecoration="none"
                                     color="black"
                                 >

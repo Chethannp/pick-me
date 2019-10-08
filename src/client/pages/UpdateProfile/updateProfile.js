@@ -61,8 +61,8 @@ const UpdateProfile = ({
         email: (profile && profile.email) || "",
         company: (profile && profile.company) || "",
         designation: (profile && profile.designation) || "",
-        experience: (profile && profile.experience) || "",
-        noticePeriod: (profile && profile.noticePeriod) || ""
+        experience: (profile && profile.experience) || 0,
+        noticePeriod: (profile && profile.noticePeriod) || 0
     };
 
     const { handleChange, handleSubmit, values, errors } = useForm(
@@ -271,6 +271,9 @@ const UpdateProfile = ({
                                                         }
                                                         onChange={handleChange}
                                                         type="text"
+                                                        pattern="\d*"
+                                                        minLength="1"
+                                                        maxLength="2"
                                                     />
                                                     <FormLabel htmlFor="experience">
                                                         <FormLabelName>
@@ -297,6 +300,9 @@ const UpdateProfile = ({
                                                         }
                                                         onChange={handleChange}
                                                         type="text"
+                                                        pattern="\d*"
+                                                        minLength="1"
+                                                        maxLength="2"
                                                     />
                                                     <FormLabel htmlFor="noticePeriod">
                                                         <FormLabelName>
@@ -338,7 +344,7 @@ const UpdateProfile = ({
                         Oops..!
                     </Div>
 
-                    <Div fontSize="sm" marB40>
+                    <Div fontSize="xs" marB40>
                         Looks like you are not logged in.
                     </Div>
 

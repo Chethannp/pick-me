@@ -6,7 +6,9 @@ import {
     SHOW_CUSTOM_TOAST,
     SAVE_PROFILE_INFO,
     UPDATE_USER_SAVED_LIST,
-    LOG_OUT
+    LOG_OUT,
+    SAVE_JOB_FORM,
+    APPLY_FOR_JOB
 } from "./list.actions";
 
 /**
@@ -65,6 +67,20 @@ export default (state = {}, action) => {
         return {
             ...state,
             userSavedList: action.payload
+        };
+    }
+
+    case SAVE_JOB_FORM: {
+        return {
+            ...state,
+            formInputValues: action.payload
+        };
+    }
+
+    case APPLY_FOR_JOB: {
+        return {
+            ...state,
+            jobApplicationInfo: action.payload
         };
     }
 

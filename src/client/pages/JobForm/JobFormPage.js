@@ -2,11 +2,11 @@ import React from "react";
 import { Container, Div } from "../../styledComponents/layout";
 import UserForm from "../../components/multiPartForm";
 
-const JobFormPage = () => {
+const JobFormPage = props => {
     return (
         <Container>
             <Div mar20>
-                <UserForm />
+                <UserForm {...props} />
             </Div>
         </Container>
     );

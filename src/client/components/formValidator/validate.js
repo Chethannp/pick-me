@@ -61,14 +61,21 @@ export default function validate(values) {
         errors.designation = "Current designation is required";
         break;
 
-    case values.experience != undefined &&
-            (values.experience || values.experience.length == 0):
+    case values.experience != undefined && values.experience.length == 0:
         errors.experience = "Total years of experience is required";
         break;
 
+    case values.experience != undefined && isNaN(values.experience):
+        errors.experience = "In digits please!";
+        break;
+
     case values.noticePeriod != undefined &&
-            (values.noticePeriod || values.noticePeriod.length == 0):
+            values.noticePeriod.length == 0:
         errors.noticePeriod = "Current notice period duration is required";
+        break;
+
+    case values.noticePeriod != undefined && isNaN(values.noticePeriod):
+        errors.noticePeriod = "In digits please!";
         break;
 
     default:

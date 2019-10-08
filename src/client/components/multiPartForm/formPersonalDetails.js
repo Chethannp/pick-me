@@ -1,112 +1,149 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FlexBox, Div } from "../../styledComponents/layout";
+
+import useForm from "../formValidator/useForm";
+import validate from "../formValidator/validate";
+
 import {
+    MultiFormWrapper,
     FormGroupSpacer,
     FormGroup,
     FormInput,
     FormLabel,
-    FormLabelName
+    FormLabelName,
+    Form,
+    FormInputError
 } from "../../styledComponents/forms";
+import { Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 
-const FormPersonalDetails = ({
-    nextStep,
-    prevStep,
-    handleChange,
-    company,
-    designation,
-    experience
-}) => {
-    const moveToNextStep = e => {
-        e.preventDefault();
-        nextStep();
+const FormPersonalDetails = ({ handleStepChange }) => {
+    const formInputs = {
+        company: "",
+        designation: "",
+        experience: 0,
+        noticePeriod: 0
     };
 
-    const moveToPrevStep = e => {
-        e.preventDefault();
-        prevStep();
-    };
+    const { handleChange, handleSubmit, values, errors } = useForm(
+        submit,
+        validate,
+        formInputs
+    );
+
+    function submit() {
+        handleStepChange(values);
+    }
+
     return (
-        <FlexBox flowCol pad20 jcCenter alignCenter width="500px" marAuto>
-            <Div fontSize="lg">Please fill in your personal details </Div>
+        <MultiFormWrapper>
+            <Div fontSize="lg">Please fill in user details </Div>
             <Div width="70%" marT30>
-                <FormGroupSpacer>
-                    <FormGroup>
-                        <FormInput
-                            autoComplete="off"
-                            name="company"
-                            required
-                            defaultValue={company}
-                            onChange={handleChange("company")}
-                            type="text"
-                        />
-                        <FormLabel htmlFor="company">
-                            <FormLabelName>Current Company</FormLabelName>
-                        </FormLabel>
-                    </FormGroup>
-                    {/* {errors.firstName && (
-          <FormInputError>{errors.firstName}</FormInputError>
-        )} */}
-                </FormGroupSpacer>
-                <FormGroupSpacer>
-                    <FormGroup>
-                        <FormInput
-                            autoComplete="off"
-                            name="designation"
-                            required
-                            defaultValue={designation}
-                            onChange={handleChange("designation")}
-                            type="text"
-                        />
-                        <FormLabel htmlFor="designation">
-                            <FormLabelName>Current Designation</FormLabelName>
-                        </FormLabel>
-                    </FormGroup>
-                    {/* {errors.firstName && (
-          <FormInputError>{errors.firstName}</FormInputError>
-        )} */}
-                </FormGroupSpacer>
-                <FormGroupSpacer>
-                    <FormGroup>
-                        <FormInput
-                            autoComplete="off"
-                            name="experience"
-                            required
-                            defaultValue={experience}
-                            onChange={handleChange("experience")}
-                            type="text"
-                        />
-                        <FormLabel htmlFor="experience">
-                            <FormLabelName>Total Experience </FormLabelName>
-                        </FormLabel>
-                    </FormGroup>
-                    {/* {errors.firstName && (
-          <FormInputError>{errors.firstName}</FormInputError>
-        )} */}
-                </FormGroupSpacer>
-                <br /> <br />
+                <Form onSubmit={handleSubmit} noValidate>
+                    <FormGroupSpacer>
+                        <FormGroup>
+                            <FormInput
+                                autoComplete="off"
+                                name="company"
+                                required
+                                value={values.company}
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <FormLabel htmlFor="company">
+                                <FormLabelName>Current Company*</FormLabelName>
+                            </FormLabel>
+                        </FormGroup>
+                        {errors.company && (
+                            <FormInputError>{errors.company}</FormInputError>
+                        )}
+                    </FormGroupSpacer>
+                    <FormGroupSpacer>
+                        <FormGroup>
+                            <FormInput
+                                autoComplete="off"
+                                name="designation"
+                                required
+                                defaultValue={values.designation}
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <FormLabel htmlFor="designation">
+                                <FormLabelName>
+                                    Current Designation*
+                                </FormLabelName>
+                            </FormLabel>
+                        </FormGroup>
+                        {errors.designation && (
+                            <FormInputError>
+                                {errors.designation}
+                            </FormInputError>
+                        )}
+                    </FormGroupSpacer>
+                    <FormGroupSpacer>
+                        <FormGroup>
+                            <FormInput
+                                autoComplete="off"
+                                name="experience"
+                                required
+                                defaultValue={values.experience}
+                                onChange={handleChange}
+                                type="text"
+                                pattern="\d*"
+                                minLength="1"
+                                maxLength="2"
+                            />
+                            <FormLabel htmlFor="experience">
+                                <FormLabelName>
+                                    Current Experience (in years)*
+                                </FormLabelName>
+                            </FormLabel>
+                        </FormGroup>
+                        {errors.experience && (
+                            <FormInputError>{errors.experience}</FormInputError>
+                        )}
+                    </FormGroupSpacer>
+                    <FormGroupSpacer>
+                        <FormGroup>
+                            <FormInput
+                                required
+                                defaultValue={values.noticePeriod}
+                                onChange={handleChange}
+                                type="text"
+                                name="noticePeriod"
+                                pattern="\d*"
+                                autoComplete="off"
+                                minLength="1"
+                                maxLength="2"
+                            />
+                            <FormLabel htmlFor="noticePeriod">
+                                <FormLabelName>
+                                    Notice period (in months)*
+                                </FormLabelName>
+                            </FormLabel>
+                        </FormGroup>
+                        {errors.noticePeriod && (
+                            <FormInputError>
+                                {errors.noticePeriod}
+                            </FormInputError>
+                        )}
+                    </FormGroupSpacer>
+                    <br /> <br />
+                    <CustomButton width="200px" marAuto>
+                        Next
+                    </CustomButton>
+                </Form>
             </Div>
-
-            <FlexBox jcSpaceAround alignCenter width="60%">
-                <CustomButton width="100px" marAuto onClick={moveToPrevStep}>
-                    Prev
-                </CustomButton>
-                <CustomButton width="100px" marAuto onClick={moveToNextStep}>
-                    Next
-                </CustomButton>
-            </FlexBox>
-        </FlexBox>
+        </MultiFormWrapper>
     );
 };
 
 export default FormPersonalDetails;
 
 FormPersonalDetails.propTypes = {
-    nextStep: PropTypes.func,
-    prevStep: PropTypes.func,
-    handleChange: PropTypes.func,
+    handleStepChange: PropTypes.func,
     company: PropTypes.string,
     designation: PropTypes.string,
-    experience: PropTypes.string
+    experience: PropTypes.number,
+    noticePeriod: PropTypes.number
 };

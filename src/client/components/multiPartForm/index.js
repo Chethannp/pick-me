@@ -1,67 +1,98 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import FormUserDetails from "./formUserDetails";
 import FormPersonalDetails from "./formPersonalDetails";
-import Confirm from "./confirm";
 import Success from "./success";
+import { Div, Anchor } from "../../styledComponents/layout";
+import { CustomButton } from "../../styledComponents/button";
+import { saveJobFromChanges } from "../../../redux-thunk/list/list.actions";
+import FormResumeUpload from "./formResumeUpload";
 
-const UserForm = () => {
-    const [formValues, setFormValues] = useState({
-        step: 1,
-        firstName: "",
-        lastName: "",
-        email: "",
-        company: "",
-        designation: "",
-        experience: ""
-    });
+const UserForm = ({ isLoggedIn = false, saveFormInputs, match }) => {
+    const InitialState = {
+        step: 1
+    };
+
+    const [company] = useState(match.params.id);
+    const [formValues, setFormValues] = useState(InitialState);
 
     //Proceed to next step
     const nextStep = () => {
         setFormValues({ ...formValues, step: formValues.step + 1 });
     };
 
-    //Go back to prev step
-    const prevStep = () => {
-        setFormValues({ ...formValues, step: formValues.step - 1 });
+    //Handle fields change
+    const handleStepChange = val => {
+        saveFormInputs(val);
+        nextStep();
     };
 
-    //Handle fields change
-    const handleChange = input => e => {
-        setFormValues({ ...formValues, [input]: e.target.value });
-    };
+    if (!isLoggedIn)
+        return (
+            <Div
+                bg="lightShade"
+                pad20
+                boxShadow="lightGrey"
+                borderRadius
+                marAuto
+                width="60%"
+                textAlign="center"
+            >
+                <Div fontSize="md" marB20>
+                    404
+                </Div>
+
+                <Div fontSize="xs" marB40>
+                    You are not authorised to access this page, Please navigate
+                    back to homepage
+                </Div>
+
+                <Anchor to={"/"} textDecoration="none" color="black">
+                    <CustomButton>Go Back</CustomButton>
+                </Anchor>
+            </Div>
+        );
 
     switch (formValues.step) {
     case 1:
         return (
             <FormUserDetails
-                nextStep={nextStep}
-                handleChange={handleChange}
+                handleStepChange={handleStepChange}
                 {...formValues}
             />
         );
     case 2:
         return (
             <FormPersonalDetails
-                prevStep={prevStep}
-                nextStep={nextStep}
-                handleChange={handleChange}
+                handleStepChange={handleStepChange}
                 {...formValues}
             />
         );
     case 3:
-        return (
-            <Confirm
-                prevStep={prevStep}
-                nextStep={nextStep}
-                handleChange={handleChange}
-                {...formValues}
-            />
-        );
+        return <FormResumeUpload nextStep={nextStep} {...formValues} />;
     case 4:
-        return <Success />;
+        return <Success company={company} />;
     default:
-        return "Jaffa";
+        return {};
     }
 };
 
-export default UserForm;
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.list.isLoggedIn
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    dispatch => ({
+        saveFormInputs: data => dispatch(saveJobFromChanges(data))
+    })
+)(UserForm);
+
+UserForm.propTypes = {
+    isLoggedIn: PropTypes.bool,
+    saveFormInputs: PropTypes.func,
+    match: PropTypes.object
+};

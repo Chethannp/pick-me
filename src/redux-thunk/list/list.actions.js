@@ -9,6 +9,8 @@ export const HANDLE_LOGIN_SUCCESS = "Handle_Login_Success";
 export const SHOW_CUSTOM_TOAST = "Show_Custom_Toast";
 export const SAVE_PROFILE_INFO = "Save_Profile_Info";
 export const UPDATE_USER_SAVED_LIST = "Update_User_Saved_List";
+export const SAVE_JOB_FORM = "Save_Job_Form";
+export const APPLY_FOR_JOB = "Apply_For_Job";
 export const LOG_OUT = "Log_Out";
 
 /**
@@ -155,4 +157,20 @@ export const handleUserLogout = () => dispatch => {
             type: LOG_OUT
         });
     }, 4000);
+};
+
+export const saveJobFromChanges = data => (dispatch, getState) => {
+    let prevData = getState().list.formInputValues || {};
+    let newData = { ...prevData, ...data };
+    dispatch({
+        type: SAVE_JOB_FORM,
+        payload: newData
+    });
+};
+
+export const applyForJob = data => dispatch => {
+    dispatch({
+        type: APPLY_FOR_JOB,
+        payload: data
+    });
 };

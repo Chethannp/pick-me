@@ -59,7 +59,7 @@ const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
                             type="text"
                         />
                         <FormLabel htmlFor="firstName">
-                            <FormLabelName>First Name</FormLabelName>
+                            <FormLabelName>First Name*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
 
@@ -79,7 +79,7 @@ const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
                             type="text"
                         />
                         <FormLabel htmlFor="lastName">
-                            <FormLabelName>Last Name</FormLabelName>
+                            <FormLabelName>Last Name*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
                     {errors.lastName && (
@@ -98,7 +98,7 @@ const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
                             type="text"
                         />
                         <FormLabel htmlFor="email">
-                            <FormLabelName>Email</FormLabelName>
+                            <FormLabelName>Email*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
                     {errors.email && (
@@ -117,7 +117,7 @@ const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
                             type="text"
                         />
                         <FormLabel htmlFor="userName">
-                            <FormLabelName>Choose a username</FormLabelName>
+                            <FormLabelName>Choose a username*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
                     {errors.userName && (
@@ -136,7 +136,7 @@ const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
                             type="password"
                         />
                         <FormLabel htmlFor="userPassword">
-                            <FormLabelName>Choose a password</FormLabelName>
+                            <FormLabelName>Choose a password*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
                     {errors.userPassword && (

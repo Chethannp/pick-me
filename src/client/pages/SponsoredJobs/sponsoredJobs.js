@@ -64,12 +64,12 @@ const SponsoredJobs = ({ sponsoredList = [] }) => {
                             Oops..! List is empty
                         </Div>
 
-                        <Div fontSize="sm" marB40>
+                        <Div fontSize="xs" marB40>
                             We are trying our best to get the right jobs for you
                             as soon as possible!
                         </Div>
 
-                        <Div marB30>
+                        <Div marB30 fontSize="xs">
                             Trying re-visiting this link sometimes later
                         </Div>
                         <Anchor to={"/"} textDecoration="none" color="black">

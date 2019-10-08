@@ -70,7 +70,7 @@ const SavedJobs = ({ userSavedList = [] }) => {
                             Oops..! List is empty
                         </Div>
 
-                        <Div fontSize="sm" marB40>
+                        <Div fontSize="xs" marB40>
                             Looks like you have not saved any jobs.
                         </Div>
 

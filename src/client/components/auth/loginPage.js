@@ -67,7 +67,7 @@ const Login = ({
                             type="text"
                         />
                         <FormLabel htmlFor="loginUserName">
-                            <FormLabelName>Username</FormLabelName>
+                            <FormLabelName>Username*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
 
@@ -87,7 +87,7 @@ const Login = ({
                             type="password"
                         />
                         <FormLabel htmlFor="loginPassword">
-                            <FormLabelName>Password</FormLabelName>
+                            <FormLabelName>Password*</FormLabelName>
                         </FormLabel>
                     </FormGroup>
                     {errors.loginPassword && (

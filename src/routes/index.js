@@ -29,7 +29,7 @@ const routes = [
         component: SavedJobs
     },
     {
-        path: "/apply/",
+        path: "/apply/:id",
         component: JobFormPage
     }
 ];

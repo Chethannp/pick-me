@@ -17,7 +17,7 @@ import useModal from "../modal/useModal";
 import Auth from "../auth";
 import LazyImageLoader from "../lazyImageLoader";
 
-const ProfileComp = ({ isLoggedIn = false, profile = {} }) => {
+const ProfileComp = ({ isLoggedIn = false, profile}) => {
     const { isShowing, toggle } = useModal();
 
     return (
