@@ -35,7 +35,7 @@ const GridItem = styled.div`
         flex-basis: 25%;
     }
     @media (max-width: 815px) {
-        flex-basis: 50%;
+        flex-basis: 45%;
     }
     @media (max-width: 555px) {
         flex-basis: 100%;

@@ -15,6 +15,8 @@ import NotFoundPage from "./pages/NotFound/notfoundPage";
 //Styled Imports
 import { Backdrop } from "./styledComponents/layout";
 
+export const UserContext = React.createContext();
+
 const App = () => {
     const [sideBarStatus, setSideBarStatus] = useState(false);
 
@@ -30,7 +32,11 @@ const App = () => {
         <HelmetProvider>
             <ThemeProvider theme={theme}>
                 <NavbarComp drawerClickHandler={drawerToggleClickHandler} />
-                <SideBarComp expanded={sideBarStatus} />
+
+                <UserContext.Provider value={backDropClickHandler}>
+                    <SideBarComp expanded={sideBarStatus} />
+                </UserContext.Provider>
+
                 {sideBarStatus && (
                     <Backdrop zIndex="100" onClick={backDropClickHandler} />
                 )}

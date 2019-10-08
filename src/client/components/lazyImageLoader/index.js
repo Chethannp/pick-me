@@ -28,14 +28,7 @@ const LazyImageLoader = ({
     let imgSrc = !error ? url : fallbackUrl;
 
     return (
-        <Div
-            bg="opacity"
-            posRel
-            borderRadius
-            mar5
-            width={width}
-            height={height}
-        >
+        <Div bg="opacity" posRel borderRadius width={width} height={height}>
             <ImageBlock
                 src={imgSrc}
                 onLoad={onImageLoaded}

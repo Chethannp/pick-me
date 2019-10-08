@@ -246,7 +246,7 @@ export const DetailsContent = styled(Div)`
 `;
 
 export const ProfileImage = styled.div`
-    border-radius: 10%;
+    border-radius: 3px;
     border: 2px solid #fff;
     box-shadow: inset 0 0 5px 0 rgb(218, 218, 218),
         0 0px 2px 0 rgb(199, 199, 199);
