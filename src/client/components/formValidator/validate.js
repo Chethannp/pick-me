@@ -1,3 +1,10 @@
+/**
+ * @function validate
+ * @param {values} Object - with key value pairs
+ * @returns {errors} - Object with updated erros key
+ * Note:- This is a reusable component for form validations
+ */
+
 export default function validate(values) {
     const errors = {};
 

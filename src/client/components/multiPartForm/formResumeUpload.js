@@ -1,15 +1,34 @@
+/**
+ * React Imports
+ */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values and to Dispatch an action to the reducer
+ */
 import { connect } from "react-redux";
+import { applyForJob } from "../../../redux-thunk/list/list.actions";
+
+/**
+ * Styled Component Imports
+ */
 import { Div, FlexBox } from "../../styledComponents/layout";
 import { MultiFormWrapper } from "../../styledComponents/forms";
 import { CustomButton } from "../../styledComponents/button";
-import { applyForJob } from "../../../redux-thunk/list/list.actions";
 
+/**
+ * @function FormResumeUpload - Functional Component
+ * @param {nextStep} Callback - Parent function to return the desired component
+ * @param {apply} Dispatch - Dispatches action to save the form submitted data
+ * @returns {component}
+ */
 const FormResumeUpload = ({ nextStep, formInputValues = {}, apply }) => {
     const [file, setFile] = useState();
     const [enableSubmit, setEnableSubmit] = useState(false);
 
+    //Handles uploaded file and saves it to file variable in the state
     const handleFileUpload = e => {
         e.preventDefault();
         let files = Array.from(e.target.files)[0];
@@ -17,6 +36,7 @@ const FormResumeUpload = ({ nextStep, formInputValues = {}, apply }) => {
         setEnableSubmit(true);
     };
 
+    //Combines the previous form details and adds the uploaded document and is then dispatched for server call
     const submitResume = () => {
         let newData = formInputValues;
         newData.resume = file;

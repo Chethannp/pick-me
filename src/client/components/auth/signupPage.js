@@ -1,6 +1,19 @@
+/**
+ * React Imports
+ */
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values and to Dispatch an action to the reducer
+ */
 import { connect } from "react-redux";
+import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
+
+/**
+ * Styled Component Imports
+ */
 import { FlexBox, Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 import {
@@ -12,11 +25,27 @@ import {
     FormGroupSpacer,
     FormInputError
 } from "../../styledComponents/forms";
+
+/**
+ * Custom Reusable Hooks
+ */
 import useForm from "../formValidator/useForm";
 import validate from "../formValidator/validate";
-import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
 
-const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
+/**
+ * @function SignUp - Functional Component
+ * @param {dismissSignup} - Function => parent reference to close the Modal popup
+ * @param {isLoggedIn} - Boolean => state value from reducer
+ * @param {registerUser} - Function => used to dispatch an action
+ * @returns {Component} - SignUp
+ */
+
+const SignUp = ({ dismissSignup, isLoggedIn = false, registerUser }) => {
+    /**
+     * Since I am using resubale custom hooks
+     * To keep it unique I am setting the initial value
+     * Which is then passed to useForm as a parmeter and eventually gets validated for their respective enteries.
+     */
     const formInputs = {
         firstName: "",
         lastName: "",
@@ -25,6 +54,16 @@ const SignUp = ({ registerUser, dismissSignup, isLoggedIn = false }) => {
         userPassword: ""
     };
 
+    /**
+     * @CustomHook  UseForm
+     * @constant {handleChange} - Function => holds the value of a particular input when an onChange event triggers
+     * @constant {handleSubmit} - Function => validates form input erros
+     * @constant {values} - Object => holds validated form input values
+     * @constant {errors} - Object => holds errors specific to inputs
+     * @param {submit} - Callback reference
+     * @param {validate} - It is a function which validates form inputs
+     * @param {formInputs} - It is an object which holds the values of form inputs
+     */
     const { handleChange, handleSubmit, values, errors } = useForm(
         submit,
         validate,

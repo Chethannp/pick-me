@@ -1,6 +1,18 @@
+/**
+ * React Imports
+ */
 import React from "react";
+
+/**
+ * Styled Component Imports
+ */
 import styled, { keyframes } from "styled-components";
 
+/**
+ * Note: These below styles are more specific to this component.
+ *       Hence I decided to place it inline rather than
+ *       creating a seperate file.
+ */
 const spin = keyframes`
     0% {
         transform: rotate(0deg);
@@ -9,7 +21,6 @@ const spin = keyframes`
         transform: rotate(360deg);
     }
 `;
-
 const PageLoaderWrapper = styled.div`
     width: 100%;
     height: 100%;
@@ -22,7 +33,6 @@ const PageLoaderWrapper = styled.div`
     left: 0;
     right: 0;
 `;
-
 const PageLoader = styled.div`
     animation: ${spin} 1.2s linear infinite;
     border: 3px solid #e3ad30;
@@ -36,6 +46,10 @@ const PageLoader = styled.div`
     z-index: 99999;
 `;
 
+/**
+ * @function Loader - Functional Component
+ * @returns {component} - Page loader shown to user during asynchronous operations
+ */
 const Loader = () => {
     return (
         <PageLoaderWrapper>

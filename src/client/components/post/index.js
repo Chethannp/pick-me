@@ -1,17 +1,42 @@
+/**
+ * React Imports
+ */
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
-import InlineLoaderComp from "../InlineLoader";
-import Deck from "../deck";
-import { Div } from "../../styledComponents/layout";
-import { CardHeader } from "../../styledComponents/card";
-import Search from "../search";
+/**
+ * Redux  Imports
+ * To read state values and to dispatch an action
+ */
+import { connect } from "react-redux";
 import {
     fetchAllPosts,
     updateUserSavedList
 } from "../../../redux-thunk/list/list.actions";
 
+/**
+ * Styled Component Imports
+ */
+import { Div } from "../../styledComponents/layout";
+import { CardHeader } from "../../styledComponents/card";
+
+/**
+ * Component Imports
+ */
+import InlineLoaderComp from "../InlineLoader";
+import Deck from "../deck";
+import Search from "../search";
+
+/**
+ * @function Post - Functional Component
+ * @param {postList} array - Holds the jobs array from the api response. Needed to send data to children component 'Deck'
+ * @param {postListCount} number - Holds the maximum post count, to demonstrate lazyloading feature
+ * @param {isLoggedIn} boolean - Holds the state of the user whether he is logged in or not
+ * @param {fetchMorePosts} callback - Dispatch action to fetch more list once the bottom reference is reached
+ * @param {updateUserSavedList} callback - Dispatch action to save user saved jobs to the userSavedList array and is immediately shown as a quick view widget on the right of the homepage below sponsored widget.
+ * @param {filterOptions} object - Holds the filters array from the api response. Needed to send data to children component 'Search'
+ * @returns {component} - Present a View which includes search box and card component
+ */
 const Post = ({
     postList = [],
     postListCount = 20, // Hard coded value just to demonstrate lazyloading feature
@@ -20,19 +45,24 @@ const Post = ({
     updateUserSavedList,
     filterOptions = []
 }) => {
-    const bottomRef = useRef();
-    const [loaderStatus, setLoaderStatus] = useState(false);
-    const [endStatus, setEndStatus] = useState(false);
-    // const [searchParams, setSearchParams] = useState("");
+    /**
+     * LazyLoading Functionality code:
+     */
+    const bottomRef = useRef(); // Lets collect the div reference that we want to watch for its entry into the view port
 
-    //Trigger the callback function when the intersection is reached
+    const [loaderStatus, setLoaderStatus] = useState(false); //State to inform the user that we are loading addtional data
+    const [endStatus, setEndStatus] = useState(false); //State to inform the user that we have reached the end of the list
+
+    //Trigger the callback function when the intersection is reached (i.e., when bottomRef div comes inside the view port)
     function scrollCallBack(entries) {
         if (entries[0].isIntersecting) {
             setLoaderStatus(true);
         }
     }
 
-    //Placing this settimeout inside the scrollCallBack function is causing a memory leak so placing it inside the use effect function and clearing it once the component unmounts
+    //Placing the below settimeout function which is doing a fetchMorePosts(); => in the above scrollCallBack function is causing a memory leak.
+    //Hence I placed it inside the use effect function and doing the required clean up when the component unmount.
+    //The settimeout is currently being used to show a loader, I wanted to do this to showcase an async operation.
     useEffect(() => {
         if (!isLoggedIn) return;
         const timer = setTimeout(() => {
@@ -50,7 +80,7 @@ const Post = ({
     //Defines the reference element which needs to be observed and Instantiates the observer
     //We need to make sure to disconnect observering to avoid memory leaks.
     //It is important to remove the observer and remove it from dom so that our useeffect hook doesn't trigger unecessarily. also it is good to inform the user that the end of the list is reached.
-    //Further more you can still split the lazyloading feature to a different component or you can also create a dynamic hook.
+    //Further more you can still split the lazyloading feature to a different component or you can also create a custom hook, so that this feature can be reused elsewhere also!
     useEffect(() => {
         if (!isLoggedIn) return;
         if (searchFilteredOutput.length === 0) {
@@ -68,13 +98,12 @@ const Post = ({
         }
         scroll.observe(bottomRef.current);
         return () => scroll.disconnect();
-    }, [endStatus, searchFilteredOutput, isLoggedIn]); //passing posts prop to the useffect function the reason being if we do not do it then our props do not update in the call back function
+    }, [endStatus, searchFilteredOutput, isLoggedIn]);
 
-    const updateJob = (job, action) => {
-        updateUserSavedList(job, action);
-    };
+    /**
+     * Filter code goes here
+     */
 
-    //Filtered code goes here
     const [method, setMethod] = useState();
 
     //This code is used to identify whether it is an input search or a dropdown select
@@ -131,10 +160,15 @@ const Post = ({
         return tmp;
     };
 
-    //Now lets assing this function to a searchFilteredOutput so that we can use it to iterate through
+    //Now lets assing this function to a searchFilteredOutput so that we can use it to iterate through and present it to the user :)
     let searchFilteredOutput = filterFunnel() || postList;
 
-    //Filtered code ends here
+    /**
+     * Dispatch and aaction to save the user saved job list
+     */
+    const updateJob = (job, action) => {
+        updateUserSavedList(job, action);
+    };
 
     return (
         <Div>

@@ -1,5 +1,17 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Static Assets
+ */
+import Guest from "../../assets/company-placeholder.png";
+
+/**
+ * Styled Component Imports
+ */
 import {
     FlexBox,
     Div,
@@ -10,8 +22,12 @@ import {
     DetailsProfileImage
 } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
-import Guest from "../../assets/company-placeholder.png";
 
+/**
+ * @function PostDetails
+ * @param {details} object - Which holds title, company, description, employment_type, experience_level, location, skills and time_of_post values
+ * @returns {component} - Holds the detailed view of the job
+ */
 const PostDetails = ({ details }) => {
     const {
         title,

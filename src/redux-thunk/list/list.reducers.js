@@ -18,7 +18,7 @@ import {
  * @return - {Object} - It returns the redux store
  */
 
-export default (state = {}, action) => {
+export default (state = [], action) => {
     switch (action.type) {
     case HANDLE_PAGE_LOADER: {
         return {

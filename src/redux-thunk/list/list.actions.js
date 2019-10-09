@@ -14,9 +14,9 @@ export const APPLY_FOR_JOB = "Apply_For_Job";
 export const LOG_OUT = "Log_Out";
 
 /**
- * @function - {Function} - used to fetch data from the server
- * @param - () - has the ability to accept params, but currently none in our case so its marked empty
- * @async - Used to allow asynchronus fetch calls (i.e., await) from the server
+ * @function  {fetchAllPosts} - used to fetch data from the server
+ * @param {()} - has the ability to accept params, but currently none in our case so its marked empty
+ * @async  Used to allow asynchronus fetch calls (i.e., await) from the server
  * @dispatch - Used to dispatch an action to the reducer.
  */
 

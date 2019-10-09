@@ -1,15 +1,38 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux  Imports
+ * To read state values
+ */
 import { connect } from "react-redux";
+
+/**
+ * Styled Component Imports
+ */
 import {
     QuickViewWrapper,
     QuickViewHeading,
     QuickViewContent,
     QuickViewDiv
 } from "../../styledComponents/quickview";
-import Carousel from "../carousel";
 import { Div, Anchor } from "../../styledComponents/layout";
 
+/**
+ * Component Imports
+ */
+import Carousel from "../carousel";
+
+/**
+ * @function QuickView - Functional Component
+ * @param {isLoggedIn} boolean - Holds the state of the user whether is logged in or not
+ * @param {sponsoredList} array - Holds the sponsored company list
+ * @param {userSavedList} array - Holds the user saved List
+ * @returns {component} - The main intention of building the widget is for monetization and advance facilites for logged in and subscribed users
+ */
 const QuickView = ({
     isLoggedIn = false,
     sponsoredList = [],

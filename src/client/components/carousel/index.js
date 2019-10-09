@@ -1,5 +1,12 @@
+/**
+ * React Imports
+ */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Styled Component Imports
+ */
 import {
     CarouselWrapper,
     CarouselContainer,
@@ -8,13 +15,24 @@ import {
     Prev,
     Next
 } from "../../styledComponents/carousel";
+import { Div, Anchor, FlexBox } from "../../styledComponents/layout";
+import { CustomButton } from "../../styledComponents/button";
+
+/**
+ * FontAwesome Imports for icons support
+ */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faChevronLeft,
     faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
-import { Div, Anchor, FlexBox } from "../../styledComponents/layout";
-import { CustomButton } from "../../styledComponents/button";
+
+/**
+ * @function Carousel - Functional Component
+ * @param {list} Array - It holds the array of iteratable objects
+ * @returns {component}
+ * Note: This is a resuable component and can be used to get a carousel/slider effect
+ */
 
 const Carousel = ({ list }) => {
     const [slideIndex, setSlideIndex] = useState(0);
@@ -24,6 +42,10 @@ const Carousel = ({ list }) => {
     const [imageWidth] = useState(200);
     const [userSwipeDirection, setUserSwipeDirection] = useState("");
 
+    /**
+     * Note: slideNext function will check for the slide index and length of the list to calculate its current position.
+     * Accordingly sets the state of index and slide direction
+     */
     const slideNext = () => {
         if (slideIndex != list.length - 1 && slideIndex < list.length - 1) {
             let slideTo = (slideIndex + 1) * -230;
@@ -32,6 +54,10 @@ const Carousel = ({ list }) => {
         }
     };
 
+    /**
+     * Note: slidePrev function will check for the slide index if the length is 0 or greater than 0.
+     * Accordingly sets the state of index, direction and decides the view
+     */
     const slidePrev = () => {
         if (slideIndex != 0 && slideIndex > 0) {
             let slideTo = leftVal + 230;
@@ -40,6 +66,12 @@ const Carousel = ({ list }) => {
         }
     };
 
+    /**
+     * Note: Following code enables touch options on mobile device
+     * We make use of 3 Javascript built in functions
+     * onTouchStart and onTouchEnd - to get the client x and y references
+     * onTouchMove - to calculate the current index and swipe direction and decides the view
+     */
     //For Touch scroll to enable we need to watch on 3 functions onTouchStart, onTouchMove, onTouchEnd
     const onTouchStart = e => {
         setClientX(e.touches[0].clientX);

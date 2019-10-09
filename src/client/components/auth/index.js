@@ -1,17 +1,38 @@
+/**
+ * React Imports
+ */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled, { css, keyframes } from "styled-components";
-import { FlexBox } from "../../styledComponents/layout";
+
+/**
+ * Component Imports
+ */
 import Login from "./loginPage";
 import SignUp from "./signupPage";
+
+/**
+ * Styled Component Imports
+ */
+import styled, { css, keyframes } from "styled-components";
+import { FlexBox } from "../../styledComponents/layout"; //This is a reusable styled component
+
+/**
+ * Note: These below styles are more specific to this component.
+ *       Hence I decided to place it inline rather than
+ *       creating a seperate file.
+ */
 
 const AuthWrapper = styled(FlexBox)`
     margin: 18vh auto;
 `;
-
 const AuthContainer = styled(FlexBox)`
     box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
 `;
+
+/**
+ * Note: The below styled component showcases the use of keyframe and css helper methods.
+ * It also dynamically renders a specific css based on props.
+ */
 
 const bounce = keyframes`
   from {
@@ -21,7 +42,6 @@ const bounce = keyframes`
     transform: translateY(-15px);
   }
 `;
-
 const FloatingDiv = styled(FlexBox)`
     transition: all 300ms ease-out;
     animation: ${bounce} 1s infinite alternate;
@@ -37,7 +57,7 @@ const FloatingDiv = styled(FlexBox)`
         transition: 1s;
     }
     ${props =>
-        props.signup == true
+        props.view == true
             ? css`
                   right: 40%;
                   align-items: flex-start;
@@ -89,12 +109,18 @@ const FloatingDiv = styled(FlexBox)`
               `}
 `;
 
-const Auth = props => {
-    const [isLogInActive, setIsLogInActive] = useState(true);
-    const current = isLogInActive ? "Register" : "Login";
+/**
+ * @function Auth - Functional Component
+ * @params {hide} - It is a reference to a function which helps to close the modal popup present in the parent component. (I could have used useContext but I wanted to show case on how to pass the parent reference to children of childrens. [Ps fyi: I have used useContext, showcasing Provider and Consumer methods in the side bar component]).
+ * @returns {component} - It returns Login/SignUp component based on authView state.
+ */
 
-    const changeState = () => {
-        setIsLogInActive(!isLogInActive);
+const Auth = ({ hide }) => {
+    const [authView, setAuthView] = useState(true);
+    const currentView = authView ? "Register" : "Login";
+
+    const changeAuthView = () => {
+        setAuthView(!authView);
     };
 
     return (
@@ -117,22 +143,27 @@ const Auth = props => {
                 zIndex="99"
                 pad5
             >
-                {current == "Login" ? (
-                    <SignUp dismissSignup={props.hide} />
+                {currentView == "Login" ? (
+                    <SignUp dismissSignup={hide} />
                 ) : (
-                    <Login dismissLogin={props.hide} />
+                    <Login dismissLogin={hide} />
                 )}
             </AuthContainer>
             <SideDiv
-                signup={isLogInActive}
-                current={current}
-                onClick={changeState}
+                sideView={authView}
+                currentView={currentView}
+                toggleAuthView={changeAuthView}
             />
         </AuthWrapper>
     );
 };
 
-const SideDiv = props => {
+/**
+ * @function SideDiv - Functional Component
+ * @params {sideView} - This decides which view should be the side to present on the side
+ * @returns {Component} - It returns Login/SignUp component based on authView state.
+ */
+const SideDiv = ({ sideView, currentView, toggleAuthView }) => {
     return (
         <FloatingDiv
             jcCenter
@@ -148,25 +179,24 @@ const SideDiv = props => {
             bg="brandPrimary"
             color="white"
             zIndex="1"
-            signup={props.signup}
-            onClick={props.onClick}
+            view={sideView}
+            onClick={toggleAuthView}
         >
-            {props.current}
+            {currentView}
         </FloatingDiv>
     );
 };
 
 SideDiv.propTypes = {
-    signup: PropTypes.bool,
-    onClick: PropTypes.func,
-    current: PropTypes.string
+    sideView: PropTypes.bool,
+    currentView: PropTypes.string,
+    toggleAuthView: PropTypes.func
 };
 
 export default Auth;
 
 Auth.propTypes = {
     hide: PropTypes.func,
-    signup: PropTypes.bool,
     onClick: PropTypes.func,
-    current: PropTypes.string
+    currentView: PropTypes.string
 };

@@ -273,7 +273,7 @@ const UpdateProfile = ({
                                                         type="text"
                                                         pattern="\d*"
                                                         minLength="1"
-                                                        maxLength="2"
+                                                        maxLength="3"
                                                     />
                                                     <FormLabel htmlFor="experience">
                                                         <FormLabelName>

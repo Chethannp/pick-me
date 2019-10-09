@@ -1,9 +1,12 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
 
-import useForm from "../formValidator/useForm";
-import validate from "../formValidator/validate";
-
+/**
+ * Styled Component Imports
+ */
 import {
     MultiFormWrapper,
     FormGroupSpacer,
@@ -17,6 +20,17 @@ import {
 import { Div } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 
+/**
+ * Custom Reusable Hooks
+ */
+import useForm from "../formValidator/useForm";
+import validate from "../formValidator/validate";
+
+/**
+ * @function FormUserDetails - Functional Component
+ * @param {handleStepChange} Callback - Parent function returns the desired component
+ * @returns {component} - This component is rendered when the user tries to apply for a job and this is the first screen shown for collecting employee details
+ */
 const FormUserDetails = ({ handleStepChange }) => {
     const formInputs = {
         firstName: "",
@@ -24,12 +38,24 @@ const FormUserDetails = ({ handleStepChange }) => {
         email: ""
     };
 
+    /**
+     * @CustomHook  UseForm
+     * @constant {handleChange} - Function => holds the value of a particular input when an onChange event triggers
+     * @constant {handleSubmit} - Function => validates form input erros
+     * @constant {values} - Object => holds validated form input values
+     * @constant {errors} - Object => holds errors specific to inputs
+     * @param {submit} - Callback reference
+     * @param {validate} - It is a function which validates form inputs
+     * @param {formInputs} - It is an object which holds the values of form inputs
+     * @returns {Component}
+     */
     const { handleChange, handleSubmit, values, errors } = useForm(
         submit,
         validate,
         formInputs
     );
 
+    //Invokes the parent function to decide on the rendering component
     function submit() {
         handleStepChange(values);
     }

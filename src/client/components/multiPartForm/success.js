@@ -1,9 +1,21 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Styled Component Imports
+ */
 import { MultiFormWrapper } from "../../styledComponents/forms";
 import { Div, Anchor } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 
+/**
+ * @function Success - Functional Component
+ * @param {company} string - Holds the companies name which the user is applying for
+ * @returns {component} - Shows the success message after the user submits his data
+ */
 const Success = ({ company }) => {
     return (
         <MultiFormWrapper>

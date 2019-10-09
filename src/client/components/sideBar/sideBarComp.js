@@ -1,7 +1,24 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
+/**
+ * Redux - Thunk Imports
+ * To read state values and to Dispatch an action to the reducer
+ */
+import { connect } from "react-redux";
+import { handleUserLogout } from "../../../redux-thunk/list/list.actions";
+
+/**
+ * Static Assets
+ */
+import User from "../../assets/user-placeholder.png";
+
+/**
+ * Styled Component Imports
+ */
 import styled, { css } from "styled-components";
 import {
     Div,
@@ -9,19 +26,13 @@ import {
     ImageBlock,
     Anchor
 } from "../../styledComponents/layout";
-import User from "../../assets/user-placeholder.png";
-import { UserContext } from "../../App";
-import useModal from "../modal/useModal";
 import { CustomButton } from "../../styledComponents/button";
-import Modal from "../modal/modal";
-import Auth from "../auth";
-import LazyImageLoader from "../lazyImageLoader";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { Row, Column } from "../../styledComponents/grid";
-import { handleUserLogout } from "../../../redux-thunk/list/list.actions";
-
+/**
+ * Note: These below styles are more specific to this component.
+ *       Hence I decided to place it inline rather than
+ *       creating a seperate file.
+ */
 const SideBarWrapper = styled(Div)`
     transform: translateX(-100%);
     transition: transform 300ms ease-in-out;
@@ -32,9 +43,42 @@ const SideBarWrapper = styled(Div)`
         `}
 `;
 
+/**
+ * Context Hooks
+ */
+import { UserContext } from "../../App";
+
+/**
+ * Custom Reusable Hooks
+ */
+import useModal from "../modal/useModal";
+import Modal from "../modal/modal";
+import { Row, Column } from "../../styledComponents/grid";
+
+/**
+ * FontAwesome Imports for icons support
+ */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+
+/**
+ * Component Imports
+ */
+import Auth from "../auth";
+import LazyImageLoader from "../lazyImageLoader";
+
+/**
+ * @function SideBarComp - Functional Component
+ * @param {props} props - Contains user login status, profile information and logOut dispatch action
+ * @return {component}
+ * Note: The component is built for the purpose of the sidebar on mobile devices
+ * Context hook is used in this component to close the app drawer
+ * when the user clicks on the login/signup button
+ */
 const SideBarComp = props => {
     const { isShowing, toggle } = useModal();
     const { isLoggedIn, profile = {}, logOut } = props;
+
     return (
         <UserContext.Consumer>
             {closeSideNav => {

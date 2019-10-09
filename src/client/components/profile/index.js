@@ -1,7 +1,23 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values
+ */
 import { connect } from "react-redux";
+
+/**
+ * Static Assets
+ */
 import Guest from "../../assets/user-placeholder.png";
+
+/**
+ * Styled Component Imports
+ */
 import {
     FlexBox,
     Div,
@@ -9,13 +25,26 @@ import {
     Anchor,
     ProfileImage
 } from "../../styledComponents/layout";
-
 import { CustomButton } from "../../styledComponents/button";
+
+/**
+ * Custom Reusable Hooks
+ */
 import Modal from "../modal/modal";
 import useModal from "../modal/useModal";
+
+/**
+ * Component Imports
+ */
 import Auth from "../auth";
 import LazyImageLoader from "../lazyImageLoader";
 
+/**
+ * @function ProfileComp - Functional Component
+ * @param {isLoggedIn} boolean - Holds the user state if he is logged in or not
+ * @param {profile} object - Holds the profile information of the user
+ * @return {component} - The main purpose of the component is to showcase the user status and motivate the user to login / update the profile information!
+ */
 const ProfileComp = ({ isLoggedIn = false, profile }) => {
     const { isShowing, toggle } = useModal();
 

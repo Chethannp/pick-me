@@ -1,11 +1,32 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Styled Component Imports
+ */
 import { SearchForm, SearchInput } from "../../styledComponents/search";
-import Dropdown from "../dropdown";
 import { CustomButton } from "../../styledComponents/button";
+
+/**
+ * FontAwesome Imports for icons support
+ */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Component Imports
+ */
+import Dropdown from "../dropdown";
+
+/**
+ * @function Search - Functional Component
+ * @param {search} callback - Parent function to filter job list
+ * @param {filters} array - Holds the dropdown filter options
+ * @return {component}
+ */
 const Search = ({ search, filters }) => {
     const handleSearchSubmit = e => {
         e.preventDefault();

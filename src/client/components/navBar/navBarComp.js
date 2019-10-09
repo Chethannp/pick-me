@@ -1,9 +1,24 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
+/**
+ * Redux - Thunk Imports
+ * To read state values and to Dispatch an action to the reducer
+ */
+import { connect } from "react-redux";
+import { handleUserLogout } from "../../../redux-thunk/list/list.actions";
+
+/**
+ * Static Assets
+ */
 import LogoImg from "../../assets/logo.png";
 
+/**
+ * Styled Component Imports
+ */
 import {
     Div,
     Container,
@@ -13,8 +28,14 @@ import {
 } from "../../styledComponents/layout";
 import DrawerToggleButton from "../../styledComponents/drawerbtn";
 import { DisplayDecisionMaker } from "../../styledComponents/breakpoints";
-import { handleUserLogout } from "../../../redux-thunk/list/list.actions";
 
+/**
+ * @function NavbarComp - Functional Component
+ * @param {drawerClickHandler} callback - to toggle the side menu view on mobile
+ * @param {isLoggedIn} Boolean - Holds the user state if he is logged in or not
+ * @param {logOut} Dispatch - Dispatches the action required to upadte the logged in state
+ * @returns {component} - This returns the header view of our project
+ */
 const NavbarComp = ({ drawerClickHandler, isLoggedIn = false, logOut }) => {
     const handleLogout = () => {
         logOut();

@@ -1,9 +1,26 @@
+/**
+ * React Imports
+ */
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values and to Dispatch an action to the reducer
+ */
 import { connect } from "react-redux";
-import styled, { css, keyframes } from "styled-components";
 import { showCustomToast } from "../../../redux-thunk/list/list.actions";
 
+/**
+ * Styled Component Imports
+ */
+import styled, { css, keyframes } from "styled-components";
+
+/**
+ * Note: These below styles are more specific to this component.
+ *       Hence I decided to place it inline rather than
+ *       creating a seperate file.
+ */
 const fadeIn = keyframes`
     from {
         bottom: 0; opacity: 0;
@@ -21,7 +38,6 @@ const fadeOut = keyframes`
         bottom: 0; opacity: 0;
     }
 `;
-
 const ToastWrapper = styled.div`
     visibility: hidden; /* Hidden by default. Visible on click */
     min-width: 300px; /* Set a default minimum width */
@@ -45,6 +61,12 @@ const ToastWrapper = styled.div`
         `}
 `;
 
+/**
+ * @function CustomToast - Functional Component
+ * @param {hideCustomToast} boolean - Decides to show / hide the component
+ * @param {toastMessage} string - Holds the message of the toast
+ * @returns {component}
+ */
 const CustomToast = ({ hideCustomToast, toastMessage = "" }) => {
     useEffect(() => {
         const timer = setTimeout(() => {

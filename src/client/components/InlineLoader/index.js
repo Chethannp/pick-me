@@ -1,6 +1,18 @@
+/**
+ * React Imports
+ */
 import React from "react";
+
+/**
+ * Styled Component Imports
+ */
 import styled, { keyframes } from "styled-components";
 
+/**
+ * Note: These below styles are more specific to this component.
+ *       Hence I decided to place it inline rather than
+ *       creating a seperate file.
+ */
 const spin = keyframes`
   0% {
         opacity: 1;
@@ -9,7 +21,6 @@ const spin = keyframes`
         opacity: 0;
     }
 `;
-
 const InlineLoader = styled.div`
     display: inline-block;
     position: relative;
@@ -86,6 +97,10 @@ const InlineLoader = styled.div`
     }
 `;
 
+/**
+ *@function InlineLoaderComp - Functional Component
+ *@returns {component} - inline custom loader view
+ */
 const InlineLoaderComp = () => {
     return (
         <InlineLoader>

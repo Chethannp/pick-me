@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 
+/**
+ * @function CustomHook - Functional Component
+ * @param {callback} - Function => that is called after validation, can hold erros or values
+ * @param {validate} - Helper Function => validates form input errors
+ * @param {formInputs} - Object => holds the initial form input values
+ */
+
 const useForm = (callback, validate, formInputs) => {
     const [values, setValues] = useState(formInputs);
 
     // We would need a new state for errors
     // function that validates these errors
     // pass these erros back to form
-
     const [errors, setErrors] = useState({});
 
     // This will allow us to the callback

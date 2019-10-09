@@ -1,8 +1,20 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import ReactDOM from "react-dom";
+
+/**
+ * Styled Component Imports
+ */
 import styled, { keyframes } from "styled-components";
 import { Div, FlexBox } from "../../styledComponents/layout";
 
+/**
+ * Note: These below styles are more specific to this component.
+ *       Hence I decided to place it inline rather than
+ *       creating a seperate file.
+ */
 const CloseButton = styled(Div)`
     top: 0;
     right: 0;
@@ -20,7 +32,6 @@ const fadeIn = keyframes`
       transform: translate3d(0, 0, 0);
     }
 `;
-
 const ModalContent = styled.div`
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
@@ -28,6 +39,14 @@ const ModalContent = styled.div`
     animation-fill-mode: both;
     animation-name: ${fadeIn};
 `;
+
+/**
+ * @function Modal - Functional Component
+ * @param {isShowing} boolean - decides to show or hide the modal popup
+ * @param {hide} - callback - that toggles the view
+ * @param {children} - takes all the inner elements wrapped by <Modal></Modal> and inserts inside this component
+ * @returns {component}
+ */
 
 const Modal = ({ isShowing, hide, children }) =>
     isShowing

@@ -1,15 +1,46 @@
-import React, { useState, useEffect } from "react";
+/**
+ * React Imports
+ */
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Styled Component Imports
+ */
 import { Div, FlexBox, Anchor } from "../../styledComponents/layout";
 import { CardHeader, Paragraph } from "../../styledComponents/card";
+
+/**
+ * FontAwesome Imports for icons support
+ */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+
+/**
+ * Reusable functional components
+ */
 import InlineLoaderComp from "../InlineLoader";
 import CustomToast from "../toast";
-import { useHistory } from "react-router";
+
+/**
+ * @function Deck - Functional Component
+ * @param {id} number
+ * @param {loginStatus} boolean
+ * @param {title} string - holds the title of job
+ * @param {company} string - holds the company name
+ * @param {location} string - holds the location of company
+ * @param {description} string - description about the company
+ * @param {time_of_post} string - job posted time
+ * @param {is_saved} boolean - saved status
+ * @param {updateJob} function - sets the status of saved jobs
+ * @returns {component} - deck view that holds the job information
+ */
 
 const Deck = props => {
-    let history = useHistory();
+    /**
+     * Because I want to pass the props as is when the user tries to save or remove a job
+     * did not wanted to destructure it and the function level
+     */
     const {
         updateJob,
         loginStatus,
@@ -24,15 +55,9 @@ const Deck = props => {
 
     const [saveJobStatus, setSaveJobStatus] = useState(is_saved);
     const [showInlineLoader, setShowInlineLoader] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loginReminderToast, setLoginReminderToast] = useState(false);
 
-    useEffect(() => {
-        if (loginStatus) {
-            setIsLoggedIn(loginStatus);
-        }
-    }, [loginStatus]);
-
+    //Save job widget - adds the job and updates the userSavedList array under redux store
     const saveJob = () => {
         setShowInlineLoader(true);
         setTimeout(() => {
@@ -42,6 +67,7 @@ const Deck = props => {
         }, 1000);
     };
 
+    //Save job widget - removes the job and updates the userSavedList array under redux store
     const removedSavedJob = () => {
         setShowInlineLoader(true);
         setTimeout(() => {
@@ -51,15 +77,12 @@ const Deck = props => {
         }, 2000);
     };
 
+    //Triggers a toast when the user is not logged in
     function handleRouteClick() {
-        if (isLoggedIn) {
-            history.push(`/details/${id}`, props);
-        } else {
-            setLoginReminderToast(true);
-            setTimeout(() => {
-                setLoginReminderToast(false);
-            }, 2000);
-        }
+        setLoginReminderToast(true);
+        setTimeout(() => {
+            setLoginReminderToast(false);
+        }, 2000);
     }
 
     return (

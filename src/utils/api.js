@@ -5,18 +5,32 @@ export default async (url, type) => {
         url = process.env.API_ENDPOINT + url;
     }
 
-    let res;
+    let collection;
 
     switch (true) {
     case type === "get":
-        res = await axios.get(url);
+        await axios
+            .get(url)
+            .then(res => {
+                collection = res;
+            })
+            .catch(err => {
+                collection = err;
+            });
         break;
     case type === "post":
-        res = await axios.post(url);
+        await axios
+            .post(url)
+            .then(res => {
+                collection = res;
+            })
+            .catch(err => {
+                collection = err;
+            });
         break;
     default:
         break;
     }
 
-    return res.data;
+    return collection.data;
 };
