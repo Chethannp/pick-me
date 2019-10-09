@@ -6,6 +6,11 @@
  */
 
 {
+  "env": {
+    "production": {
+      "plugins": [["react-remove-properties", { "properties": ["data-test"] }]]
+    }
+  },
   "presets": [
     [
       "@babel/preset-env"

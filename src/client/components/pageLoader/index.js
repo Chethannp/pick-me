@@ -52,7 +52,7 @@ const PageLoader = styled.div`
  */
 const Loader = () => {
     return (
-        <PageLoaderWrapper>
+        <PageLoaderWrapper data-test="pageLoaderComponent">
             <PageLoader />
         </PageLoaderWrapper>
     );

@@ -22,8 +22,12 @@ import StarIcon from "../../styledComponents/staricon";
  */
 
 const StarRating = ({ id, ratingCount }) => {
+    //Base condition checks if both id and ratingcount are defined else immediately returns
+    if (!id && !ratingCount) return;
+
     return (
         <StarRatingComponent
+            data-test="starRatingComponent"
             name={id}
             starCount={5}
             emptyStarColor="#dfdfdf"

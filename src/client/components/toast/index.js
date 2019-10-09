@@ -72,10 +72,14 @@ const CustomToast = ({ hideCustomToast, toastMessage = "" }) => {
         const timer = setTimeout(() => {
             hideCustomToast("");
         }, 3000);
-        return () => clearTimeout(timer);
+        return () => clearTimeout(timer); // To avoid memory leak
     }, [toastMessage]);
 
-    return <ToastWrapper showToast={toastMessage}>{toastMessage}</ToastWrapper>;
+    return (
+        <ToastWrapper data-test="toastComponent" showToast={toastMessage}>
+            {toastMessage}
+        </ToastWrapper>
+    );
 };
 
 export default connect(

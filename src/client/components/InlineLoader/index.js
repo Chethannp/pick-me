@@ -103,7 +103,7 @@ const InlineLoader = styled.div`
  */
 const InlineLoaderComp = () => {
     return (
-        <InlineLoader>
+        <InlineLoader data-test="inlineLoaderComponent">
             <div />
             <div />
             <div />

@@ -35,6 +35,9 @@ import {
  */
 
 const Carousel = ({ list }) => {
+    //Base condition checks if the list props is undefined, if so immediately returns
+    if (!list) return;
+
     const [slideIndex, setSlideIndex] = useState(0);
     const [clientX, setClientX] = useState();
     const [clientY, setClientY] = useState();
@@ -116,6 +119,7 @@ const Carousel = ({ list }) => {
             {list.length > 1 && (
                 <CarouselFooter>
                     <Prev
+                        data-test="prevButton"
                         style={{ opacity: slideIndex == 0 ? "0.1" : "1" }}
                         onClick={slidePrev}
                     >
@@ -123,6 +127,7 @@ const Carousel = ({ list }) => {
                     </Prev>
 
                     <Next
+                        data-test="nextButton"
                         style={{
                             opacity:
                                 slideIndex === list.length - 1 ? "0.1" : "1"
@@ -135,6 +140,7 @@ const Carousel = ({ list }) => {
             )}
 
             <CarouselContainer
+                data-test="carouselComponent"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
