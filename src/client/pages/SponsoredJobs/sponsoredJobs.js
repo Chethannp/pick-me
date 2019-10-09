@@ -1,6 +1,18 @@
+/**
+ * React Imports
+ */
 import React from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values
+ */
 import { connect } from "react-redux";
+
+/**
+ * Styled Component Imports
+ */
 import {
     Container,
     Div,
@@ -13,6 +25,11 @@ import StarRating from "../../components/star/rating";
 import { Paragraph } from "../../styledComponents/card";
 import { GridRow, GridItem } from "../../styledComponents/grid";
 
+/**
+ * @function SponsoredJobs
+ * @param {sponsoredList} array - Holds the list of sponsored jobs
+ * @return {component}
+ */
 const SponsoredJobs = ({ sponsoredList = [] }) => {
     return (
         <Div marT20>

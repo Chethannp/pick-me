@@ -1,4 +1,11 @@
+/**
+ * React Imports
+ */
 import React from "react";
+
+/**
+ * Styled Component Imports
+ */
 import {
     Div,
     Anchor,
@@ -7,6 +14,10 @@ import {
 } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
 
+/**
+ * @function NotFoundPage
+ * @returns {component} - This view is shown when the user tries to access a route which is not present in our routes object
+ */
 const NotFoundPage = () => {
     return (
         <Container>

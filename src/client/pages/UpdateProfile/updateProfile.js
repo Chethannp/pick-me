@@ -1,9 +1,24 @@
+/**
+ * React Imports
+ */
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values and to Dispatch an action to the reducer
+ */
 import { connect } from "react-redux";
+import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
+
+/**
+ * Static Assets
+ */
 import UserImage from "../../assets/user-placeholder.png";
 
-//Styled Component Imports
+/**
+ * Styled Component Imports
+ */
 import { Row, Column } from "../../styledComponents/grid";
 import { CustomButton } from "../../styledComponents/button";
 import {
@@ -15,11 +30,6 @@ import {
     FormLabelName,
     FormInputError
 } from "../../styledComponents/forms";
-
-//Dispatch Action
-import { saveProfileInfo } from "../../../redux-thunk/list/list.actions";
-import useForm from "../../components/formValidator/useForm";
-import validate from "../../components/formValidator/validate";
 import {
     Breadcrumb,
     Anchor,
@@ -27,8 +37,23 @@ import {
     Div
 } from "../../styledComponents/layout";
 
+/**
+ * Component Imports
+ */
+import useForm from "../../components/formValidator/useForm";
+import validate from "../../components/formValidator/validate";
+
+/**
+ * @function UpdateProfile
+ * @param {profile} object - Holds user information
+ * @param {saveProfile} callback - Used to dispatch action to make api call and save the user's profile input on server
+ * @param {history} object - Need this to dynamically route the user back to homepage.
+ * @param {isLoggedIn} boolean - Holds the user state whether he is logged in or not
+ * @returns {component}
+ * Note: This component allows the user to update his profile pic and information which might need to apply AI to find the best jobs for him!!!
+ */
 const UpdateProfile = ({
-    profile = undefined,
+    profile,
     saveProfile,
     history,
     isLoggedIn = false

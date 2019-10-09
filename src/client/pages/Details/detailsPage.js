@@ -1,15 +1,37 @@
+/**
+ * React Imports
+ */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values
+ */
+import { connect } from "react-redux";
+
+/**
+ * Styled Component Imports
+ */
 import {
     Div,
     Anchor,
     Breadcrumb,
     Container
 } from "../../styledComponents/layout";
-import { connect } from "react-redux";
-import PostDetails from "../../components/postDetails";
 import { CustomButton } from "../../styledComponents/button";
 
+/**
+ * Component Imports
+ */
+import PostDetails from "../../components/postDetails";
+
+/**
+ * @function DetailsPage - Functional Component
+ * @param {location} object - Destructured from props, Need this to pull out location.query.props information that was passed through react router Link!
+ * @param {isLoggedIn} boolean - Holds the state of the user whether he is logged in or not
+ * @returns {component}
+ */
 const DetailsPage = ({ location, isLoggedIn }) => {
     const [postDetails] = useState(isLoggedIn ? location.query.props : "");
 

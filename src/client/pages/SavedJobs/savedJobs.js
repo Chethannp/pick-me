@@ -1,6 +1,18 @@
+/**
+ * React Imports
+ */
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
+/**
+ * Redux - Thunk Imports
+ * To read state values
+ */
 import { connect } from "react-redux";
+
+/**
+ * Styled Component Imports
+ */
 import {
     Container,
     Div,
@@ -11,6 +23,12 @@ import {
 import { CustomButton } from "../../styledComponents/button";
 import { Paragraph } from "../../styledComponents/card";
 import { GridRow, GridItem } from "../../styledComponents/grid";
+
+/**
+ * @function SavedJobs
+ * @param {userSavedList} array - Holds the list of user saved jobs
+ * @return {component}
+ */
 
 const SavedJobs = ({ userSavedList = [] }) => {
     useEffect(() => {
