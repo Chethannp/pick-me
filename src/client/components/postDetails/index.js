@@ -101,7 +101,7 @@ const PostDetails = ({ details }) => {
                             </Div>
 
                             {description && (
-                                <Div marB20 fontSize="xs" color="mediumGrey">
+                                <Div marB20 fontSize="xxs" color="mediumGrey">
                                     {description}
                                 </Div>
                             )}

@@ -47,7 +47,7 @@ const FormResumeUpload = ({ nextStep, formInputValues = {}, apply }) => {
     return (
         <MultiFormWrapper>
             <Div fontSize="lg">Please upload your resume </Div>
-            <Div width="80%" marT30 textAlign="center">
+            <Div width="90%" marT30 textAlign="center">
                 <FlexBox
                     jcCenter
                     pad20

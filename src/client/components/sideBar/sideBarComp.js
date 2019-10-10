@@ -77,7 +77,7 @@ import LazyImageLoader from "../lazyImageLoader";
  */
 const SideBarComp = props => {
     const { isShowing, toggle } = useModal();
-    const { isLoggedIn, profile = {}, logOut } = props;
+    const { isLoggedIn, profile, logOut } = props;
 
     return (
         <UserContext.Consumer>
@@ -114,16 +114,18 @@ const SideBarComp = props => {
                             <Div width="80px" height="80px" marAuto>
                                 <ProfileImage>
                                     {isLoggedIn ? (
-                                        <LazyImageLoader
-                                            url={
-                                                profile
-                                                    ? `${profile.profileImage}`
-                                                    : "http://placeimg.com/295/295/any/tech"
-                                            }
-                                            fallbackUrl={User}
-                                            width="100%"
-                                            height="100%"
-                                        />
+                                        <Div>
+                                            <LazyImageLoader
+                                                url={
+                                                    profile
+                                                        ? `${profile.profileImage}`
+                                                        : "http://placeimg.com/295/295/any/tech"
+                                                }
+                                                fallbackUrl={User}
+                                                width="100%"
+                                                height="100%"
+                                            />
+                                        </Div>
                                     ) : (
                                         <ImageBlock
                                             src={User}
@@ -142,6 +144,25 @@ const SideBarComp = props => {
                                                     {profile
                                                         ? `${profile.firstName}`
                                                         : "Hello User"}
+                                                </Div>
+                                                <Div
+                                                    width="100px"
+                                                    marAuto
+                                                    marB20
+                                                >
+                                                    {!profile && (
+                                                        <Anchor
+                                                            onClick={close}
+                                                            to="/update-profile"
+                                                        >
+                                                            <CustomButton
+                                                                secondary
+                                                                xs
+                                                            >
+                                                                Edit Profile
+                                                            </CustomButton>
+                                                        </Anchor>
+                                                    )}
                                                 </Div>
                                             </Column>
                                         </Row>
