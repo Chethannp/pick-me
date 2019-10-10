@@ -54,11 +54,11 @@ const Post = ({
     const [endStatus, setEndStatus] = useState(false); //State to inform the user that we have reached the end of the list
 
     //Trigger the callback function when the intersection is reached (i.e., when bottomRef div comes inside the view port)
-    function scrollCallBack(entries) {
+    const scrollCallBack = entries => {
         if (entries[0].isIntersecting) {
             setLoaderStatus(true);
         }
-    }
+    };
 
     //Placing the below settimeout function which is doing a fetchMorePosts(); => in the above scrollCallBack function is causing a memory leak.
     //Hence I placed it inside the use effect function and doing the required clean up when the component unmount.

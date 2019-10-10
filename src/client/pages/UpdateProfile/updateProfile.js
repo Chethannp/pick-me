@@ -100,7 +100,9 @@ const UpdateProfile = ({
         let profileInfo = values;
         profileInfo.profileImage = image;
         saveProfile(profileInfo, "Profile updated!");
-        history.push("/");
+        setTimeout(() => {
+            history.push("/");
+        }, 1000);
     }
 
     return (
