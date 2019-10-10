@@ -7,7 +7,7 @@ import {
 } from "../../../testHelper/testUtils";
 import Toast from "./index";
 
-const setUp = (initialState = {}, props = {}) => {
+const setUp = (props = {}) => {
     const store = testStore();
     const wrapper = shallow(<Toast store={store} {...props} />).dive();
     return wrapper;
@@ -19,7 +19,7 @@ describe("Should render without errors", () => {
         const props = {
             toastMessage: "Hello!"
         };
-        component = setUp({}, props);
+        component = setUp(props);
     });
 
     //Test for Data Test Attribute

@@ -5,7 +5,6 @@ module.exports = {
         node: true,
         commonjs: true
     },
-
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -14,7 +13,8 @@ module.exports = {
     globals: {
         Atomics: "readonly",
         SharedArrayBuffer: "readonly",
-        process: true
+        process: true,
+        __isBrowser__: true
     },
     parser: "babel-eslint",
     parserOptions: {
