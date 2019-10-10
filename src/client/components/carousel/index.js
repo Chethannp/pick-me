@@ -26,6 +26,7 @@ import {
     faChevronLeft,
     faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
+import { Row, Column } from "../../styledComponents/grid";
 
 /**
  * @function Carousel - Functional Component
@@ -118,24 +119,41 @@ const Carousel = ({ list }) => {
         <CarouselWrapper>
             {list.length > 1 && (
                 <CarouselFooter>
-                    <Prev
-                        data-test="prevButton"
-                        style={{ opacity: slideIndex == 0 ? "0.1" : "1" }}
-                        onClick={slidePrev}
-                    >
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </Prev>
-
-                    <Next
-                        data-test="nextButton"
-                        style={{
-                            opacity:
-                                slideIndex === list.length - 1 ? "0.1" : "1"
-                        }}
-                        onClick={slideNext}
-                    >
-                        <FontAwesomeIcon icon={faChevronRight} />
-                    </Next>
+                    <Row>
+                        <Column lg="10" md="10">
+                            <Prev
+                                data-test="prevButton"
+                                style={{
+                                    opacity: slideIndex == 0 ? "0.1" : "1"
+                                }}
+                                onClick={slidePrev}
+                            >
+                                <FontAwesomeIcon icon={faChevronLeft} />
+                            </Prev>
+                            <Next
+                                data-test="nextButton"
+                                style={{
+                                    opacity:
+                                        slideIndex === list.length - 1
+                                            ? "0.1"
+                                            : "1"
+                                }}
+                                onClick={slideNext}
+                            >
+                                <FontAwesomeIcon icon={faChevronRight} />
+                            </Next>
+                        </Column>
+                        <Column lg="2" md="2">
+                            <Div
+                                fontSize="xxs"
+                                textAlign="right"
+                                data-test="slideCount"
+                            >
+                                <strong>{slideIndex}</strong> /{" "}
+                                {list.length - 1}
+                            </Div>
+                        </Column>
+                    </Row>
                 </CarouselFooter>
             )}
 
@@ -146,7 +164,8 @@ const Carousel = ({ list }) => {
                 onTouchEnd={onTouchEnd}
                 style={{
                     transform: `translate3d(${leftVal}px,0,0)`,
-                    transition: "transform 0.2s linear"
+                    transition: "transform 0.2s linear",
+                    marginLeft: "20px"
                 }}
             >
                 {list.map((item, i) => (

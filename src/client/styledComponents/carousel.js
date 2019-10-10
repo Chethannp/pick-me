@@ -26,7 +26,6 @@ const CarouselItem = styled.div`
 `;
 
 const CarouselFooter = styled.div`
-    display: flexbox;
     margin: 5px;
 `;
 

@@ -27,17 +27,21 @@ describe("Carousel Component", () => {
             expect(wrapper.length).toBe(1);
         });
 
-        // test("Clicking on next button should increment the slide Index by 1", () => {
-        //     let initialCounterState = 0;
-        //     let next = findByTestAttr(component, "nextButton");
-        //     next.simulate("click");
+        test("Clicking on next button should increment the slide Index by 1", () => {
+            let length = 3;
 
-        //     console.log(expect(component.state("slideIndex")).toBe(0));
-        // });
+            let next = findByTestAttr(component, "nextButton");
+            next.simulate("click");
+            let count = findByTestAttr(component, "slideCount").text();
 
-        // test("Clicking on prev button should decrement the slide Index by 1", () => {
-        //     const wrapper = findByTestAttr(component);
-        // });
+            expect(count).toBe(`1 / ${length - 1}`);
+        });
+
+        test("Mock function to check if slidePrev method is present", () => {
+            const slidePrev = jest.fn();
+            const comp = shallow(<Carousel slidePrev={slidePrev} />);
+            expect(comp).not.toBeNull();
+        });
     });
 
     describe("Has No Props", () => {
