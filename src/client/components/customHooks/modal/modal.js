@@ -8,7 +8,7 @@ import ReactDOM from "react-dom";
  * Styled Component Imports
  */
 import styled, { keyframes } from "styled-components";
-import { Div, FlexBox } from "../../styledComponents/layout";
+import { Div, FlexBox } from "../../../styledComponents/layout";
 
 /**
  * Note: These below styles are more specific to this component.

@@ -30,8 +30,8 @@ import { CustomButton } from "../../styledComponents/button";
 /**
  * Custom Reusable Hooks
  */
-import Modal from "../modal/modal";
-import useModal from "../modal/useModal";
+import Modal from "../customHooks/modal/modal";
+import useModal from "../customHooks/modal/useModal";
 
 /**
  * Component Imports

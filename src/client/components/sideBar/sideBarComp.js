@@ -27,6 +27,7 @@ import {
     Anchor
 } from "../../styledComponents/layout";
 import { CustomButton } from "../../styledComponents/button";
+import { Row, Column } from "../../styledComponents/grid";
 
 /**
  * Note: These below styles are more specific to this component.
@@ -51,9 +52,8 @@ import { UserContext } from "../../App";
 /**
  * Custom Reusable Hooks
  */
-import useModal from "../modal/useModal";
-import Modal from "../modal/modal";
-import { Row, Column } from "../../styledComponents/grid";
+import Modal from "../customHooks/modal/modal";
+import useModal from "../customHooks/modal/useModal";
 
 /**
  * FontAwesome Imports for icons support

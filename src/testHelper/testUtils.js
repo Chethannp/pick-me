@@ -1,3 +1,5 @@
+import React from "react";
+import { mount } from "enzyme";
 import CheckPropTypes from "check-prop-types";
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
@@ -36,4 +38,18 @@ export const testStore = initialState => {
         applyMiddleware(thunk)
     );
     return store;
+};
+
+/**
+ *
+ */
+export const renderHook = hook => {
+    let results;
+    function HookWrapper() {
+        results = hook();
+        return null;
+    }
+    mount(<HookWrapper />);
+
+    return results;
 };

@@ -40,8 +40,8 @@ import {
 /**
  * Component Imports
  */
-import useForm from "../../components/formValidator/useForm";
-import validate from "../../components/formValidator/validate";
+import useForm from "../../components/customHooks/formValidator/useForm";
+import validate from "../../components/customHooks/formValidator/validate";
 
 /**
  * @function UpdateProfile

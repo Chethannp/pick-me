@@ -23,8 +23,8 @@ import { CustomButton } from "../../styledComponents/button";
 /**
  * Custom Reusable Hooks
  */
-import useForm from "../formValidator/useForm";
-import validate from "../formValidator/validate";
+import useForm from "../customHooks/formValidator/useForm";
+import validate from "../customHooks/formValidator/validate";
 
 /**
  * @function FormUserDetails - Functional Component
